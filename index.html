@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="te">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>సంకల్పం జనరేటర్ - Global Countries & Multi-Language Output</title>
+    <title>Puja Sankalpam Generator - Global Countries & Multi-Language Output</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Mandali&family=Noto+Sans+Telugu:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -15,7 +15,7 @@
     <div class="max-w-5xl mx-auto bg-white rounded-xl shadow-md border border-amber-200 overflow-hidden">
         <!-- Header -->
         <div class="bg-amber-700 text-white p-6 text-center relative">
-            <h1 id="lbl_header_title" class="text-2xl md:text-3xl font-bold">పూజ సంకల్పం జనరేటర్ (Global Location & Multi-Language Output)</h1>
+            <h1 id="lbl_header_title" class="text-2xl md:text-3xl font-bold">Puja Sankalpam Generator (Global Location & Multi-Language Output)</h1>
             <p class="text-amber-100 text-sm mt-1">Designed & Developed by Gandhi Chappa</p>
             
             <!-- Visitor Counter Badge -->
@@ -24,20 +24,20 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                 </svg>
-                <span><span id="lbl_visitor_count">వీక్షకుల సంఖ్య (Visitors)</span>: <strong id="headerVisitorCount" class="text-white">0</strong></span>
+                <span><span id="lbl_visitor_count">Visitor Count</span>: <strong id="headerVisitorCount" class="text-white">0</strong></span>
             </div>
         </div>
 
         <!-- Quick Presets -->
         <div class="bg-amber-100/60 p-4 border-b border-amber-200">
-            <label id="lbl_quick_presets" class="block text-xs font-bold text-amber-900 uppercase tracking-wider mb-2">త్వరిత ఎంపిక (Quick Puja Presets):</label>
+            <label id="lbl_quick_presets" class="block text-xs font-bold text-amber-900 uppercase tracking-wider mb-2">Quick Puja Presets:</label>
             <div class="flex flex-wrap gap-2">
-                <button type="button" id="btn_preset_vinayaka" onclick="applyPreset('vinayaka')" class="text-xs md:text-sm bg-amber-800 text-white px-3 py-1.5 rounded-md hover:bg-amber-900 transition">వినాయక చవితి</button>
-                <button type="button" id="btn_preset_varalakshmi" onclick="applyPreset('varalakshmi')" class="text-xs md:text-sm bg-amber-800 text-white px-3 py-1.5 rounded-md hover:bg-amber-900 transition">వరలక్ష్మీ వ్రతం</button>
-                <button type="button" id="btn_preset_dasara" onclick="applyPreset('dasara')" class="text-xs md:text-sm bg-amber-800 text-white px-3 py-1.5 rounded-md hover:bg-amber-900 transition">విజయదశమి / దసరా</button>
-                <button type="button" id="btn_preset_sankranti" onclick="applyPreset('sankranti')" class="text-xs md:text-sm bg-amber-800 text-white px-3 py-1.5 rounded-md hover:bg-amber-900 transition">మకర సంక్రాంతి</button>
-                <button type="button" id="btn_preset_ugadi" onclick="applyPreset('ugadi')" class="text-xs md:text-sm bg-amber-800 text-white px-3 py-1.5 rounded-md hover:bg-amber-900 transition">ఉగాది</button>
-                <button type="button" id="btn_preset_shivratri" onclick="applyPreset('shivratri')" class="text-xs md:text-sm bg-amber-800 text-white px-3 py-1.5 rounded-md hover:bg-amber-900 transition">మహా శివరాత్రి</button>
+                <button type="button" id="btn_preset_vinayaka" onclick="applyPreset('vinayaka')" class="text-xs md:text-sm bg-amber-800 text-white px-3 py-1.5 rounded-md hover:bg-amber-900 transition">Vinayaka Chavithi</button>
+                <button type="button" id="btn_preset_varalakshmi" onclick="applyPreset('varalakshmi')" class="text-xs md:text-sm bg-amber-800 text-white px-3 py-1.5 rounded-md hover:bg-amber-900 transition">Varalakshmi Vratam</button>
+                <button type="button" id="btn_preset_dasara" onclick="applyPreset('dasara')" class="text-xs md:text-sm bg-amber-800 text-white px-3 py-1.5 rounded-md hover:bg-amber-900 transition">Vijayadasami / Dasara</button>
+                <button type="button" id="btn_preset_sankranti" onclick="applyPreset('sankranti')" class="text-xs md:text-sm bg-amber-800 text-white px-3 py-1.5 rounded-md hover:bg-amber-900 transition">Makara Sankranti</button>
+                <button type="button" id="btn_preset_ugadi" onclick="applyPreset('ugadi')" class="text-xs md:text-sm bg-amber-800 text-white px-3 py-1.5 rounded-md hover:bg-amber-900 transition">Ugadi</button>
+                <button type="button" id="btn_preset_shivratri" onclick="applyPreset('shivratri')" class="text-xs md:text-sm bg-amber-800 text-white px-3 py-1.5 rounded-md hover:bg-amber-900 transition">Maha Shivaratri</button>
             </div>
         </div>
 
@@ -47,19 +47,19 @@
                 
                 <!-- SECTION 1: PUJA DETAILS & LANGUAGE CHOICE -->
                 <div class="bg-amber-50/80 p-4 rounded-lg border border-amber-200 space-y-3">
-                    <h2 id="lbl_sec1_header" class="text-lg font-bold text-amber-900 border-b border-amber-300 pb-1">1. పూజ వివరాలు & భాష (Puja Details & Language)</h2>
+                    <h2 id="lbl_sec1_header" class="text-lg font-bold text-amber-900 border-b border-amber-300 pb-1">1. Puja Details & Language</h2>
 
                     <!-- Output Language Selector (Radio Buttons) -->
                     <div>
-                        <label id="lbl_output_lang" class="block text-xs font-bold text-amber-900 uppercase mb-2">అవుట్‌పుట్ భాష / Output Script Preference:</label>
+                        <label id="lbl_output_lang" class="block text-xs font-bold text-amber-900 uppercase mb-2">Output Script Preference:</label>
                         <div class="grid grid-cols-3 gap-2 bg-amber-100/70 p-2 rounded-lg border border-amber-300">
                             <label class="flex items-center gap-1.5 cursor-pointer text-xs font-bold text-amber-950 bg-white p-2 rounded border border-amber-200 hover:bg-amber-50">
-                                <input type="radio" name="outputLanguage" value="telugu" checked onchange="updatePreferredLanguage()" class="accent-amber-700 w-4 h-4">
-                                <span>తెలుగు (Telugu)</span>
+                                <input type="radio" name="outputLanguage" value="english" checked onchange="updatePreferredLanguage()" class="accent-amber-700 w-4 h-4">
+                                <span>English</span>
                             </label>
                             <label class="flex items-center gap-1.5 cursor-pointer text-xs font-bold text-amber-950 bg-white p-2 rounded border border-amber-200 hover:bg-amber-50">
-                                <input type="radio" name="outputLanguage" value="english" onchange="updatePreferredLanguage()" class="accent-amber-700 w-4 h-4">
-                                <span>English</span>
+                                <input type="radio" name="outputLanguage" value="telugu" onchange="updatePreferredLanguage()" class="accent-amber-700 w-4 h-4">
+                                <span>తెలుగు (Telugu)</span>
                             </label>
                             <label class="flex items-center gap-1.5 cursor-pointer text-xs font-bold text-amber-950 bg-white p-2 rounded border border-amber-200 hover:bg-amber-50">
                                 <input type="radio" name="outputLanguage" value="sanskrit" onchange="updatePreferredLanguage()" class="accent-amber-700 w-4 h-4">
@@ -69,24 +69,24 @@
                     </div>
 
                     <div>
-                        <label id="lbl_puja_name" class="block text-sm font-medium text-gray-700">పూజ / వ్రతం పేరు (Puja Name)</label>
-                        <input type="text" id="pujaName" value="శ్రీ వరసిద్ధి వినాయక వ్రత" placeholder="ఉదా: వినాయక చవితి వ్రతం" class="w-full mt-1 p-2 border border-gray-300 rounded-md bg-white">
+                        <label id="lbl_puja_name" class="block text-sm font-medium text-gray-700">Puja / Vratam Name</label>
+                        <input type="text" id="pujaName" value="Sri Varasiddhi Vinayaka Vratam" placeholder="e.g., Sri Varasiddhi Vinayaka Vratam" class="w-full mt-1 p-2 border border-gray-300 rounded-md bg-white">
                     </div>
 
                     <div>
-                        <label id="lbl_deity_name" class="block text-sm font-medium text-gray-700">పూజా దేవత (Deity Name)</label>
-                        <input type="text" id="deityName" value="శ్రీ వరసిద్ధి వినాయకస్వామి" placeholder="ఉదా: శ్రీ వరసిద్ధి వినాయకస్వామి" class="w-full mt-1 p-2 border border-gray-300 rounded-md bg-white">
+                        <label id="lbl_deity_name" class="block text-sm font-medium text-gray-700">Deity Name</label>
+                        <input type="text" id="deityName" value="Sri Varasiddhi Vinayakaswami" placeholder="e.g., Sri Varasiddhi Vinayakaswami" class="w-full mt-1 p-2 border border-gray-300 rounded-md bg-white">
                     </div>
                 </div>
 
                 <!-- SECTION 2: DATE, LOCATION & TIMEZONE -->
                 <div class="space-y-3 bg-amber-50/40 p-4 rounded-lg border border-amber-200">
-                    <h2 id="lbl_sec2_header" class="text-lg font-semibold text-amber-800 border-b pb-1">2. స్థలము, తేదీ & టైమ్‌జోన్ (Location & Timezone)</h2>
+                    <h2 id="lbl_sec2_header" class="text-lg font-semibold text-amber-800 border-b pb-1">2. Location, Date & Timezone</h2>
 
                     <!-- Year & Date/Time Selection -->
                     <div class="grid grid-cols-3 gap-2">
                         <div>
-                            <label id="lbl_year" class="block text-xs font-medium text-gray-700">సంవత్సరం (Year)</label>
+                            <label id="lbl_year" class="block text-xs font-medium text-gray-700">Year</label>
                             <select id="pujaYear" onchange="updateDateByYear()" class="w-full mt-1 p-2 border border-amber-500 bg-amber-50 rounded-md font-bold text-amber-900 text-sm">
                                 <option value="2024">2024</option>
                                 <option value="2025">2025</option>
@@ -98,7 +98,7 @@
                             </select>
                         </div>
                         <div class="col-span-2">
-                            <label id="lbl_datetime" class="block text-xs font-medium text-gray-700">తేదీ & సమయం (Date & Time)</label>
+                            <label id="lbl_datetime" class="block text-xs font-medium text-gray-700">Date & Time</label>
                             <input type="datetime-local" id="pujaDateTime" value="2026-09-14T09:30" onchange="syncYearFromDateTime()" class="w-full mt-1 p-2 border border-amber-500 bg-amber-50/50 rounded-md font-semibold text-amber-900 text-sm">
                         </div>
                     </div>
@@ -106,29 +106,17 @@
                     <!-- Location Dropdowns -->
                     <div class="grid grid-cols-3 gap-2">
                         <div>
-                            <label id="lbl_country" class="block text-xs font-medium text-gray-700">దేశం (Country)</label>
+                            <label id="lbl_country" class="block text-xs font-medium text-gray-700">Country</label>
                             <select id="country" onchange="populateStates()" class="w-full mt-1 p-2 border border-gray-300 rounded-md text-xs font-semibold">
-                                <option value="అమెరికా" selected>అమెరికా (USA)</option>
-                                <option value="భారతదేశం">భారతదేశం (India)</option>
-                                <option value="యునైటెడ్ అరబ్ ఎమిరేట్స్">యు.ఎ.ఇ (UAE)</option>
-                                <option value="ఆస్ట్రేలియా">ఆస్ట్రేలియా (Australia)</option>
-                                <option value="న్యూజిలాండ్">న్యూజిలాండ్ (New Zealand)</option>
-                                <option value="యునైటెడ్ కింగ్‌డమ్">యు.కె (UK)</option>
-                                <option value="కెనడా">కెనడా (Canada)</option>
-                                <option value="సింగపూర్">సింగపూర్ (Singapore)</option>
-                                <option value="మలేషియా">మలేషియా (Malaysia)</option>
-                                <option value="సౌదీ అరేబియా">సౌదీ అరేబియా (Saudi Arabia)</option>
-                                <option value="ఒమన్ / బహ్రెయిన్">ఒమన్ / బహ్రెయిన్</option>
-                                <option value="మయన్మార్">మయన్మార్ (Myanmar)</option>
                             </select>
                         </div>
                         <div>
-                            <label id="lbl_state" class="block text-xs font-medium text-gray-700">రాష్ట్రం (State)</label>
+                            <label id="lbl_state" class="block text-xs font-medium text-gray-700">State</label>
                             <select id="state" onchange="onStateChange()" class="w-full mt-1 p-2 border border-gray-300 rounded-md text-xs font-semibold">
                             </select>
                         </div>
                         <div>
-                            <label id="lbl_city" class="block text-xs font-medium text-gray-700">నగరం (City)</label>
+                            <label id="lbl_city" class="block text-xs font-medium text-gray-700">City</label>
                             <select id="city" class="w-full mt-1 p-2 border border-gray-300 rounded-md text-xs font-semibold">
                             </select>
                         </div>
@@ -136,7 +124,7 @@
 
                     <!-- Timezone Selection -->
                     <div>
-                        <label id="lbl_timezone" class="block text-xs font-medium text-gray-700">టైమ్‌జోన్ (Auto Updated)</label>
+                        <label id="lbl_timezone" class="block text-xs font-medium text-gray-700">Timezone (Auto Updated)</label>
                         <select id="timezoneOffset" onchange="fetchGlobalPanchang()" class="w-full mt-1 p-2 border border-amber-500 bg-amber-50 rounded-md font-semibold text-amber-900 text-sm">
                             <option value="-05:00" selected>US Eastern (EST/EDT) [UTC-5]</option>
                             <option value="-06:00">US Central (CST/CDT) [UTC-6]</option>
@@ -156,54 +144,54 @@
                     <!-- Computed Panchang Details -->
                     <div class="grid grid-cols-2 gap-2 pt-1">
                         <div>
-                            <label id="lbl_samvatsaram" class="block text-xs font-medium text-gray-700">సంవత్సరం పేరు (Samvatsaram)</label>
-                            <input type="text" id="samvatsaram" value="పరాభవ" class="w-full p-2 border border-amber-200 bg-amber-50/30 rounded-md text-sm font-bold text-amber-900">
+                            <label id="lbl_samvatsaram" class="block text-xs font-medium text-gray-700">Samvatsaram (Year Name)</label>
+                            <input type="text" id="samvatsaram" value="Parabhava" class="w-full p-2 border border-amber-200 bg-amber-50/30 rounded-md text-sm font-bold text-amber-900">
                         </div>
                         <div>
-                            <label id="lbl_masam" class="block text-xs font-medium text-gray-700">మాసము (Month)</label>
-                            <input type="text" id="masam" value="భాద్రపద-మాసే" class="w-full p-2 border border-amber-200 bg-amber-50/30 rounded-md text-sm font-semibold">
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-2">
-                        <div>
-                            <label id="lbl_paksham" class="block text-xs font-medium text-gray-700">పక్షము (Paksham)</label>
-                            <input type="text" id="paksham" value="శుక్ల పక్షే" class="w-full p-2 border border-amber-200 bg-amber-50/30 rounded-md text-sm font-semibold">
-                        </div>
-                        <div>
-                            <label id="lbl_tithi" class="block text-xs font-medium text-gray-700">తిథి (Tithi)</label>
-                            <input type="text" id="tithi" value="చతుర్థ్యామ్ తిథౌ" class="w-full p-2 border border-amber-200 bg-amber-50/30 rounded-md text-sm font-semibold">
+                            <label id="lbl_masam" class="block text-xs font-medium text-gray-700">Masam (Month)</label>
+                            <input type="text" id="masam" value="Bhadrapada-Mase" class="w-full p-2 border border-amber-200 bg-amber-50/30 rounded-md text-sm font-semibold">
                         </div>
                     </div>
 
                     <div class="grid grid-cols-2 gap-2">
                         <div>
-                            <label id="lbl_vaaram" class="block text-xs font-medium text-gray-700">వారం (Day)</label>
-                            <input type="text" id="vaaram" value="ఇందువాసర యుక్తాయామ్" class="w-full p-2 border border-amber-200 bg-amber-50/30 rounded-md text-sm font-semibold">
+                            <label id="lbl_paksham" class="block text-xs font-medium text-gray-700">Paksham</label>
+                            <input type="text" id="paksham" value="Sukla Pakshe" class="w-full p-2 border border-amber-200 bg-amber-50/30 rounded-md text-sm font-semibold">
                         </div>
                         <div>
-                            <label id="lbl_nakshatram" class="block text-xs font-medium text-gray-700">నక్షత్రం (Nakshatram)</label>
-                            <input type="text" id="nakshatram" value="చిత్తా-నక్షత్రే" class="w-full p-2 border border-amber-200 bg-amber-50/30 rounded-md text-sm font-semibold">
+                            <label id="lbl_tithi" class="block text-xs font-medium text-gray-700">Tithi</label>
+                            <input type="text" id="tithi" value="Chaturthyam Tithau" class="w-full p-2 border border-amber-200 bg-amber-50/30 rounded-md text-sm font-semibold">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label id="lbl_vaaram" class="block text-xs font-medium text-gray-700">Vaaram (Day)</label>
+                            <input type="text" id="vaaram" value="Induvasara Yuktayam" class="w-full p-2 border border-amber-200 bg-amber-50/30 rounded-md text-sm font-semibold">
+                        </div>
+                        <div>
+                            <label id="lbl_nakshatram" class="block text-xs font-medium text-gray-700">Nakshatram</label>
+                            <input type="text" id="nakshatram" value="Chitta-Nakshatre" class="w-full p-2 border border-amber-200 bg-amber-50/30 rounded-md text-sm font-semibold">
                         </div>
                     </div>
                 </div>
 
                 <!-- SECTION 3: FAMILY DETAILS -->
                 <div class="space-y-3 pt-1">
-                    <h2 id="lbl_sec3_header" class="text-lg font-semibold text-amber-800 border-b pb-1">3. కుటుంబ వివరాలు (Family Details)</h2>
+                    <h2 id="lbl_sec3_header" class="text-lg font-semibold text-amber-800 border-b pb-1">3. Family Details</h2>
                     
                     <div>
-                        <label id="lbl_gotram" class="block text-sm font-medium text-gray-700">గోత్రం (Gotram)</label>
-                        <input type="text" id="gotram" value="" placeholder="ఉదా: నాగేశ్వర / Nageswara / नागेश्वर" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
+                        <label id="lbl_gotram" class="block text-sm font-medium text-gray-700">Gotram</label>
+                        <input type="text" id="gotram" value="" placeholder="e.g., Nageswara" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
                     </div>
 
                     <div class="grid grid-cols-2 gap-2">
                         <div>
-                            <label id="lbl_self_name" class="block text-sm font-medium text-gray-700">యజమాని (Self Name)</label>
-                            <input type="text" id="selfName" value="" placeholder="ఉదా: గాంధీ / Gandhi / गांधी" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
+                            <label id="lbl_self_name" class="block text-sm font-medium text-gray-700">Self / Yajamana Name</label>
+                            <input type="text" id="selfName" value="" placeholder="e.g., Gandhi" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
                         </div>
                         <div>
-                            <label id="lbl_self_nakshatra" class="block text-sm font-medium text-gray-700">నక్షత్రం (Nakshatram)</label>
+                            <label id="lbl_self_nakshatra" class="block text-sm font-medium text-gray-700">Nakshatram</label>
                             <select id="selfNakshatra" class="nakshatra-dropdown w-full mt-1 p-2 border border-gray-300 rounded-md text-sm">
                             </select>
                         </div>
@@ -211,11 +199,11 @@
 
                     <div class="grid grid-cols-2 gap-2">
                         <div>
-                            <label id="lbl_wife_name" class="block text-sm font-medium text-gray-700">ధర్మపత్ని (Wife Name)</label>
-                            <input type="text" id="wifeName" value="" placeholder="ఉదా: మనోరమ / Manorama / मनोरमा" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
+                            <label id="lbl_wife_name" class="block text-sm font-medium text-gray-700">Wife Name</label>
+                            <input type="text" id="wifeName" value="" placeholder="e.g., Manorama" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
                         </div>
                         <div>
-                            <label id="lbl_wife_nakshatra" class="block text-sm font-medium text-gray-700">నక్షత్రం (Nakshatram)</label>
+                            <label id="lbl_wife_nakshatra" class="block text-sm font-medium text-gray-700">Nakshatram</label>
                             <select id="wifeNakshatra" class="nakshatra-dropdown w-full mt-1 p-2 border border-gray-300 rounded-md text-sm">
                             </select>
                         </div>
@@ -223,11 +211,11 @@
 
                     <!-- Children Container -->
                     <div>
-                        <label id="lbl_children" class="block text-sm font-medium text-gray-700 mb-1">సంతానం (Children)</label>
+                        <label id="lbl_children" class="block text-sm font-medium text-gray-700 mb-1">Children</label>
                         <div id="childrenContainer" class="space-y-2">
                         </div>
                         <button id="btn_add_child" type="button" onclick="addChildRow()" class="mt-2 text-xs bg-amber-100 hover:bg-amber-200 text-amber-800 py-1.5 px-3 rounded font-bold border border-amber-300 flex items-center gap-1 shadow-sm transition">
-                            <span>+</span> Add Child (సంతానం చేర్చు)
+                            <span>+</span> Add Child
                         </button>
                     </div>
                 </div>
@@ -235,10 +223,10 @@
                 <!-- Generate & Reset Buttons -->
                 <div class="flex gap-2 mt-4">
                     <button id="btn_generate" type="button" onclick="generateSankalpam()" class="flex-1 bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 rounded-md shadow-md transition border border-amber-800">
-                        సంకల్పం తయారుచేయి (Generate)
+                        Generate Sankalpam
                     </button>
                     <button id="btn_reset" type="button" onclick="startOver()" class="bg-slate-200 hover:bg-slate-300 text-slate-800 font-semibold px-4 py-3 rounded-md border border-slate-300 transition text-sm">
-                        రీసెట్ (Start Over)
+                        Start Over
                     </button>
                 </div>
             </div>
@@ -247,18 +235,18 @@
             <div class="bg-amber-50/50 p-4 rounded-lg border border-amber-200 flex flex-col justify-between">
                 <div>
                     <div class="flex justify-between items-center mb-3 border-b border-amber-200 pb-2">
-                        <h2 id="outputTitleHeader" class="text-base md:text-lg font-bold text-amber-900">పూజ సంకల్పం</h2>
+                        <h2 id="outputTitleHeader" class="text-base md:text-lg font-bold text-amber-900">Puja Sankalpam</h2>
                         <div class="flex gap-2">
                             <button id="copyBtn" onclick="copyToClipboard()" class="hidden text-xs bg-amber-700 text-white px-3 py-1.5 rounded hover:bg-amber-800">Copy Text</button>
-                            <button id="printBtn" onclick="printSankalpamPDF()" class="hidden text-xs bg-emerald-700 text-white px-3 py-1.5 rounded hover:bg-emerald-800">ప్రింట్ / PDF (Print Report)</button>
+                            <button id="printBtn" onclick="printSankalpamPDF()" class="hidden text-xs bg-emerald-700 text-white px-3 py-1.5 rounded hover:bg-emerald-800">Print / PDF</button>
                         </div>
                     </div>
                     <div>
                         <div id="sankalpamOutput" class="text-sm text-slate-800 whitespace-pre-line leading-relaxed max-h-[720px] overflow-y-auto bg-white p-4 rounded border border-amber-100 font-serif">
                             <div class="text-center text-gray-400 py-20 italic" id="emptyOutputPlaceholder">
-                                వివరాలను పూర్తి చేసి, క్రింద ఉన్న <br>
-                                <span class="font-bold text-amber-800">"సంకల్పం తయారుచేయి"</span> <br>
-                                బటన్‌ను నొక్కండి.
+                                Fill in the details and click the <br>
+                                <span class="font-bold text-amber-800">"Generate Sankalpam"</span> <br>
+                                button below.
                             </div>
                         </div>
                     </div>
@@ -270,21 +258,21 @@
         <div class="p-6 border-t border-amber-200 bg-amber-50/30 grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="bg-white p-5 rounded-lg border border-amber-200 shadow-sm space-y-4">
                 <h3 class="text-lg font-bold text-amber-900 border-b border-amber-200 pb-2 flex items-center justify-between">
-                    <span id="lbl_comments_header">అభిప్రాయాలు / కామెంట్లు (Comments)</span>
+                    <span id="lbl_comments_header">Comments & Feedback</span>
                     <span class="text-xs font-normal bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full" id="commentCountBadge">0</span>
                 </h3>
 
                 <div class="space-y-3 bg-amber-50/60 p-3 rounded-md border border-amber-100">
                     <div>
-                        <label id="lbl_comment_name" class="block text-xs font-medium text-gray-700 mb-1">మీ పేరు (Your Name)</label>
-                        <input type="text" id="commentName" placeholder="ఉదా: రాము" class="w-full text-xs p-2 border border-gray-300 rounded bg-white">
+                        <label id="lbl_comment_name" class="block text-xs font-medium text-gray-700 mb-1">Your Name</label>
+                        <input type="text" id="commentName" placeholder="e.g., Ramu" class="w-full text-xs p-2 border border-gray-300 rounded bg-white">
                     </div>
                     <div>
-                        <label id="lbl_comment_msg" class="block text-xs font-medium text-gray-700 mb-1">మీ అభిప్రాయం / సూచన (Comment/Feedback)</label>
-                        <textarea id="commentMsg" rows="2" placeholder="ఇక్కడ మీ అభిప్రాయాన్ని రాయండి..." class="w-full text-xs p-2 border border-gray-300 rounded bg-white"></textarea>
+                        <label id="lbl_comment_msg" class="block text-xs font-medium text-gray-700 mb-1">Comment / Feedback</label>
+                        <textarea id="commentMsg" rows="2" placeholder="Write your feedback here..." class="w-full text-xs p-2 border border-gray-300 rounded bg-white"></textarea>
                     </div>
                     <button type="button" id="btn_submit_comment" onclick="addComment()" class="bg-amber-800 hover:bg-amber-900 text-white text-xs px-4 py-2 rounded font-semibold transition">
-                        కామెంట్ సమర్పించండి (Submit Comment)
+                        Submit Comment
                     </button>
                 </div>
 
@@ -295,7 +283,7 @@
             <div class="bg-white p-5 rounded-lg border border-amber-200 shadow-sm space-y-4 flex flex-col justify-between">
                 <div>
                     <h3 id="lbl_contact_header" class="text-lg font-bold text-amber-900 border-b border-amber-200 pb-2">
-                        డెవలపర్‌ను సంప్రదించండి (Contact Developer)
+                        Contact Developer
                     </h3>
                     
                     <div class="mt-3 space-y-3 text-sm text-gray-700">
@@ -303,12 +291,12 @@
                             <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-800 font-bold text-sm">GC</div>
                             <div>
                                 <h4 class="font-bold text-gray-900">Gandhi Chappa</h4>
-                                <p class="text-xs text-gray-500">IT Professional & Developer[cite: 4]</p>
+                                <p class="text-xs text-gray-500">IT Professional & Developer</p>
                             </div>
                         </div>
 
                         <p id="lbl_contact_desc" class="text-xs text-gray-600 leading-relaxed">
-                            ఈ సంకల్పం జనరేటర్ ఆప్ లో ఏవైనా మార్పులు, చేర్పులు లేదా కొత్త ఫీచర్లు కావాలనుకుంటే క్రింది బటన్ ద్వారా డెవలపర్‌ను నేరుగా సంప్రదించవచ్చు.
+                            If you have any feedback or requests for new features in this Sankalpam Generator app, you can contact the developer directly.
                         </p>
 
                         <div class="pt-2 flex flex-wrap gap-2">
@@ -323,7 +311,7 @@
                 </div>
 
                 <div class="pt-3 border-t border-amber-100 flex items-center justify-between text-xs text-gray-500">
-                    <span id="lbl_total_visits">మొత్తం సందర్శనలు (Total Page Visits):</span>
+                    <span id="lbl_total_visits">Total Page Visits:</span>
                     <span id="footerVisitorCount" class="font-bold text-amber-900 text-sm bg-amber-50 px-2 py-0.5 rounded border border-amber-200">0</span>
                 </div>
             </div>
@@ -333,18 +321,18 @@
     <!-- Quick Message Modal -->
     <div id="contactModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center p-4 z-50">
         <div class="bg-white rounded-lg p-6 max-w-md w-full shadow-xl border border-amber-200 space-y-4">
-            <h3 class="text-base font-bold text-amber-900">డెవలపర్‌కు సందేశం పంపండి</h3>
+            <h3 class="text-base font-bold text-amber-900">Send Message to Developer</h3>
             <div>
-                <label class="block text-xs font-medium text-gray-700 mb-1">మీ పేరు</label>
+                <label class="block text-xs font-medium text-gray-700 mb-1">Your Name</label>
                 <input type="text" id="modalSenderName" class="w-full text-xs p-2 border border-gray-300 rounded">
             </div>
             <div>
-                <label class="block text-xs font-medium text-gray-700 mb-1">సందేశం</label>
+                <label class="block text-xs font-medium text-gray-700 mb-1">Message</label>
                 <textarea id="modalMessage" rows="3" class="w-full text-xs p-2 border border-gray-300 rounded"></textarea>
             </div>
             <div class="flex justify-end gap-2">
-                <button type="button" onclick="closeQuickContactModal()" class="text-xs px-3 py-1.5 border rounded text-gray-600">రద్దు చేయి (Cancel)</button>
-                <button type="button" onclick="sendDirectMessage()" class="text-xs px-3 py-1.5 bg-amber-800 text-white rounded font-semibold">పంపండి (Send)</button>
+                <button type="button" onclick="closeQuickContactModal()" class="text-xs px-3 py-1.5 border rounded text-gray-600">Cancel</button>
+                <button type="button" onclick="sendDirectMessage()" class="text-xs px-3 py-1.5 bg-amber-800 text-white rounded font-semibold">Send</button>
             </div>
         </div>
     </div>
@@ -615,8 +603,8 @@
                 lbl_children: "सन्तानम् (Children)",
                 btn_add_child: "<span>+</span> सन्तानवर्धनम् (Add Child)",
                 btn_generate: "संकल्पं कुरु (Generate)",
-                btn_reset: "పునః ఆర్భః (Start Over)",
-                lbl_comments_header: "अभिप्रायाः / टिप्पण्यః (Comments)",
+                btn_reset: "पुनः आरम्भः (Start Over)",
+                lbl_comments_header: "अभिप्रायाः / टिप्पण्यः (Comments)",
                 lbl_comment_name: "भवतः नाम (Your Name)",
                 lbl_comment_msg: "भवतः अभिप्रायः (Comment)",
                 btn_submit_comment: "टिप्पणीं प्रेषयतु (Submit Comment)",
@@ -649,7 +637,7 @@
         };
 
         function updatePresetsUI(outputLang) {
-            const presetData = presetsMap[outputLang] || presetsMap.telugu;
+            const presetData = presetsMap[outputLang] || presetsMap.english;
             document.getElementById('lbl_quick_presets').textContent = presetData.label;
 
             document.getElementById('btn_preset_vinayaka').textContent = presetData.vinayaka.btn;
@@ -666,9 +654,9 @@
         }
 
         function updateSectionUILabels() {
-            const outputLang = document.querySelector('input[name="outputLanguage"]:checked')?.value || 'telugu';
-            const labels = sectionUILabels[outputLang] || sectionUILabels.telugu;
-            const placeholders = placeHoldersByLang[outputLang] || placeHoldersByLang.telugu;
+            const outputLang = document.querySelector('input[name="outputLanguage"]:checked')?.value || 'english';
+            const labels = sectionUILabels[outputLang] || sectionUILabels.english;
+            const placeholders = placeHoldersByLang[outputLang] || placeHoldersByLang.english;
 
             for (const [id, text] of Object.entries(labels)) {
                 const elem = document.getElementById(id);
@@ -731,6 +719,37 @@
             "ఒమన్ / బహ్రెయిన్": { eng: "Oman / Bahrain", sans: "ओमान / बहरीन" },
             "మయన్మార్": { eng: "Myanmar", sans: "म्यांमार" },
 
+            "మేరీల్యాండ్": { eng: "Maryland", sans: "मैरीलैंड" },
+            "వర్జీనియా": { eng: "Virginia", sans: "वर्जीनिया" },
+            "న్యూజెర్సీ": { eng: "New Jersey", sans: "न्यू जर्सी" },
+            "టెక్సాస్": { eng: "Texas", sans: "टेक्सास" },
+            "కాలిఫోర్నియా": { eng: "California", sans: "कैलिफोर्निया" },
+            "ఇల్లినోయ్": { eng: "Illinois", sans: "इलिनॉय" },
+            "నోర్త్ కరోలినా": { eng: "North Carolina", sans: "नॉर्थ कैरोलिना" },
+            "ఆంధ్రప్రదేశ్": { eng: "Andhra Pradesh", sans: "आन्ध्रप्रदेशः" },
+            "తెలంగాణ": { eng: "Telangana", sans: "तेलंगाना" },
+            "కర్ణాటక": { eng: "Karnataka", sans: "कर्नाटक" },
+            "తమిళనాడు": { eng: "Tamil Nadu", sans: "तमिलनाडु" },
+            "మహారాష్ట్ర": { eng: "Maharashtra", sans: "महाराष्ट्र" },
+            "దుబాయ్": { eng: "Dubai", sans: "दुबई" },
+            "అబుదాబి": { eng: "Abu Dhabi", sans: "अबू धाबी" },
+            "షార్జా": { eng: "Sharjah", sans: "शारजाह" },
+            "న్యూ సౌత్ వేల్స్": { eng: "New South Wales", sans: "न्यू साउथ वेल्स" },
+            "విక్టోరియా": { eng: "Victoria", sans: "विक्टोरिया" },
+            "క్వీన్స్‌లాండ్": { eng: "Queensland", sans: "क्वींसलैंड" },
+            "ఆక్లాండ్": { eng: "Auckland", sans: "ऑकलैंड" },
+            "ఇంగ్లాండ్": { eng: "England", sans: "इंग्लैंड" },
+            "స్కాట్లాండ్": { eng: "Scotland", sans: "स्कॉटलैंड" },
+            "ఒంటారియో": { eng: "Ontario", sans: "ओंटारियो" },
+            "బ్రిటిష్ కొలంబియా": { eng: "British Columbia", sans: "ब्रिटिश कोलंबिया" },
+            "కోలాలంపూర్": { eng: "Kuala Lumpur", sans: "कुआलालमपुर" },
+            "పినాంగ్": { eng: "Penang", sans: "पेनांग" },
+            "రియాద్": { eng: "Riyadh", sans: "रियाद" },
+            "జెద్దా": { eng: "Jeddah", sans: "जिद्दा" },
+            "మస్కట్": { eng: "Muscat", sans: "मस्कट" },
+            "మనామా": { eng: "Manama", sans: "मनामा" },
+            "యాంగోన్": { eng: "Yangon", sans: "यांगून" },
+
             "పోటోమాక్-అనాకోస్టియా నద్యోర్మధ్యే వాషింగ్టన్ నగరే": { eng: "Potomac-Anacostia Nadyormadhye Washington Nagare", sans: "पोटोमैक-अनाकोस्टिया नद्योर्मध्ये वाशिंगटन गरे" },
             "పోటోమాక్-జేమ్స్ నద్యోర్మధ్యే": { eng: "Potomac-James Nadyormadhye", sans: "पोटोमैक-जेम्स नद्योर्मध्ये" },
             "హడ్సన్-రారిటన్ నద్యోర్మధ్యే": { eng: "Hudson-Raritan Nadyormadhye", sans: "हडसन-रारिटन नद्योर्मध्ये" },
@@ -739,7 +758,7 @@
             "మిస్సిస్సిప్పి-ఇల్లినోయ్ నద్యోర్మధ్యే": { eng: "Mississippi-Illinois Nadyormadhye", sans: "मिसिसिप्पी-इलिनॉय नद्योर्मध्ये" },
             "కేప్ ఫియర్-నూస్ నద్యోర్మధ్యే": { eng: "Cape Fear-Neuse Nadyormadhye", sans: "केप फियर-न्यूज नद्योर्मध्ये" },
             "గోదావరి-కృష్ణా-తుంగభద్రా నదీ తీర ప్రదేశే": { eng: "Godavari-Krishna-Tungabhadra Nadi Tira Pradeshe", sans: "गोदावरी-कृष्णा-तुङ्गभद्रा नदी तीर प्रदेशे" },
-            "కృష్ణా-గోదావరి నద్యోర్మధ్యే, మూసీ నదీ ప్రాంతే": { eng: "Krishna-Godavari Nadyormadhye, Musi Nadi Prante", sans: "कृष्णा-गोदावरी नद्योर्मध्ये, मूसी नदी प्रान्ते" },
+            "కృష్ణా-గోదావరి నద్యోర్మధ్యే, మూసీ నదీ ప్రాంతే": { eng: "Krishna-Godavari Nadyormadhye, Musi Nadi Prante", sans: "कृष्णा-गोदावरी नद्यోర్మध्ये, मूसी नदी प्रान्ते" },
             "కావేరీ-తుంగభద్రా నద్యోర్మధ్యే": { eng: "Kaveri-Tungabhadra Nadyormadhye", sans: "कावेरी-तुङ्गभद्रा नद्योर्मध्ये" },
             "కావేరీ-తామ్రపర్ణి నద్యోర్మధ్యే": { eng: "Kaveri-Tamraparni Nadyormadhye", sans: "कावेरी-ताम्रपर्णी नद्योर्मध्ये" },
             "గోదావరి-కృష్ణా-భీమా నద్యోర్మధ్యే": { eng: "Godavari-Krishna-Bhima Nadyormadhye", sans: "गोदावरी-कृष्णा-भीमा नद्योर्मध्ये" },
@@ -780,10 +799,11 @@
             "దశమ్యామ్ తిథౌ": { eng: "Dasamyam Tithau", sans: "दशम्याम् तिथौ" },
             "చతుర్దశ్యామ్ తిథౌ": { eng: "Chaturdasyam Tithau", sans: "चतुर्दश्याम् तिथौ" },
 
+
             "భాద్రపద-మాసే": { eng: "Bhadrapada-Mase", sans: "भाद्रपद-मासे" },
-            "శ్రావణ-మాసే": { eng: "Sravana-Mase", sans: "श्रावण-माసే" },
-            "ఆశ్వయుజ-మాసే": { eng: "Aswayuja-Mase", sans: "आश्वयुज-माసే" },
-            "మాఘ-మాసే": { eng: "Magha-Mase", sans: "माघ-మాసే" },
+            "శ్రావణ-మాసే": { eng: "Sravana-Mase", sans: "श्रावण-मासे" },
+            "ఆశ్వయుజ-మాసే": { eng: "Aswayuja-Mase", sans: "आश्वयुज-मासे" },
+            "మాఘ-మాసే": { eng: "Magha-Mase", sans: "माघ-मासे" },
             "చైత్ర-మాసే": { eng: "Chaitra-Mase", sans: "चैत्र-मासे" },
             "పుష్య-మాసే": { eng: "Pushya-Mase", sans: "पौष-मासे" },
 
@@ -793,41 +813,96 @@
             "భౌమవాసర యుక్తాయామ్": { eng: "Bhaumavasara Yuktayam", sans: "भौमवासर युक्तायाम्" },
             "సౌమ్యవాసర యుక్తాయామ్": { eng: "Saumyavasara Yuktayam", sans: "सौम्यवासर युक्तायाम्" },
             "గురువాసర యుక్తాయామ్": { eng: "Guruvasara Yuktayam", sans: "गुरुवासर युक्तायाम्" },
-            "భృగువాసర యుక్తాయామ్": { eng: "Bhriguvasara Yuktayam", sans: "भृगुवासर युक्तायाమ్" },
+            "భృగువాసర యుక్తాయామ్": { eng: "Bhriguvasara Yuktayam", sans: "भृगुवासर युक्तायाम्" },
             "స్థిరవాసర / మందవాసర యుక్తాయామ్": { eng: "Sthiravasara Yuktayam", sans: "स्थिरवासर युक्तायाम्" },
 
             "మన్రోవియా": { eng: "Monrovia", sans: "मन्रोविया" },
             "బాల్టిమోర్": { eng: "Baltimore", sans: "बाल्टीमोर" },
             "రాక్‌విల్లే": { eng: "Rockville", sans: "रॉकविले" },
             "జర్మాన్‌టౌన్": { eng: "Germantown", sans: "जर्मनटाउन" },
+            "కొలంబియా": { eng: "Columbia", sans: "कोलंबिया" },
+            "సిల్వర్ స్ప్రింగ్": { eng: "Silver Spring", sans: "सिल्वर स्प्रिंग" },
             "ఫెయిర్‌ఫ్యాక్స్": { eng: "Fairfax", sans: "फेयरफैक्स" },
             "యాష్‌బర్న్": { eng: "Ashburn", sans: "ऐशबर्न" },
             "చాంటిల్లీ": { eng: "Chantilly", sans: "चांटिली" },
+            "రిచ్‌మండ్": { eng: "Richmond", sans: "रिचमंड" },
+            "మెక్‌లీన్": { eng: "McLean", sans: "मैकलीन" },
             "ఎడిసన్": { eng: "Edison", sans: "एडिसन" },
             "ప్రిన్స్‌టన్": { eng: "Princeton", sans: "प्रिंस्टन" },
             "పార్సిప్పానీ": { eng: "Parsippany", sans: "पार्सिपनी" },
+            "జెర్సీ సిటీ": { eng: "Jersey City", sans: "जर्सी सिटी" },
+            "బ్రిడ్జ్‌వాటర్": { eng: "Bridgewater", sans: "ब्रिजवाटर" },
+            "డల్లాస్": { eng: "Dallas", sans: "डलास" },
+            "ఆస్టిన్": { eng: "Austin", sans: "ऑस्टिन" },
+            "హ్యూస్టన్": { eng: "Houston", sans: "ह्यूस्टन" },
+            "ఫ్రిస్కో": { eng: "Frisco", sans: "फ्रिस्को" },
+            "ప్లేనో": { eng: "Plano", sans: "प्लांस" },
+            "ఇర్వింగ్": { eng: "Irving", sans: "इरिंग" },
+            "శాన్ జోస్": { eng: "San Jose", sans: "सैन जोस" },
+            "ఫ్రీమాంట్": { eng: "Fremont", sans: "फ्रीमोंट" },
+            "శాన్ ఫ్రాన్సిస్కో": { eng: "San Francisco", sans: "सैन फ्रांसिस्को" },
+            "లాస్ ఏంజెల్స్": { eng: "Los Angeles", sans: "लॉस एंजिल्स" },
+            "ఇర్విన్": { eng: "Irvine", sans: "इरविन" },
+            "షికాగో": { eng: "Chicago", sans: "शिकागो" },
+            "నేపర్‌విల్లే": { eng: "Naperville", sans: "नेपरविले" },
+            "అరోరా": { eng: "Aurora", sans: "अरोरा" },
+            "షాంబర్గ్": { eng: "Schaumburg", sans: "शामबर्ग" },
+            "రాలే": { eng: "Raleigh", sans: "राले" },
+            "షార్లెట్": { eng: "Charlotte", sans: "शार्लोट" },
+            "కేరీ": { eng: "Cary", sans: "कैरी" },
+            "అపెక్స్": { eng: "Apex", sans: "एपेक्स" },
             "విశాఖపట్నం": { eng: "Visakhapatnam", sans: "विशाखापत्तनम्" },
             "విజయవాడ": { eng: "Vijayawada", sans: "विजयवाडा" },
             "గుంటూరు": { eng: "Guntur", sans: "गुंटूर" },
             "తిరుపతి": { eng: "Tirupati", sans: "तिरुपति" },
+            "అనంతపురం": { eng: "Anantapur", sans: "अनंतपुर" },
+            "కాకినాడ": { eng: "Kakinada", sans: "काकीनाडा" },
+            "రాజమండ్రి": { eng: "Rajahmundry", sans: "राजमुंद्री" },
             "హైదరాబాద్": { eng: "Hyderabad", sans: "हैदराबाद" },
             "వరంగల్": { eng: "Warangal", sans: "वरंगल" },
+            "నిజామాబాద్": { eng: "Nizamabad", sans: "निज़ामाबाद" },
+            "కరీంనగర్": { eng: "Karimnagar", sans: "करीमनगर" },
+            "ఖమ్మం": { eng: "Khammam", sans: "खम्मम" },
+            "బెంగళూరు": { eng: "Bengaluru", sans: "बेंगलुरु" },
+            "మైసూర్": { eng: "Mysuru", sans: "मैसूर" },
+            "మంగళూరు": { eng: "Mangaluru", sans: "मंगलुरु" },
+            "హుబ్బళ్లి": { eng: "Hubballi", sans: "हुबली" },
+            "చెన్నై": { eng: "Chennai", sans: "चेन्नई" },
+            "కోయంబత్తూర్": { eng: "Coimbatore", sans: "कोयंबटूर" },
+            "మధురై": { eng: "Madurai", sans: "मदुरै" },
+            "తిరుచిరాపల్లి": { eng: "Tiruchirappalli", sans: "तिरुचिरापल्ली" },
+            "ముంబై": { eng: "Mumbai", sans: "मुंबई" },
+            "పూణే": { eng: "Pune", sans: "पुणे" },
+            "నాగపూర్": { eng: "Nagpur", sans: "नागपुर" },
+            "నాసిక్": { eng: "Nashik", sans: "नासिक" },
             "దుబాయ్ నగరే": { eng: "Dubai", sans: "दुबई" },
             "అబుదాబి నగరే": { eng: "Abu Dhabi", sans: "अबू धाबी" },
             "షార్జా నగరే": { eng: "Sharjah", sans: "शारजाह" },
             "సిడ్నీ నగరే": { eng: "Sydney", sans: "सिडनी" },
+            "న్యూకాజిల్": { eng: "Newcastle", sans: "न्यूकैसल" },
             "మెల్‌బోర్న్ నగరే": { eng: "Melbourne", sans: "मेलबर्न" },
             "బ్రిస్బేన్ నగరే": { eng: "Brisbane", sans: "ब्रिसबेन" },
             "ఆక్లాండ్ నగరే": { eng: "Auckland", sans: "ऑकलैंड" },
+            "వెల్లింగ్టన్": { eng: "Wellington", sans: "वेलिंगटन" },
             "లండన్ నగరే": { eng: "London", sans: "लंदन" },
+            "బర్మింగ్‌హామ్": { eng: "Birmingham", sans: "बर्मिंघम" },
+            "మాంచెస్టర్": { eng: "Manchester", sans: "मैनचेस्टर" },
+            "గ్లాస్గో నగరే": { eng: "Glasgow", sans: "ग्लासगो" },
+            "ఎడిన్‌బర్గ్": { eng: "Edinburgh", sans: "एडिनबर्ग" },
             "టొరంటో నగరే": { eng: "Toronto", sans: "टोरंटो" },
+            "ఒట్టావా": { eng: "Ottawa", sans: "ओटावा" },
+            "మిస్సిసాగా": { eng: "Mississauga", sans: "मिसिसॉगा" },
+            "వాంకూవర్ నగరే": { eng: "Vancouver", sans: "वैंकूवर" },
+            "సర్రీ": { eng: "Surrey", sans: "सर्रे" },
             "సింగపూర్ నగరే": { eng: "Singapore", sans: "सिंगापुर" },
             "కోలాలంపూర్ నగరే": { eng: "Kuala Lumpur", sans: "कुआलालमपुर" },
+            "జార్జ్ టౌన్": { eng: "George Town", sans: "जॉर्ज टाउन" },
             "రియాద్ నగరే": { eng: "Riyadh", sans: "रियाद" },
             "జెద్దా నగరే": { eng: "Jeddah", sans: "जिद्दा" },
             "మస్కట్ నగరే": { eng: "Muscat", sans: "मस्कट" },
             "మనామా నగరే": { eng: "Manama", sans: "मनामा" },
-            "యాంగోన్ నగరే": { eng: "Yangon", sans: "यांगून" }
+            "యాంగోన్ నగరే": { eng: "Yangon", sans: "यांगून" },
+            "మండలే": { eng: "Mandalay", sans: "मांडले" }
         };
 
         function convertToSelectedScript(text, targetLang) {
@@ -874,7 +949,7 @@
 
         function populateSingleNakshatraSelect(selectElem) {
             const currentVal = selectElem.value;
-            const outputLang = document.querySelector('input[name="outputLanguage"]:checked')?.value || 'telugu';
+            const outputLang = document.querySelector('input[name="outputLanguage"]:checked')?.value || 'english';
             selectElem.innerHTML = '';
             
             nakshatrasList.forEach(n => {
@@ -904,6 +979,7 @@
 
         function updatePreferredLanguage() {
             updateSectionUILabels();
+            populateCountries();
             populateNakshatraDropdowns();
             fetchGlobalPanchang();
 
@@ -971,16 +1047,38 @@
             }
         };
 
+        function populateCountries() {
+            const countrySelect = document.getElementById('country');
+            const currentSelected = countrySelect.value || "అమెరికా";
+            const outputLang = document.querySelector('input[name="outputLanguage"]:checked')?.value || 'english';
+            
+            countrySelect.innerHTML = '';
+            const countries = Object.keys(statePanchangConfig);
+            countries.forEach(cntry => {
+                const opt = document.createElement('option');
+                opt.value = cntry;
+                opt.textContent = convertToSelectedScript(cntry, outputLang);
+                if (cntry === currentSelected) opt.selected = true;
+                countrySelect.appendChild(opt);
+            });
+
+            populateStates();
+        }
+
         function populateStates() {
             const country = document.getElementById('country').value;
             const stateSelect = document.getElementById('state');
+            const currentSelected = stateSelect.value;
+            const outputLang = document.querySelector('input[name="outputLanguage"]:checked')?.value || 'english';
+            
             stateSelect.innerHTML = '';
 
             const states = Object.keys(statePanchangConfig[country] || {});
             states.forEach(st => {
                 const opt = document.createElement('option');
                 opt.value = st;
-                opt.textContent = st;
+                opt.textContent = convertToSelectedScript(st, outputLang);
+                if (st === currentSelected) opt.selected = true;
                 stateSelect.appendChild(opt);
             });
 
@@ -991,15 +1089,19 @@
             const country = document.getElementById('country').value;
             const state = document.getElementById('state').value;
             const config = (statePanchangConfig[country] && statePanchangConfig[country][state]);
+            const outputLang = document.querySelector('input[name="outputLanguage"]:checked')?.value || 'english';
 
             if (config) {
                 document.getElementById('timezoneOffset').value = config.tz;
                 const citySelect = document.getElementById('city');
+                const currentCitySelected = citySelect.value;
+                
                 citySelect.innerHTML = '';
                 config.cities.forEach(ct => {
                     const opt = document.createElement('option');
                     opt.value = ct;
-                    opt.textContent = ct;
+                    opt.textContent = convertToSelectedScript(ct, outputLang);
+                    if (ct === currentCitySelected) opt.selected = true;
                     citySelect.appendChild(opt);
                 });
             }
@@ -1017,7 +1119,7 @@
 
         function applyPreset(key) {
             currentActivePresetKey = key;
-            const outputLang = document.querySelector('input[name="outputLanguage"]:checked')?.value || 'telugu';
+            const outputLang = document.querySelector('input[name="outputLanguage"]:checked')?.value || 'english';
             const year = document.getElementById('pujaYear').value;
             const dataDate = presetsBaseDate[key];
             const dataNames = presetsMap[outputLang][key];
@@ -1054,7 +1156,7 @@
         }
 
         function fetchGlobalPanchang() {
-            const outputLang = document.querySelector('input[name="outputLanguage"]:checked')?.value || 'telugu';
+            const outputLang = document.querySelector('input[name="outputLanguage"]:checked')?.value || 'english';
             const selectedVal = document.getElementById('pujaDateTime').value;
             const tzOffset = document.getElementById('timezoneOffset').value;
             if (!selectedVal) return;
@@ -1089,7 +1191,7 @@
                 if (tithiIdx > 14) tithiIdx = 14;
                 document.getElementById('tithi').value = convertToSelectedScript(tithisTelugu[tithiIdx], outputLang);
 
-                let masamIdx = Math.floor((dateObj.getMonth() + (dateObj.getDate() > 15 ? 1 : 0) + 9) % 12);
+                let masamIdx = (dateObj.getMonth() + 9) % 12;
                 document.getElementById('masam').value = convertToSelectedScript(masamsTelugu[masamIdx], outputLang);
             }
 
@@ -1105,14 +1207,14 @@
         /* CHILD Dynamic Rows */
         function addChildRow(name = '', type = 'పుత్రుడి', nakshatra = 'అశ్విని') {
             const container = document.getElementById('childrenContainer');
-            const outputLang = document.querySelector('input[name="outputLanguage"]:checked')?.value || 'telugu';
-            const placeholders = placeHoldersByLang[outputLang] || placeHoldersByLang.telugu;
+            const outputLang = document.querySelector('input[name="outputLanguage"]:checked')?.value || 'english';
+            const placeholders = placeHoldersByLang[outputLang] || placeHoldersByLang.english;
             
-            let optSon = "కుమారుడు (Son)";
-            let optDaughter = "కుమార్తె (Daughter)";
-            if (outputLang === 'english') {
-                optSon = "Son";
-                optDaughter = "Daughter";
+            let optSon = "Son";
+            let optDaughter = "Daughter";
+            if (outputLang === 'telugu') {
+                optSon = "కుమారుడు (Son)";
+                optDaughter = "కుమార్తె (Daughter)";
             } else if (outputLang === 'sanskrit') {
                 optSon = "पुत्रः (Son)";
                 optDaughter = "पुत्री (Daughter)";
@@ -1135,7 +1237,7 @@
                     </select>
                 </div>
                 <div class="col-span-1 text-center">
-                    <button type="button" onclick="removeChildRow(this)" title="ఈ వరుసను తొలగించు (Remove)" class="text-red-500 hover:text-red-700 font-bold text-sm bg-red-50 hover:bg-red-100 border border-red-200 rounded w-6 h-6 inline-flex items-center justify-center">
+                    <button type="button" onclick="removeChildRow(this)" title="Remove" class="text-red-500 hover:text-red-700 font-bold text-sm bg-red-50 hover:bg-red-100 border border-red-200 rounded w-6 h-6 inline-flex items-center justify-center">
                         ✕
                     </button>
                 </div>
@@ -1160,18 +1262,18 @@
             document.getElementById('childrenContainer').innerHTML = '';
             
             const outputDiv = document.getElementById('sankalpamOutput');
-            const outputLang = document.querySelector('input[name="outputLanguage"]:checked')?.value || 'telugu';
+            const outputLang = document.querySelector('input[name="outputLanguage"]:checked')?.value || 'english';
             
             let placeholderText = `
-                వివరాలను పూర్తి చేసి, క్రింద ఉన్న <br>
-                <span class="font-bold text-amber-800">"సంకల్పం తయారుచేయి"</span> <br>
-                బటన్‌ను నొక్కండి.
+                Fill in the details and click the <br>
+                <span class="font-bold text-amber-800">"Generate Sankalpam"</span> <br>
+                button below.
             `;
-            if (outputLang === 'english') {
+            if (outputLang === 'telugu') {
                 placeholderText = `
-                    Fill in the details and click the <br>
-                    <span class="font-bold text-amber-800">"Generate Sankalpam"</span> <br>
-                    button below.
+                    వివరాలను పూర్తి చేసి, క్రింద ఉన్న <br>
+                    <span class="font-bold text-amber-800">"సంకల్పం తయారుచేయి"</span> <br>
+                    బటన్‌ను నొక్కండి.
                 `;
             } else if (outputLang === 'sanskrit') {
                 placeholderText = `
@@ -1200,8 +1302,8 @@
             );
             
             if (match) {
-                let baseName = match.telugu;
-                if (outputLang === 'english') baseName = match.eng;
+                let baseName = match.eng;
+                if (outputLang === 'telugu') baseName = match.telugu;
                 else if (outputLang === 'sanskrit') baseName = match.sans;
                 
                 if (includeSuffix) {
@@ -1216,7 +1318,7 @@
 
         /* GENERATE SANKALPAM */
         function generateSankalpam() {
-            const outputLang = document.querySelector('input[name="outputLanguage"]:checked')?.value || 'telugu';
+            const outputLang = document.querySelector('input[name="outputLanguage"]:checked')?.value || 'english';
             
             // Raw inputs
             let rawGotram = document.getElementById('gotram').value.trim();
@@ -1238,7 +1340,6 @@
             let rawNakshatram = document.getElementById('nakshatram').value.trim();
             let samvatsaram = document.getElementById('samvatsaram').value.trim();
 
-            // REQUIREMENT 1 & 2: Dedicated Language Variables created and resolved upon input conversion
             let gotram_telugu = getMultiLangFamilyValue(rawGotram, 'telugu');
             let gotram_english = getMultiLangFamilyValue(rawGotram, 'english');
             let gotram_sanskrit = getMultiLangFamilyValue(rawGotram, 'sanskrit');
@@ -1251,7 +1352,6 @@
             let wifeName_english = getMultiLangFamilyValue(rawWifeName, 'english');
             let wifeName_sanskrit = getMultiLangFamilyValue(rawWifeName, 'sanskrit');
 
-            // Child Language Variables Resolution
             let children_telugu = [];
             let children_english = [];
             let children_sanskrit = [];
@@ -1283,17 +1383,16 @@
                 }
             });
 
-            // REQUIREMENT 3: Select respective language variables based on target output language
-            let gotram = gotram_telugu;
-            let selfName = selfName_telugu;
-            let wifeName = wifeName_telugu;
-            let childrenText = children_telugu.join('\n') + (children_telugu.length ? '\n' : '');
+            let gotram = gotram_english;
+            let selfName = selfName_english;
+            let wifeName = wifeName_english;
+            let childrenText = children_english.join('\n') + (children_english.length ? '\n' : '');
 
-            if (outputLang === 'english') {
-                gotram = gotram_english;
-                selfName = selfName_english;
-                wifeName = wifeName_english;
-                childrenText = children_english.join('\n') + (children_english.length ? '\n' : '');
+            if (outputLang === 'telugu') {
+                gotram = gotram_telugu;
+                selfName = selfName_telugu;
+                wifeName = wifeName_telugu;
+                childrenText = children_telugu.join('\n') + (children_telugu.length ? '\n' : '');
             } else if (outputLang === 'sanskrit') {
                 gotram = gotram_sanskrit;
                 selfName = selfName_sanskrit;
@@ -1384,34 +1483,10 @@ ${masam}
 ${paksham} 
 ${tithi} 
 ${vaaram} 
-${nakshatram} 
-Subha Yoge Subha Karane 
-Evam Guna Viseshana Visishtayam Subha Tithau 
-${pujaName} Puja Punyakale 
+${nakshatram} Subhayoga Subhakarana Evanguna Visesana Visistayam Subhatithau 
 
-Sri Paramesvara Prityartham 
-
-• Sriman 
-• ${gotram_english ? gotram_english : '_____'} Gotrodbhavasya 
-• ${selfNakshatra} Nakshatre Jatasya 
-• ${selfName_english ? selfName_english : '_____'} Namadheyasya 
-${wifeName_english ? `• Mama Dharmapatni Sametasya \n• ${wifeNakshatra} Nakshatre Jatayah \n• Srimatyah ${wifeName_english} Namni\n` : ''}${childrenText}Saha Kutumbasya Sabandhavasya Asmakam 
-Kshema-Sthairya-Dhairya-Vijaya-Aayuh-Aarogya-Aisvarya-Abhivruddhyartham 
-Dharma Artha Kama Moksha Chaturvidha Purushartha Phala Siddhyartham 
-Samasta Mangalavaptyartham 
-Dhana Kanaka Vastu Vahana Samruddhiyartham 
-Jnana Vairagya Moksha Praptyartham 
-Sarvabhishta Siddhyartham 
-
-${deityName} Prityartham 
-Sambhavadabhih dravyaih sambhavadabhih upacharaih 
-Cha sambhavata niyamena sambhavita prakarena 
-Yavachhakti dhyana aavahanadi 
-${pujaName} Shodashopachara Pujam Karishye |
-
-Nirvighna puja parisamaptyartham aadau Srimahaganapati pujam karishye |
-Tadangakalasa aaradhanram karishye |`;
-
+• ${gotram || '[Gotram]'} Gotrasya • ${selfNakshatra} Nakshatre Jatasya • ${selfName || '[Self Name]'} Namadheyasya 
+${wifeName ? `• Dharmapatni Sametasya • ${wifeNakshatra} Nakshatre Jatayah • ${wifeName} Namadheyavatyah\n` : ''}${childrenText}Asmakam Sahakutumbanam Kshema Sthairya Dhairya Vijayabhaya AyurArogya Aiswaryabhivruddhyartham, Dharma Artha Kama Moksha Chaturvidha Purushartha Phala Siddhyartham, ${pujaName} Karma Yathasakti Kalpokta Prakarena Karishye.`;
             } else if (outputLang === 'sanskrit') {
                 sankalpamText = `ममोपात्त समस्त दुरितक्षय द्वारा 
 श्री परमेश्वर प्रीत्यर्थम् 
@@ -1420,41 +1495,17 @@ Tadangakalasa aaradhanram karishye |`;
 अद्य ब्रह्मणः द्वितीय परार्धे श्वेतवराहकल्पे वैवस्वतमन्वन्तरे 
 ${locationText}
 
-अस्मिन् वर्तमाने व्यावहारिकचान्द्रमानेन 
+अस्मिन् वर्तमानी व्यावहारिकचान्द्रमानेन 
 ${samvatsaram} नाम संवत्सरे 
 ${ayanamText} 
 ${masam} 
 ${paksham} 
 ${tithi} 
 ${vaaram} 
-${nakshatram} 
-शुभ योगे शुभ करणे 
-एवं गुण विशेषण विशिष्टायाम् शुभ तिथौ 
-${pujaName} पूजा पुण्यकाले 
+${nakshatram} शुभयोग शुभकरण एवंगुण विशेषण विशिष्टायां शुभतिथौ 
 
-श्री परमेश्वर प्रीत्यर्थम् 
-
-• श्रीमान् 
-• ${gotram_sanskrit ? gotram_sanskrit : '_____'} गोत्रोद्भवस्य 
-• ${selfNakshatra} नक्षत्रे जातस्य 
-• ${selfName_sanskrit ? selfName_sanskrit : '_____'} नामधेयस्य 
-${wifeName_sanskrit ? `• मम धर्मपत्नी समेतस्य \n• ${wifeNakshatra} नक्षत्रे जातायाः \n• श्रीमत्याః ${wifeName_sanskrit} नाम्न्याः\n` : ''}${childrenText}सह कुटुम्बस्य सबान्धवस्य अस्माकम् 
-क्षेम-स्थैर्य-धैर्य-विजय-आयुरारोग्य-ऐश्वर्याभिवृद्ध्यर्थम् 
-धर्म अर्थ काम मोक्ष चतुर्विध पुरुषार्थ फल सिद्ध्यर्थम् 
-समस्त मङ्गलावाप्त्यर्थम् 
-धन कनक वस्तु वाहन समृद्ध्यर्थम् 
-ज्ञान वैराग्य मोक्ष प्राप्त्यर्थम् 
-सर्वाभीष्ट सिद्ध्यर्थम् 
-
-${deityName} प्रीत्यर्थम् 
-सम्भवद्भिः द्रव्यैः सम्भवद्भिः उपचारैः 
-च सम्भवता नियमेन सम्भाविता प्रकारेण 
-यावच्छक्ति ध्यान आवाहनादि 
-${pujaName} षोडशोपचार पूजां करिष्ये |
-
-निर्विघ्न पूजा परिसमाप्त्यर्थम् आदौ श्रीमहागणपति पूजां करिष्ये |
-तदङ्गकलश आराधनं करिष्ये |`;
-
+• ${gotram || '[गोत्रम्]'} गोत्रस्य • ${selfNakshatra} नक्षत्रे जातस्य • ${selfName || '[नाम]'} नामधेयस्य 
+${wifeName ? `• धर्मपत्नी समेतस्य • ${wifeNakshatra} नक्षत्रे जातायाः • ${wifeName} नामधेयवत्याः\n` : ''}${childrenText}अस्माकं सहकुटुम्बानां क्षेम स्थैर्य धैर्य विजयाभय आयुरारोग्य ऐश्वर्याभिवृद्ध्यर्थम्, धर्म अर्थ काम मोक्ष चतुर्विध पुरुषार्थ फल सिद्ध्यर्थम्, ${pujaName} कर्म यथाशक्ति कल्पोक्त प्रकारेण करिष्ये।`;
             } else {
                 sankalpamText = `మమోపాత్త సమస్త దురితక్షయ ద్వారా 
 శ్రీ పరమేశ్వర ప్రీత్యర్థం 
@@ -1470,33 +1521,10 @@ ${masam}
 ${paksham} 
 ${tithi} 
 ${vaaram} 
-${nakshatram} 
-శుభ యోగే శుభ కరణే 
-ఎవం గుణ విశేషణ విశిష్టాయాం శుభ తిథౌ 
-${pujaName} పూజా పుణ్యకాలే 
+${nakshatram} శుభయోగ శుభకరణ ఏవంగుణ విశేషణ విశిష్టాయాం శుభతిథౌ 
 
-శ్రీ పరమేశ్వర ప్రీత్యర్థం 
-
-• శ్రీమాన్ 
-• ${gotram_telugu ? gotram_telugu : '_____'} గోత్రోద్భవస్య 
-• ${selfNakshatra} నక్షత్రే జాతస్య 
-• ${selfName_telugu ? selfName_telugu : '_____'} నామధేయస్య 
-${wifeName_telugu ? `• మమ ధర్మపత్నీ సమేతస్య \n• ${wifeNakshatra} నక్షత్రే జాతాయాః \n• శ్రీమత్యాః ${wifeName_telugu} నామ్న్యాః\n` : ''}${childrenText}సహ కుటుంబస్య సబాంధవస్య అస్మాకం 
-క్షేమ-స్థైర్య-ధైర్య-విజయ-ఆయురారోగ్య-ఐశ్వర్యాభివృద్ధ్యర్థం 
-ధర్మ అర్థ కామ మోక్ష చతుర్విధ పురుషార్థ ఫల సిద్ధ్యర్థం 
-సమస్త మంగళావాప్త్యర్థం 
-ధన కనక వస్తు వాహన సమృద్ధ్యర్థం 
-జ్ఞాన వైరాగ్య మోక్ష ప్రాప్త్యర్థం 
-సర్వాభీష్ట సిద్ధ్యర్థం 
-
-${deityName} ప్రీత్యర్థం 
-సంభవద్భిః ద్రవ్యైః సంభవద్భిః ఉపచారైః 
-చ సంభవతా నియమేన సంభావిత ప్రకారేణ 
-యావచ్ఛక్తి ధ్యాన ఆవాహనాది 
-${pujaName} షొడశోపచార పూజాం కరిష్యే |
-
-నిర్విఘ్న పూజా పరిసమాప్త్యర్థం ఆదౌ శ్రీమహాగాణపతి పూజాం కరిష్యే |
-తదంగకలశ ఆరాధనం కరిష్యే |`;
+• ${gotram || '[గోత్రం]'} గోత్రస్య • ${selfNakshatra} నక్షత్రే జాతస్య • ${selfName || '[పేరు]'} నామధేయస్య 
+${wifeName ? `• ధర్మపత్నీ సమేతస్య • ${wifeNakshatra} నక్షత్రే జాతాయాః • ${wifeName} నామధేయవత్యాః\n` : ''}${childrenText}అస్మాకం సహకుటుంబానాం క్షేమ స్థైర్య ధైర్య విజయాభయ ఆయురారోగ్య ఐశ్వర్యాభివృద్ధ్యర్థం, ధర్మ అర్థ కామ మోక్ష చతుర్విధ పురుషార్థ ఫల సిద్ధ్యర్థం, ${pujaName} కర్మ యథాశక్తి కల్పోక్త ప్రకారేణ కరిష్యే.`;
             }
 
             document.getElementById('sankalpamOutput').innerText = sankalpamText;
@@ -1504,56 +1532,13 @@ ${pujaName} షొడశోపచార పూజాం కరిష్యే |
             document.getElementById('printBtn').classList.remove('hidden');
         }
 
-        function copyToClipboard() {
-            const outputText = document.getElementById('sankalpamOutput').innerText;
-            navigator.clipboard.writeText(outputText).then(() => {
-                alert('Sankalpam copied to clipboard!');
-            });
-        }
-
-        function printSankalpamPDF() {
-            window.print();
-        }
-
-        function addComment() {
-            const name = document.getElementById('commentName').value.trim();
-            const msg = document.getElementById('commentMsg').value.trim();
-            if (!name || !msg) return;
-
-            const container = document.getElementById('commentsContainer');
-            const commentDiv = document.createElement('div');
-            commentDiv.className = 'bg-amber-50 p-3 rounded border border-amber-200 text-xs space-y-1';
-            commentDiv.innerHTML = `<div class="font-bold text-amber-900">${name}</div><div class="text-gray-700">${msg}</div>`;
-            container.prepend(commentDiv);
-
-            document.getElementById('commentName').value = '';
-            document.getElementById('commentMsg').value = '';
-
-            const badge = document.getElementById('commentCountBadge');
-            badge.textContent = parseInt(badge.textContent || '0') + 1;
-        }
-
-        function openQuickContactModal() {
-            document.getElementById('contactModal').classList.remove('hidden');
-            document.getElementById('contactModal').classList.add('flex');
-        }
-
-        function closeQuickContactModal() {
-            document.getElementById('contactModal').classList.add('hidden');
-            document.getElementById('contactModal').classList.remove('flex');
-        }
-
-        function sendDirectMessage() {
-            alert('Message sent successfully!');
-            closeQuickContactModal();
-        }
-
-        // Initial setup
-        window.onload = function() {
-            populateStates();
-            populateNakshatraDropdowns(true);
+        // Initialize defaults
+        window.addEventListener('DOMContentLoaded', () => {
             updateSectionUILabels();
-        };
+            populateCountries();
+            populateNakshatraDropdowns(true);
+            fetchGlobalPanchang();
+        });
     </script>
 </body>
 </html>
