@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puja Sankalpam Generator - Global Countries & Multi-Language Output</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Mandali&family=Noto+Sans+Telugu:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans Telugu', 'Mandali', 'Noto Sans Devanagari', sans-serif; }
+    </style>
+</head>
+<body class="bg-amber-50 text-slate-800 p-4 md:p-8">
+
+    <div class="max-w-5xl mx-auto bg-white rounded-xl shadow-md border border-amber-200 overflow-hidden">
+        <!-- Header -->
+        <div class="bg-amber-700 text-white p-6 text-center relative">
+            <h1 id="lbl_header_title" class="text-2xl md:text-3xl font-bold">Puja Sankalpam Generator (Global Location & Multi-Language Output)</h1>
+            <p class="text-amber-100 text-sm mt-1">Designed & Developed by Gandhi Chappa</p>
+            
+            <!-- Visitor Counter Badge -->
+            <div class="mt-3 inline-flex items-center gap-2 bg-amber-800/80 px-3 py-1 rounded-full text-xs text-amber-100 border border-amber-600">
+                <svg class="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                </svg>
+                <span><span id="lbl_visitor_count">Visitor Count</span>: <strong id="headerVisitorCount" class="text-white">...</strong></span>
+            </div>
+        </div>
+
+        <!-- Quick Presets -->
+        <div class="bg-amber-100/60 p-4 border-b border-amber-200">
+            <label id="lbl_quick_presets" class="block text-xs font-bold text-amber-900 uppercase tracking-wider mb-2">Quick Puja Presets:</label>
+            <div class="flex flex-wrap gap-2">
+                <button type="button" id="btn_preset_vinayaka" onclick="applyPreset('vinayaka')" class="text-xs md:text-sm bg-amber-800 text-white px-3 py-1.5 rounded-md hover:bg-amber-900 transition">Vinayaka Chavithi</button>
+                <button type="button" id="btn_preset_varalakshmi" onclick="applyPreset('varalakshmi')" class="text-xs md:text-sm bg-amber-800 text-white px-3 py-1.5 rounded-md hover:bg-amber-900 transition">Varalakshmi Vratam</button>
+                <button type="button" id="btn_preset_dasara" onclick="applyPreset('dasara')" class="text-xs md:text-sm bg-amber-800 text-white px-3 py-1.5 rounded-md hover:bg-amber-900 transition">Vijayadasami / Dasara</button>
+                <button type="button" id="btn_preset_sankranti" onclick="applyPreset('sankranti')" class="text-xs md:text-sm bg-amber-800 text-white px-3 py-1.5 rounded-md hover:bg-amber-900 transition">Makara Sankranti</button>
+                <button type="button" id="btn_preset_ugadi" onclick="applyPreset('ugadi')" class="text-xs md:text-sm bg-amber-800 text-white px-3 py-1.5 rounded-md hover:bg-amber-900 transition">Ugadi</button>
+                <button type="button" id="btn_preset_shivratri" onclick="applyPreset('shivratri')" class="text-xs md:text-sm bg-amber-800 text-white px-3 py-1.5 rounded-md hover:bg-amber-900 transition">Maha Shivaratri</button>
+            </div>
+        </div>
+
+        <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Left Column: Form Inputs -->
+            <div class="space-y-5">
+                
+                <!-- SECTION 1: PUJA DETAILS & LANGUAGE CHOICE -->
+                <div class="bg-amber-50/80 p-4 rounded-lg border border-amber-200 space-y-3">
+                    <h2 id="lbl_sec1_header" class="text-lg font-bold text-amber-900 border-b border-amber-300 pb-1">1. Puja Details & Language</h2>
+
+                    <!-- Output Language Selector -->
+                    <div>
+                        <label id="lbl_output_lang" class="block text-xs font-bold text-amber-900 uppercase mb-2">Output Script Preference:</label>
+                        <div class="grid grid-cols-3 gap-2 bg-amber-100/70 p-2 rounded-lg border border-amber-300">
+                            <label class="flex items-center gap-1.5 cursor-pointer text-xs font-bold text-amber-950 bg-white p-2 rounded border border-amber-200 hover:bg-amber-50">
+                                <input type="radio" name="outputLanguage" value="english" checked onchange="updatePreferredLanguage()" class="accent-amber-700 w-4 h-4">
+                                <span>English</span>
+                            </label>
+                            <label class="flex items-center gap-1.5 cursor-pointer text-xs font-bold text-amber-950 bg-white p-2 rounded border border-amber-200 hover:bg-amber-50">
+                                <input type="radio" name="outputLanguage" value="telugu" onchange="updatePreferredLanguage()" class="accent-amber-700 w-4 h-4">
+                                <span>తెలుగు (Telugu)</span>
+                            </label>
+                            <label class="flex items-center gap-1.5 cursor-pointer text-xs font-bold text-amber-950 bg-white p-2 rounded border border-amber-200 hover:bg-amber-50">
+                                <input type="radio" name="outputLanguage" value="sanskrit" onchange="updatePreferredLanguage()" class="accent-amber-700 w-4 h-4">
+                                <span>సంస్కృతం (Sanskrit)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label id="lbl_puja_name" class="block text-sm font-medium text-gray-700">Puja / Vratam Name</label>
+                        <input type="text" id="pujaName" value="Sri Varasiddhi Vinayaka Vratam" placeholder="e.g., Sri Varasiddhi Vinayaka Vratam" class="w-full mt-1 p-2 border border-gray-300 rounded-md bg-white">
+                    </div>
+
+                    <div>
+                        <label id="lbl_deity_name" class="block text-sm font-medium text-gray-700">Deity Name</label>
+                        <input type="text" id="deityName" value="Sri Varasiddhi Vinayakaswami" placeholder="e.g., Sri Varasiddhi Vinayakaswami" class="w-full mt-1 p-2 border border-gray-300 rounded-md bg-white">
+                    </div>
+                </div>
+
+                <!-- SECTION 2: DATE, LOCATION & TIMEZONE -->
+                <div class="space-y-3 bg-amber-50/40 p-4 rounded-lg border border-amber-200">
+                    <div class="border-b pb-1">
+                        <h2 id="lbl_sec2_header" class="text-lg font-semibold text-amber-800">2. Location, Date & Timezone</h2>
+                    </div>
+
+                    <!-- Year & Date/Time Selection -->
+                    <div class="grid grid-cols-3 gap-2">
+                        <div>
+                            <label id="lbl_year" class="block text-xs font-medium text-gray-700">Year</label>
+                            <select id="pujaYear" onchange="updateDateByYear()" class="w-full mt-1 p-2 border border-amber-500 bg-amber-50 rounded-md font-bold text-amber-900 text-sm">
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                <option value="2026" selected>2026</option>
+                                <option value="2027">2027</option>
+                                <option value="2028">2028</option>
+                                <option value="2029">2029</option>
+                                <option value="2030">2030</option>
+                            </select>
+                        </div>
+                        <div class="col-span-2">
+                            <label id="lbl_datetime" class="block text-xs font-medium text-gray-700">Date & Time</label>
+                            <input type="datetime-local" id="pujaDateTime" value="2026-08-21T08:00" onchange="syncYearFromDateTime()" class="w-full mt-1 p-2 border border-amber-500 bg-amber-50/50 rounded-md font-semibold text-amber-900 text-sm">
+                        </div>
+                    </div>
+
+                    <!-- Location Dropdowns -->
+                    <div class="grid grid-cols-3 gap-2">
+                        <div>
+                            <label id="lbl_country" class="block text-xs font-medium text-gray-700">Country</label>
+                            <select id="country" onchange="populateStates()" class="w-full mt-1 p-2 border border-gray-300 rounded-md text-xs font-semibold">
+                            </select>
+                        </div>
+                        <div>
+                            <label id="lbl_state" class="block text-xs font-medium text-gray-700">State / Region</label>
+                            <select id="state" onchange="onStateChange()" class="w-full mt-1 p-2 border border-gray-300 rounded-md text-xs font-semibold">
+                            </select>
+                        </div>
+                        <div>
+                            <label id="lbl_city" class="block text-xs font-medium text-gray-700">City</label>
+                            <select id="city" onchange="onCityChange()" class="w-full mt-1 p-2 border border-gray-300 rounded-md text-xs font-semibold">
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Custom City Input when 'Other' is selected -->
+                    <div id="customCityContainer" class="hidden">
+                        <label id="lbl_custom_city" class="block text-xs font-medium text-amber-900">Enter Custom City Name</label>
+                        <input type="text" id="customCityInput" oninput="fetchGlobalPanchang()" placeholder="e.g., Perth or Auckland" class="w-full mt-1 p-2 border border-amber-400 bg-amber-50 rounded-md text-xs font-medium">
+                    </div>
+
+                    <!-- Timezone Selection -->
+                    <div>
+                        <label id="lbl_timezone" class="block text-xs font-medium text-gray-700">Timezone (Auto Updated)</label>
+                        <select id="timezoneOffset" onchange="fetchGlobalPanchang()" class="w-full mt-1 p-2 border border-amber-500 bg-amber-50 rounded-md font-semibold text-amber-900 text-sm">
+                            <option value="-05:00" selected>US/Canada Eastern (EST/EDT) [UTC-5]</option>
+                            <option value="-06:00">US/Canada Central (CST/CDT) [UTC-6]</option>
+                            <option value="-07:00">US/Canada Mountain (MST/MDT) [UTC-7]</option>
+                            <option value="-08:00">US/Canada Pacific (PST/PDT) [UTC-8]</option>
+                            <option value="-09:00">US Alaska (AKST) [UTC-9]</option>
+                            <option value="-10:00">US Hawaii (HST) [UTC-10]</option>
+                            <option value="+05:30">India Standard Time (IST) [UTC+5:30]</option>
+                            <option value="+04:00">Gulf Standard Time (UAE/Oman) [UTC+4]</option>
+                            <option value="+03:00">Arabia Standard Time (Saudi/Bahrain) [UTC+3]</option>
+                            <option value="+08:00">Singapore / Malaysia (SGT/MYT) [UTC+8]</option>
+                            <option value="+00:00">UK / London (GMT/BST) [UTC+0]</option>
+                            <option value="+10:00">Australia Sydney/Melbourne (AEST) [UTC+10]</option>
+                            <option value="+09:30">Australia Adelaide (ACST) [UTC+9:30]</option>
+                            <option value="+08:00">Australia Perth (AWST) [UTC+8]</option>
+                            <option value="+12:00">New Zealand (NZST/NZDT) [UTC+12]</option>
+                        </select>
+                    </div>
+
+                    <!-- Computed Panchang Details -->
+                    <div class="grid grid-cols-2 gap-2 pt-1">
+                        <div>
+                            <label id="lbl_samvatsaram" class="block text-xs font-medium text-gray-700">Samvatsaram (Year Name)</label>
+                            <input type="text" id="samvatsaram" value="Parabhava" class="w-full p-2 border border-amber-200 bg-amber-50/30 rounded-md text-sm font-bold text-amber-900">
+                        </div>
+                        <div>
+                            <label id="lbl_masam" class="block text-xs font-medium text-gray-700">Masam (Month)</label>
+                            <input type="text" id="masam" value="Bhadrapada-Mase" class="w-full p-2 border border-amber-200 bg-amber-50/30 rounded-md text-sm font-semibold">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label id="lbl_paksham" class="block text-xs font-medium text-gray-700">Paksham</label>
+                            <input type="text" id="paksham" value="Sukla Pakshe" class="w-full p-2 border border-amber-200 bg-amber-50/30 rounded-md text-sm font-semibold">
+                        </div>
+                        <div>
+                            <label id="lbl_tithi" class="block text-xs font-medium text-gray-700">Tithi</label>
+                            <input type="text" id="tithi" value="Chaturthyam Tithau" class="w-full p-2 border border-amber-200 bg-amber-50/30 rounded-md text-sm font-semibold">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label id="lbl_vaaram" class="block text-xs font-medium text-gray-700">Vaaram (Day)</label>
+                            <input type="text" id="vaaram" value="Induvasara Yuktayam" class="w-full p-2 border border-amber-200 bg-amber-50/30 rounded-md text-sm font-semibold">
+                        </div>
+                        <div>
+                            <label id="lbl_nakshatram" class="block text-xs font-medium text-gray-700">Nakshatram</label>
+                            <input type="text" id="nakshatram" value="Chitta-Nakshatre" class="w-full p-2 border border-amber-200 bg-amber-50/30 rounded-md text-sm font-semibold">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 3: FAMILY DETAILS -->
+                <div class="space-y-3 pt-1">
+                    <h2 id="lbl_sec3_header" class="text-lg font-semibold text-amber-800 border-b pb-1">3. Family Details</h2>
+                    
+                    <div>
+                        <label id="lbl_gotram" class="block text-sm font-medium text-gray-700">Gotram</label>
+                        <input type="text" id="gotram" value="" placeholder="e.g., Nageswara" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label id="lbl_self_name" class="block text-sm font-medium text-gray-700">Self / Yajamana Name</label>
+                            <input type="text" id="selfName" value="" placeholder="e.g., Gandhi" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
+                        </div>
+                        <div>
+                            <label id="lbl_self_nakshatra" class="block text-sm font-medium text-gray-700">Nakshatram</label>
+                            <select id="selfNakshatra" class="nakshatra-dropdown w-full mt-1 p-2 border border-gray-300 rounded-md text-sm">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label id="lbl_wife_name" class="block text-sm font-medium text-gray-700">Wife Name</label>
+                            <input type="text" id="wifeName" value="" placeholder="e.g., Manorama" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
+                        </div>
+                        <div>
+                            <label id="lbl_wife_nakshatra" class="block text-sm font-medium text-gray-700">Nakshatram</label>
+                            <select id="wifeNakshatra" class="nakshatra-dropdown w-full mt-1 p-2 border border-gray-300 rounded-md text-sm">
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Children Container -->
+                    <div>
+                        <label id="lbl_children" class="block text-sm font-medium text-gray-700 mb-1">Children</label>
+                        <div id="childrenContainer" class="space-y-2">
+                        </div>
+                        <button id="btn_add_child" type="button" onclick="addChildRow()" class="mt-2 text-xs bg-amber-100 hover:bg-amber-200 text-amber-800 py-1.5 px-3 rounded font-bold border border-amber-300 flex items-center gap-1 shadow-sm transition">
+                            <span>+</span> Add Child
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Generate & Reset Buttons -->
+                <div class="flex gap-2 mt-4">
+                    <button id="btn_generate" type="button" onclick="generateSankalpam()" class="flex-1 bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 rounded-md shadow-md transition border border-amber-800">
+                        Generate Sankalpam
+                    </button>
+                    <button id="btn_reset" type="button" onclick="startOver()" class="bg-slate-200 hover:bg-slate-300 text-slate-800 font-semibold px-4 py-3 rounded-md border border-slate-300 transition text-sm">
+                        Start Over
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Column: Sankalpam Output -->
+            <div class="bg-amber-50/50 p-4 rounded-lg border border-amber-200 flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-center mb-3 border-b border-amber-200 pb-2">
+                        <h2 id="outputTitleHeader" class="text-base md:text-lg font-bold text-amber-900">Puja Sankalpam</h2>
+                        <div class="flex gap-2">
+                            <button id="copyBtn" onclick="copyToClipboard()" class="text-xs bg-amber-700 text-white px-3 py-1.5 rounded hover:bg-amber-800 transition">Copy Text</button>
+                            <button id="printBtn" onclick="window.print()" class="text-xs bg-emerald-700 text-white px-3 py-1.5 rounded hover:bg-emerald-800 transition">Print / PDF</button>
+                        </div>
+                    </div>
+                    <div>
+                        <div id="sankalpamOutput" class="text-sm text-slate-800 whitespace-pre-line leading-relaxed max-h-[720px] overflow-y-auto bg-white p-4 rounded border border-amber-100 font-serif">
+                            <div class="text-center text-gray-400 py-20 italic" id="emptyOutputPlaceholder">
+                                Fill in the details and click the <br>
+                                <span class="font-bold text-amber-800">"Generate Sankalpam"</span> <br>
+                                button below.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMMENTS & CONTACT SECTIONS -->
+        <div class="p-6 border-t border-amber-200 bg-amber-50/30 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white p-5 rounded-lg border border-amber-200 shadow-sm space-y-4">
+                <h3 class="text-lg font-bold text-amber-900 border-b border-amber-200 pb-2 flex items-center justify-between">
+                    <span id="lbl_comments_header">Comments & Feedback</span>
+                    <span class="text-xs font-normal bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full" id="commentCountBadge">0</span>
+                </h3>
+
+                <div class="space-y-3 bg-amber-50/60 p-3 rounded-md border border-amber-100">
+                    <div>
+                        <label id="lbl_comment_name" class="block text-xs font-medium text-gray-700 mb-1">Your Name</label>
+                        <input type="text" id="commentName" placeholder="e.g., Ramu" class="w-full text-xs p-2 border border-gray-300 rounded bg-white">
+                    </div>
+                    <div>
+                        <label id="lbl_comment_msg" class="block text-xs font-medium text-gray-700 mb-1">Comment / Feedback</label>
+                        <textarea id="commentMsg" rows="2" placeholder="Write your feedback here..." class="w-full text-xs p-2 border border-gray-300 rounded bg-white"></textarea>
+                    </div>
+                    <button type="button" id="btn_submit_comment" onclick="addComment()" class="bg-amber-800 hover:bg-amber-900 text-white text-xs px-4 py-2 rounded font-semibold transition">
+                        Submit Comment
+                    </button>
+                </div>
+
+                <div id="commentsContainer" class="space-y-3 max-h-56 overflow-y-auto pr-1">
+                </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-lg border border-amber-200 shadow-sm space-y-4 flex flex-col justify-between">
+                <div>
+                    <h3 id="lbl_contact_header" class="text-lg font-bold text-amber-900 border-b border-amber-200 pb-2">
+                        Contact Developer
+                    </h3>
+                    
+                    <div class="mt-3 space-y-3 text-sm text-gray-700">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-800 font-bold text-sm">GC</div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Gandhi Chappa</h4>
+                                <p class="text-xs text-gray-500">IT Professional </p>
+                            </div>
+                        </div>
+
+                        <p id="lbl_contact_desc" class="text-xs text-gray-600 leading-relaxed">
+                            If you have any feedback or requests for new features in this Sankalpam Generator app, you can contact the developer directly.
+                        </p>
+
+                        <div class="pt-2 flex flex-wrap gap-2">
+                            <a href="mailto:gchappa4@gmail.com?subject=Feedback%20on%20Sankalpam%20Generator" class="inline-flex items-center gap-1.5 text-xs bg-amber-800 hover:bg-amber-900 text-white px-3 py-2 rounded font-semibold transition">
+                                Email Developer
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-3 border-t border-amber-100 flex items-center justify-between text-xs text-gray-500">
+                    <span id="lbl_total_visits">Total Page Visits:</span>
+                    <span id="footerVisitorCount" class="font-bold text-amber-900 text-sm bg-amber-50 px-2 py-0.5 rounded border border-amber-200">...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Message Modal -->
+    <div id="contactModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-lg p-6 max-w-md w-full shadow-xl border border-amber-200 space-y-4">
+            <h3 class="text-base font-bold text-amber-900">Send Message to Developer</h3>
+            <div>
+                <label class="block text-xs font-medium text-gray-700 mb-1">Your Name</label>
+                <input type="text" id="modalSenderName" class="w-full text-xs p-2 border border-gray-300 rounded">
+            </div>
+            <div>
+                <label class="block text-xs font-medium text-gray-700 mb-1">Message</label>
+                <textarea id="modalMessage" rows="3" class="w-full text-xs p-2 border border-gray-300 rounded"></textarea>
+            </div>
+            <div class="flex justify-end gap-2">
+                <button type="button" onclick="closeQuickContactModal()" class="text-xs px-3 py-1.5 border rounded text-gray-600">Cancel</button>
+                <button type="button" onclick="sendDirectMessage()" class="text-xs px-3 py-1.5 bg-amber-800 text-white rounded font-semibold">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Automatic Visitor Count API Integration
+        async function updateVisitorCounter() {
+            const namespace = "gandhi_puja_sankalpam_generator";
+            const key = "visits";
+            const headerElem = document.getElementById('headerVisitorCount');
+            const footerElem = document.getElementById('footerVisitorCount');
+
+            let localCount = parseInt(localStorage.getItem('puja_sankalpam_visits') || '0', 10) + 1;
+            localStorage.setItem('puja_sankalpam_visits', localCount);
+            
+            if (headerElem) headerElem.textContent = localCount.toLocaleString();
+            if (footerElem) footerElem.textContent = localCount.toLocaleString();
+
+            try {
+                const res = await fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data && typeof data.count === 'number') {
+                        if (headerElem) headerElem.textContent = data.count.toLocaleString();
+                        if (footerElem) footerElem.textContent = data.count.toLocaleString();
+                    }
+                }
+            } catch (err) {
+                console.log("Visitor API unreachable, showing local counter fallback.", err);
+            }
+        }
+
+        const nakshatrasList = [
+            { telugu: "అశ్విని", eng: "Aswini", sans: "अश्विनी" }, 
+            { telugu: "భరణి", eng: "Bharani", sans: "भरणी" }, 
+            { telugu: "కృత్తికా", eng: "Krittika", sans: "कृत्तिका" },
+            { telugu: "రోహిణి", eng: "Rohini", sans: "रोहिणी" }, 
+            { telugu: "మృగశిరా", eng: "Mrigasira", sans: "मृगशिरा" }, 
+            { telugu: "ఆర్ద్రా", eng: "Ardra", sans: "आर्द्रा" },
+            { telugu: "పునర్వసు", eng: "Punarvasu", sans: "पुनर्वसु" }, 
+            { telugu: "పుష్యమి", eng: "Pushyami", sans: "पुष्यमी" }, 
+            { telugu: "ఆశ్లేషా", eng: "Aslesha", sans: "आश्लेषा" },
+            { telugu: "మఖా", eng: "Makha", sans: "मघा" }, 
+            { telugu: "పూర్వఫల్గుణి (పుబ్బ)", eng: "Purvaphalguni (Pubba)", sans: "पूर्वफाल्गुनी" }, 
+            { telugu: "ఉత్తరఫల్గుణి (ఉత్తర)", eng: "Uttaraphalguni (Uttara)", sans: "उत्तराफाल्गुनी" },
+            { telugu: "హస్తా", eng: "Hasta", sans: "हस्ता" }, 
+            { telugu: "చిత్తా", eng: "Chitta", sans: "चित्रा" }, 
+            { telugu: "స్వాతి", eng: "Swathi", sans: "स्वाती" },
+            { telugu: "విశాఖా", eng: "Visakha", sans: "विशाखा" }, 
+            { telugu: "అనూరాధా", eng: "Anuradha", sans: "अनुराधा" }, 
+            { telugu: "జ్యేష్ఠా", eng: "Jyeshta", sans: "ज्येष्ठा" },
+            { telugu: "మూలా", eng: "Moola", sans: "मूल" }, 
+            { telugu: "పూర్వాషాఢా", eng: "Purvashada", sans: "पूर्वाषाढा" }, 
+            { telugu: "ఉత్తరాషాఢా", eng: "Uttarashada", sans: "उत्तराषाढा" },
+            { telugu: "శ్రవణా", eng: "Sravana", sans: "श्रवण" }, 
+            { telugu: "ధనిష్ఠా", eng: "Dhanishta", sans: "धनिष्ठा" }, 
+            { telugu: "శతభిషా", eng: "Satabhisha", sans: "शतभिषा" },
+            { telugu: "పూర్వాభాద్రా", eng: "Purvabhadra", sans: "पूर्वाभाद्रपदा" }, 
+            { telugu: "ఉత్తరాభాద్రా", eng: "Uttarabhadra", sans: "उत्तराभाद्रपदा" }, 
+            { telugu: "రేవతీ", eng: "Revati", sans: "रेवती" }
+        ];
+
+        function getNakshatraText(teluguKey, lang) {
+            const found = nakshatrasList.find(n => n.telugu === teluguKey);
+            if (!found) return teluguKey || "";
+            if (lang === 'sanskrit') return found.sans;
+            if (lang === 'english') return found.eng;
+            return found.telugu;
+        }
+
+        const universalMultiMap = {
+            "నాగేశ్వర": { telugu: "నాగేశ్వర", eng: "Nageswara", sans: "नागेश्वर" },
+            "nageswara": { telugu: "నాగేశ్వర", eng: "Nageswara", sans: "नागेश्वर" },
+            "భారద్వాజ": { telugu: "భారద్వాజ", eng: "Bharadwaja", sans: "भारद्वाज" },
+            "bharadwaja": { telugu: "భారద్వాజ", eng: "Bharadwaja", sans: "भारद्वाज" },
+            "కౌండిన్య": { telugu: "కౌండిన్య", eng: "Kaundinya", sans: "कौण्डिन्य" },
+            "kaundinya": { telugu: "కౌండిన్య", eng: "Kaundinya", sans: "कौण्डिन्य" },
+            "శ్రీవత్స": { telugu: "శ్రీవత్స", eng: "Srivatsa", sans: "श्रीवत्स" },
+            "srivatsa": { telugu: "శ్రీవత్స", eng: "Srivatsa", sans: "श्रीवत्स" },
+            "కశ్యప": { telugu: "కశ్యప", eng: "Kasyapa", sans: "कश्यप" },
+            "kasyapa": { telugu: "కశ్యప", eng: "Kasyapa", sans: "कश्यप" },
+            "గాంధీ": { telugu: "గాంధీ", eng: "Gandhi", sans: "गांधी" },
+            "gandhi": { telugu: "గాంధీ", eng: "Gandhi", sans: "गांधी" },
+            "రాము": { telugu: "రాము", eng: "Ramu", sans: "रामु" },
+            "ramu": { telugu: "రాము", eng: "Ramu", sans: "रामु" },
+            "మనోరమ": { telugu: "మనోరమ", eng: "Manorama", sans: "मनोरमा" },
+            "manorama": { telugu: "మనోరమ", eng: "Manorama", sans: "मनोरमा" },
+            "సూర్యతేజ": { telugu: "సూర్యతేజ", eng: "Suryateja", sans: "सूर्यतेज" },
+            "suryateja": { telugu: "సూర్యతేజ", eng: "Suryateja", sans: "सूर्यतेज" },
+            "దినకర్": { telugu: "దినకర్", eng: "Dinakar", sans: "दिनकर" },
+            "dinakar": { telugu: "దినకర్", eng: "Dinakar", sans: "दिनकर" },
+            "సుప్రియ": { telugu: "సుప్రియ", eng: "Supriya", sans: "सुप्रिया" },
+            "supriya": { telugu: "సుప్రియ", eng: "Supriya", sans: "सुप्रिया" }
+        };
+
+        function getMultiLangFamilyValue(inputVal, targetLang) {
+            if (!inputVal) return "";
+            const cleanKey = inputVal.trim();
+            const lowerKey = cleanKey.toLowerCase();
+
+            if (universalMultiMap[cleanKey]) {
+                return universalMultiMap[cleanKey][targetLang] || cleanKey;
+            }
+            if (universalMultiMap[lowerKey]) {
+                return universalMultiMap[lowerKey][targetLang] || cleanKey;
+            }
+            return cleanKey;
+        }
+
+        const presetsMap = {
+            telugu: {
+                label: "త్వరిత ఎంపిక (Quick Puja Presets):",
+                vinayaka: { btn: "వినాయక చవితి", pujaName: "శ్రీ వరసిద్ధి వినాయక వ్రత", deityName: "శ్రీ వరసిద్ధి వినాయకస్వామి" },
+                varalakshmi: { btn: "వరలక్ష్మీ వ్రతం", pujaName: "శ్రీ వరలక్ష్మీ వ్రత", deityName: "శ్రీ వరలక్ష్మీదేవతా" },
+                dasara: { btn: "విజయదశమి / దసరా", pujaName: "శ్రీ విజయదశమి పూజా", deityName: "శ్రీ కనకదుర్గా దేవి / శ్రీ రాజరాజేశ్వరీ దేవి" },
+                sankranti: { btn: "మకర సంక్రాంతి", pujaName: "మకర సంక్రాంతి పూజా", deityName: "శ్రీ మకర సంక్రాంతి లక్ష్మీ సమేత సూర్యనారాయణ స్వామి" },
+                ugadi: { btn: "ఉగాది", pujaName: "శ్రీ ఉగాది (నూతన సంవత్సరాది) పూజా", deityName: "శ్రీ నూతన సంవత్సరాది ప్రాసాద సమేత ఇష్టదేవతా" },
+                shivratri: { btn: "మహా శివరాత్రి", pujaName: "మహా శివరాత్రి వ్రత", deityName: "సాంబ పరమేశ్వర / శ్రీ చంద్రమౌళీశ్వర" }
+            },
+            english: {
+                label: "Quick Puja Presets:",
+                vinayaka: { btn: "Vinayaka Chavithi", pujaName: "Sri Varasiddhi Vinayaka Vratam", deityName: "Sri Varasiddhi Vinayakaswami" },
+                varalakshmi: { btn: "Varalakshmi Vratam", pujaName: "Sri Varalakshmi Vratam", deityName: "Sri Varalakshmidevata" },
+                dasara: { btn: "Vijayadasami / Dasara", pujaName: "Sri Vijayadasami Puja", deityName: "Sri Kanakadurga Devi / Sri Rajarajeswari Devi" },
+                sankranti: { btn: "Makara Sankranti", pujaName: "Makara Sankranti Puja", deityName: "Sri Makara Sankranti Lakshmi Sameta Suryanarayana Swami" },
+                ugadi: { btn: "Ugadi", pujaName: "Sri Ugadi (Nutana Samvatsaradi) Puja", deityName: "Sri Nutana Samvatsaradi Prasada Sameta Ishtadevata" },
+                shivratri: { btn: "Maha Shivaratri", pujaName: "Maha Sivaratri Vratam", deityName: "Samba Parameswara / Sri Chandramouleswara" }
+            },
+            sanskrit: {
+                label: "త్వరిత ఎంపిక (Quick Puja Presets):",
+                vinayaka: { btn: "विनायक चतुर्थी", pujaName: "श्री वरसिद्धि विनायक व्रतम्", deityName: "श्री वरसिद्धि विनायकस्वामी" },
+                varalakshmi: { btn: "वरलक्ष्मी व्रतम्", pujaName: "श्री वरलक्ष्मी व्रतम्", deityName: "श्री वरलक्ष्मीदेवता" },
+                dasara: { btn: "विजयादशमी / दशहरा", pujaName: "श्री विजयादशमी पूजा", deityName: "श्री कनकदुर्गा देवी / श्री राजराजेश्वरी देवी" },
+                sankranti: { btn: "मकर सङ्क्रान्ति", pujaName: "मकर सङ्क्रान्ति पूजा", deityName: "श्री मकर सङ्क्रान्ति लक्ष्मी समेत सूर्यनारायण स्वामी" },
+                ugadi: { btn: "युगादि", pujaName: "श्री युगादि (नूतन संवत्सरादि) पूजा", deityName: "श्री नूतन संवत्सरादि प्रसाद समेत इष्टदेवता" },
+                shivratri: { btn: "महा शिवरात्रि", pujaName: "महा शिवरात्रि व्रतम्", deityName: "साम्ब परमेश्वर / श्री चन्द्रमौलीश्वर" }
+            }
+        };
+
+        const presetsBaseDate = {
+            vinayaka: { monthDayTime: "09-14T09:30" },
+            varalakshmi: { monthDayTime: "08-21T08:00" },
+            dasara: { monthDayTime: "10-20T09:00" },
+            sankranti: { monthDayTime: "01-14T08:00" },
+            ugadi: { monthDayTime: "03-19T08:30" },
+            shivratri: { monthDayTime: "02-15T18:00" }
+        };
+
+        const sectionUILabels = {
+            telugu: {
+                lbl_header_title: "పూజ సంకల్పం జనరేటర్ (Global Location & Multi-Language Output)",
+                lbl_visitor_count: "వీక్షకుల సంఖ్య (Visitors)",
+                lbl_sec1_header: "1. పూజ వివరాలు & భాష (Puja Details & Language)",
+                lbl_output_lang: "అవుట్‌పుట్ భాష / Output Script Preference:",
+                lbl_puja_name: "పూజ / వ్రతం పేరు (Puja Name)",
+                lbl_deity_name: "పూజా దేవత (Deity Name)",
+                lbl_sec2_header: "2. స్థలము, తేదీ & టైమ్‌జోన్ (Location & Timezone)",
+                lbl_country: "దేశం (Country)",
+                lbl_state: "రాష్ట్రం / ప్రాంతం (State/Region)",
+                lbl_city: "నగరం (City)",
+                lbl_year: "సంవత్సరం (Year)",
+                lbl_timezone: "టైమ్‌జోన్ (Auto Updated)",
+                lbl_datetime: "తేదీ & సమయం (Date & Time)",
+                lbl_samvatsaram: "సంవత్సరం పేరు (Samvatsaram)",
+                lbl_masam: "మాసము (Month)",
+                lbl_paksham: "పక్షము (Paksham)",
+                lbl_tithi: "తిథి (Tithi)",
+                lbl_vaaram: "వారం (Day)",
+                lbl_nakshatram: "నక్షత్రం (Nakshatram)",
+                lbl_sec3_header: "3. కుటుంబ వివరాలు (Family Details)",
+                lbl_gotram: "గోత్రం (Gotram)",
+                lbl_self_name: "యజమాని (Self Name)",
+                lbl_self_nakshatra: "నక్షత్రం (Nakshatram)",
+                lbl_wife_name: "ధర్మపత్ని (Wife Name)",
+                lbl_wife_nakshatra: "నక్షత్రం (Nakshatram)",
+                lbl_children: "సంతానం (Children)",
+                btn_add_child: "<span>+</span> Add Child (సంతానం చేర్చు)",
+                btn_generate: "సంకల్పం తయారుచేయి (Generate)",
+                btn_reset: "రీసెట్ (Start Over)",
+                lbl_comments_header: "అభిప్రాయాలు / కామెంట్లు (Comments)",
+                lbl_comment_name: "మీ పేరు (Your Name)",
+                lbl_comment_msg: "మీ అభిప్రాయం / సూచన (Comment/Feedback)",
+                btn_submit_comment: "కామెంట్ సమర్పించండి (Submit Comment)",
+                lbl_contact_header: "డెవలపర్‌ను సంప్రదించండి (Contact Developer)",
+                lbl_contact_desc: "ఈ సంకల్పం జనరేటర్ ఆప్ లో ఏవైనా మార్పులు, చేర్పులు లేదా కొత్త ఫీచర్లు కావాలనుకుంటే క్రింది బటన్ ద్వారా డెవలపర్‌ను నేరుగా సంప్రదించవచ్చు.",
+                btn_direct_msg: "Send Direct Message",
+                lbl_total_visits: "మొత్తం సందర్శనలు (Total Page Visits):",
+                lbl_custom_city: "మీ నగరము పేరు టైప్ చేయండి (Custom City Name):"
+            },
+            english: {
+                lbl_header_title: "Puja Sankalpam Generator (Global Location & Multi-Language Output)",
+                lbl_visitor_count: "Visitor Count",
+                lbl_sec1_header: "1. Puja Details & Language",
+                lbl_output_lang: "Output Script Preference:",
+                lbl_puja_name: "Puja / Vratam Name",
+                lbl_deity_name: "Deity Name",
+                lbl_sec2_header: "2. Location, Date & Timezone",
+                lbl_country: "Country",
+                lbl_state: "State / Region",
+                lbl_city: "City",
+                lbl_year: "Year",
+                lbl_timezone: "Timezone (Auto Updated)",
+                lbl_datetime: "Date & Time",
+                lbl_samvatsaram: "Samvatsaram (Year Name)",
+                lbl_masam: "Masam (Month)",
+                lbl_paksham: "Paksham",
+                lbl_tithi: "Tithi",
+                lbl_vaaram: "Vaaram (Day)",
+                lbl_nakshatram: "Nakshatram",
+                lbl_sec3_header: "3. Family Details",
+                lbl_gotram: "Gotram",
+                lbl_self_name: "Self / Yajamana Name",
+                lbl_self_nakshatra: "Nakshatram",
+                lbl_wife_name: "Wife Name",
+                lbl_wife_nakshatra: "Nakshatram",
+                lbl_children: "Children",
+                btn_add_child: "<span>+</span> Add Child",
+                btn_generate: "Generate Sankalpam",
+                btn_reset: "Start Over",
+                lbl_comments_header: "Comments & Feedback",
+                lbl_comment_name: "Your Name",
+                lbl_comment_msg: "Comment / Feedback",
+                btn_submit_comment: "Submit Comment",
+                lbl_contact_header: "Contact Developer",
+                lbl_contact_desc: "If you have any feedback or requests for new features in this Sankalpam Generator app, you can contact the developer directly.",
+                btn_direct_msg: "Send Direct Message",
+                lbl_total_visits: "Total Page Visits:",
+                lbl_custom_city: "Enter Custom City Name:"
+            },
+            sanskrit: {
+                lbl_header_title: "पूजा संकल्प जनरेटर (Global Location & Multi-Language Output)",
+                lbl_visitor_count: "दर्शकानां संख्या (Visitors)",
+                lbl_sec1_header: "१. पूजा विवरणानि भाषा च (Puja Details & Language)",
+                lbl_output_lang: "उत्पुट भाषा / Output Script Preference:",
+                lbl_puja_name: "पूजा / व्रत नाम (Puja Name)",
+                lbl_deity_name: "पूजा देवता (Deity Name)",
+                lbl_sec2_header: "२. स्थानम्, तिथिः समयक्षेत्रं च (Location & Timezone)",
+                lbl_country: "देशः (Country)",
+                lbl_state: "राज्यम् / प्रदेशः (State/Region)",
+                lbl_city: "नगरम् (City)",
+                lbl_year: "वर्षम् (Year)",
+                lbl_timezone: "समयक्षेत्रम् (Timezone)",
+                lbl_datetime: "दिनाङ्कः समयश्च (Date & Time)",
+                lbl_samvatsaram: "संवत्सर नाम (Samvatsaram)",
+                lbl_masam: "मासः (Month)",
+                lbl_paksham: "पक्षः (Paksham)",
+                lbl_tithi: "तिथिः (Tithi)",
+                lbl_vaaram: "वासरः (Day)",
+                lbl_nakshatram: "नक्षत्रम् (Nakshatram)",
+                lbl_sec3_header: "३. कुटुम्ब विवरणानि (Family Details)",
+                lbl_gotram: "गोत्रम् (Gotram)",
+                lbl_self_name: "यजमानः (Self Name)",
+                lbl_self_nakshatra: "नक्षत्रम् (Nakshatram)",
+                lbl_wife_name: "धर्मपत्नी (Wife Name)",
+                lbl_wife_nakshatra: "नक्षत्रम् (Nakshatram)",
+                lbl_children: "सन्तानम् (Children)",
+                btn_add_child: "<span>+</span> सन्तानवर्धनम् (Add Child)",
+                btn_generate: "संकल्पं कुरु (Generate)",
+                btn_reset: "पुनः आरम्भः (Start Over)",
+                lbl_comments_header: "अभिप्रायाः / टिप्पण्यः (Comments)",
+                lbl_comment_name: "भवतः नाम (Your Name)",
+                lbl_comment_msg: "भवतः अभिप्रायः (Comment)",
+                btn_submit_comment: "टिप्पणीं प्रेषयतु (Submit Comment)",
+                lbl_contact_header: "विकासकं सम्पर्कयतु (Contact Developer)",
+                lbl_contact_desc: "अस्मिन् संकल्प जनरेटर उपकरणे परिवर्तनानि किंवा नूतनविशेषताः इच्छन्ति चेत् विकासकं साक्षात् सम्पर्कयितुं शक्नुवन्ति।",
+                btn_direct_msg: "प्रत्यक्ष सन्देशं प्रेषयतु",
+                lbl_total_visits: "आहत्य दर्शनानि (Total Visits):",
+                lbl_custom_city: "नगरनाम लिखितुं शक्नुवन्ति (Custom City Name):"
+            }
+        };
+
+        const placeHoldersByLang = {
+            telugu: { gotram: "ఉదా: నాగేశ్వర", selfName: "ఉదా: గాంధీ", wifeName: "ఉదా: మనోరమ", childName: "పేరు (Name)" },
+            english: { gotram: "e.g., Nageswara", selfName: "e.g., Gandhi", wifeName: "e.g., Manorama", childName: "Child Name" },
+            sanskrit: { gotram: "उदा: नागेश्वर", selfName: "उदा: गांधी", wifeName: "उदा: मनोरमा", childName: "नाम (Name)" }
+        };
+
+        // EXTENDED GLOBAL LOCATION CONFIGURATION WITH ALL USA & INDIA STATES
+        const locationConfig = {
+            usa: {
+                label: { telugu: "అమెరికా (USA)", english: "USA", sanskrit: "अमेरिका (USA)" },
+                sankalpamGeo: {
+                    telugu: "క్రౌంచ ద్వీపే,రమణక వర్షే, గోతీర్థఖండే మహా మేరోః ,పశ్చిమ పార్శ్వే, ఉత్తర అమెరికాయామ్ ",
+                    english: "Krauncha Dveepe, Uttara America Khande",
+                    sanskrit: "क्रौञ्च द्वीपे, उत्तर अमेरिका खण्डे"
+                },
+                states: {
+                    alabama: { label: { telugu: "అలబామా (Alabama)", english: "Alabama", sanskrit: "अलाबामा" }, tz: "-06:00", riverText: { telugu: "అలబామా-మొబైల్ నద్యోర్మధ్యే", english: "Alabama-Mobile Nadyormadhye", sanskrit: "अलाबामा-मोबाइल नद्योर्मध्ये" }, cities: [{ id: "birmingham", label: { telugu: "బర్మింగ్‌హామ్", english: "Birmingham", sanskrit: "बर्मिंघम" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    alaska: { label: { telugu: "అలాస్కా (Alaska)", english: "Alaska", sanskrit: "अलास्का" }, tz: "-09:00", riverText: { telugu: "యుకాన్ నదీ తీర ప్రదేశే", english: "Yukon Nadi Teera Pradese", sanskrit: "युकोन नदी तीर प्रदेशे" }, cities: [{ id: "anchorage", label: { telugu: "యాంకారేజ్", english: "Anchorage", sanskrit: "एंकोरेज" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    arizona: { label: { telugu: "అరిజోనా (Arizona)", english: "Arizona", sanskrit: "अरिज़ोना" }, tz: "-07:00", riverText: { telugu: "కొలరాడో నదీ తీర ప్రదేశే", english: "Colorado Nadi Teera Pradese", sanskrit: "कोलराडो नदी तीर प्रदेशे" }, cities: [{ id: "phoenix", label: { telugu: "ఫీనిక్స్", english: "Phoenix", sanskrit: "फ़ीनिक्स" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    arkansas: { label: { telugu: "ఆర్కాన్సాస్ (Arkansas)", english: "Arkansas", sanskrit: "अर्कंसास" }, tz: "-06:00", riverText: { telugu: "ఆర్కాన్సాస్ నదీ తీర ప్రదేశే", english: "Arkansas Nadi Teera Pradese", sanskrit: "अर्कंसास नदी तीर प्रदेशे" }, cities: [{ id: "little_rock", label: { telugu: "లిటిల్ రాక్", english: "Little Rock", sanskrit: "लिटिल रॉक" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    california: { label: { telugu: "కాలిఫోర్నియా (California)", english: "California", sanskrit: "कैलिफोर्निया" }, tz: "-08:00", riverText: { telugu: "శాక్రమెంటో-శాన్ జ్వాకిన్ నద్యోర్మధ్యే", english: "Sacramento-San Joaquin Nadyormadhye", sanskrit: "सक्रामेंटो-सैन जोक्विन नद्योर्मध्ये" }, cities: [{ id: "san_jose", label: { telugu: "శాన్ జోస్", english: "San Jose", sanskrit: "सैन जोस" } }, { id: "fremont", label: { telugu: "ఫ్రీమాంట్", english: "Fremont", sanskrit: "फ्रीमोंट" } }, { id: "san_francisco", label: { telugu: "శాన్ ఫ్రాన్సిస్కో", english: "San Francisco", sanskrit: "सैन फ्रांसिस्को" } }, { id: "los_angeles", label: { telugu: "లాస్ ఏంజెల్స్", english: "Los Angeles", sanskrit: "लॉस एंजेल्स" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    colorado: { label: { telugu: "కొలరాడో (Colorado)", english: "Colorado", sanskrit: "कोलराडो" }, tz: "-07:00", riverText: { telugu: "దక్షిణ ప్లాట్ నదీ తీర ప్రదేశే", english: "South Platte Nadi Teera Pradese", sanskrit: "साउथ प्लेट नदी तीर प्रदेशे" }, cities: [{ id: "denver", label: { telugu: "డెన్వర్", english: "Denver", sanskrit: "डेन्वर" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    connecticut: { label: { telugu: "కనెక్టికట్ (Connecticut)", english: "Connecticut", sanskrit: "कनेक्टिकट" }, tz: "-05:00", riverText: { telugu: "కనెక్టికట్ నదీ తీర ప్రదేశే", english: "Connecticut Nadi Teera Pradese", sanskrit: "कनेक्टिकट नदी तीर प्रदेशे" }, cities: [{ id: "hartford", label: { telugu: "హార్ట్‌ఫర్డ్", english: "Hartford", sanskrit: "हार्टफोर्ड" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    delaware: { label: { telugu: "డెలావేర్ (Delaware)", english: "Delaware", sanskrit: "डेलावेयर" }, tz: "-05:00", riverText: { telugu: "డెలావేర్ నదీ తీర ప్రదేశే", english: "Delaware Nadi Teera Pradese", sanskrit: "डेलावेयर नदी तीर प्रदेशे" }, cities: [{ id: "wilmington", label: { telugu: "విల్మింగ్టన్", english: "Wilmington", sanskrit: "विलमिंगटन" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    florida: { label: { telugu: "ఫ్లోరిడా (Florida)", english: "Florida", sanskrit: "फ्लोरिडा" }, tz: "-05:00", riverText: { telugu: "సెయింట్ జాన్స్ నదీ తీర ప్రదేశే, అట్లాంటిక్ మహాసముద్ర సమీపే", english: "St. Johns Nadi Teera Pradese, Atlantic Samudra Sameepe", sanskrit: "सेंट जॉन्स नदी तीर प्रदेशे" }, cities: [{ id: "miami", label: { telugu: "మయామి", english: "Miami", sanskrit: "मियामी" } }, { id: "orlando", label: { telugu: "ఓర్లాండో", english: "Orlando", sanskrit: "ऑर्लैंडो" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    georgia: { label: { telugu: "జార్జియా (Georgia)", english: "Georgia", sanskrit: "जॉर्जिया" }, tz: "-05:00", riverText: { telugu: "చట్టాహూచీ నదీ తీర ప్రదేశే", english: "Chattahoochee Nadi Teera Pradese", sanskrit: "चट्टाहूची नदी तीर प्रदेशे" }, cities: [{ id: "atlanta", label: { telugu: "అట్లాంటా", english: "Atlanta", sanskrit: "अटलांटा" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    hawaii: { label: { telugu: "హవాయి (Hawaii)", english: "Hawaii", sanskrit: "हवाई" }, tz: "-10:00", riverText: { telugu: "పసిఫిక్ మహాసముద్ర మధ్యే", english: "Pacific Mahasamudra Madhye", sanskrit: "प्रशान्त महासमुद्र मध्ये" }, cities: [{ id: "honolulu", label: { telugu: "హోనోలులు", english: "Honolulu", sanskrit: "होनोलूलू" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    idaho: { label: { telugu: "ఐడాహో (Idaho)", english: "Idaho", sanskrit: "इदाहो" }, tz: "-07:00", riverText: { telugu: "స్నేక్ నదీ తీర ప్రదేశే", english: "Snake Nadi Teera Pradese", sanskrit: "स्नेक नदी तीर प्रदेशे" }, cities: [{ id: "boise", label: { telugu: "బోయిసీ", english: "Boise", sanskrit: "बोइसी" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    illinois: { label: { telugu: "ఇల్లినాయ్ (Illinois)", english: "Illinois", sanskrit: "इलिनॉय" }, tz: "-06:00", riverText: { telugu: "మిచిగన్ సరోవర తీరే, ఇల్లినాయ్ నద్యోర్మధ్యే", english: "Michigan Sarovara Teere", sanskrit: "मिशिगन सरोवर तीरे" }, cities: [{ id: "chicago", label: { telugu: "షికాగో", english: "Chicago", sanskrit: "शिकागो" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    indiana: { label: { telugu: "ఇండియానా (Indiana)", english: "Indiana", sanskrit: "इन्डियाना" }, tz: "-05:00", riverText: { telugu: "వాబాష్ నదీ తీర ప్రదేశే", english: "Wabash Nadi Teera Pradese", sanskrit: "वाबाश नदी तीर प्रदेशे" }, cities: [{ id: "indianapolis", label: { telugu: "ఇండియానాపోలిస్", english: "Indianapolis", sanskrit: "इण्डियानापोलिस" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    iowa: { label: { telugu: "అయోవా (Iowa)", english: "Iowa", sanskrit: "आयवा" }, tz: "-06:00", riverText: { telugu: "మిసిసిపీ-మిస్సోరీ నద్యోర్మధ్యే", english: "Mississippi-Missouri Nadyormadhye", sanskrit: "मिसिसिपी-मिसूरी नद्योर्मध्ये" }, cities: [{ id: "des_moines", label: { telugu: "దే మోయిన్", english: "Des Moines", sanskrit: "डे मोइन" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    kansas: { label: { telugu: "కాన్సాస్ (Kansas)", english: "Kansas", sanskrit: "कंसास" }, tz: "-06:00", riverText: { telugu: "కాన్సాస్ నదీ తీర ప్రదేశే", english: "Kansas Nadi Teera Pradese", sanskrit: "कंसास नदी तीर प्रदेशे" }, cities: [{ id: "wichita", label: { telugu: "విచితా", english: "Wichita", sanskrit: "विचित्रा" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    kentucky: { label: { telugu: "కెంటుకీ (Kentucky)", english: "Kentucky", sanskrit: "केन्टकी" }, tz: "-05:00", riverText: { telugu: "ఒహియో నదీ తీర ప్రదేశే", english: "Ohio Nadi Teera Pradese", sanskrit: "ओहायो नदी तीर प्रदेशे" }, cities: [{ id: "louisville", label: { telugu: "లూయిస్‌విల్లే", english: "Louisville", sanskrit: "लुइसविले" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    louisiana: { label: { telugu: "లూసియానా (Louisiana)", english: "Louisiana", sanskrit: "लुइसियाना" }, tz: "-06:00", riverText: { telugu: "మిసిసిపీ నదీ ముఖద్వార ప్రదేశే", english: "Mississippi Nadi Mukhadvara Pradese", sanskrit: "मिसिसिपी नदी मुखद्वार प्रदेशे" }, cities: [{ id: "new_orleans", label: { telugu: "న్యూ ఆర్లీన్స్", english: "New Orleans", sanskrit: "न्यू ओर्लिन्स" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    maine: { label: { telugu: "మైనే (Maine)", english: "Maine", sanskrit: "मेन" }, tz: "-05:00", riverText: { telugu: "పెనోబ్‌స్కాట్ నదీ తీర ప్రదేశే", english: "Penobscot Nadi Teera Pradese", sanskrit: "पेनोबस्कॉट नदी तीर प्रदेशे" }, cities: [{ id: "portland_me", label: { telugu: "పోర్ట్‌లాండ్", english: "Portland", sanskrit: "पोर्टलैंड" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    maryland: { label: { telugu: "మేరీల్యాండ్ (Maryland)", english: "Maryland", sanskrit: "मैरीलैंड" }, tz: "-05:00", riverText: { telugu: "పోటోమాక్-అనాకోస్టియా నద్యోర్మధ్యే", english: "Potomac-Anacostia Nadyormadhye", sanskrit: "पोटोमैक-अनाकोस्टिया नद्योर्मध्ये" }, cities: [{ id: "monrovia", label: { telugu: "మన్రోవియా", english: "Monrovia", sanskrit: "मन्रोविया" } }, { id: "baltimore", label: { telugu: "బాల్టిమోర్", english: "Baltimore", sanskrit: "बाल्टीमोर" } }, { id: "rockville", label: { telugu: "రాక్‌విల్లే", english: "Rockville", sanskrit: "रॉकविले" } }, { id: "germantown", label: { telugu: "జర్మాన్‌టౌన్", english: "Germantown", sanskrit: "जर्मनटाउन" } }, { id: "columbia", label: { telugu: "కొలంబియా", english: "Columbia", sanskrit: "कोलंबिया" } }, { id: "silver_spring", label: { telugu: "సిల్వర్ స్ప్రింగ్", english: "Silver Spring", sanskrit: "सिल्वर स्प्रिंग" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    massachusetts: { label: { telugu: "మాసాచ్యూసెట్స్ (Massachusetts)", english: "Massachusetts", sanskrit: "मैसाचुसेट्स" }, tz: "-05:00", riverText: { telugu: "చార్లెస్ నదీ తీర ప్రదేశే", english: "Charles Nadi Teera Pradese", sanskrit: "चार्ल्स नदी तीर प्रदेशे" }, cities: [{ id: "boston", label: { telugu: "బోస్టన్", english: "Boston", sanskrit: "बॉस्टन" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    michigan: { label: { telugu: "మిచిగన్ (Michigan)", english: "Michigan", sanskrit: "मिशिगन" }, tz: "-05:00", riverText: { telugu: "హ్యూరాన్-ఎరీ సరోవర మధ్యే", english: "Huron-Erie Sarovara Madhye", sanskrit: "ह्यूरोन-एरी सरोवर मध्ये" }, cities: [{ id: "detroit", label: { telugu: "డెట్రాయిట్", english: "Detroit", sanskrit: "डेट्रायट" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    minnesota: { label: { telugu: "మిన్నెసోటా (Minnesota)", english: "Minnesota", sanskrit: "मिनेसोटा" }, tz: "-06:00", riverText: { telugu: "మిసిసిపీ నదీ జన్మభూమి ప్రదేశే", english: "Mississippi Nadi Janmabhumi Pradese", sanskrit: "मिसिसिपी नदी जन्मभूमि प्रदेशे" }, cities: [{ id: "minneapolis", label: { telugu: "మిన్నియాపోలిస్", english: "Minneapolis", sanskrit: "मिनियापोलिस" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    mississippi: { label: { telugu: "మిసిసిపీ (Mississippi)", english: "Mississippi", sanskrit: "मिसिसिपी" }, tz: "-06:00", riverText: { telugu: "మిసిసిపీ నదీ తీర ప్రదేశే", english: "Mississippi Nadi Teera Pradese", sanskrit: "मिसिसिपी नदी तीर प्रदेशे" }, cities: [{ id: "jackson", label: { telugu: "జాక్సన్", english: "Jackson", sanskrit: "जैक्सन" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    missouri: { label: { telugu: "మిస్సోరీ (Missouri)", english: "Missouri", sanskrit: "मिसूरी" }, tz: "-06:00", riverText: { telugu: "మిస్సోరీ-మిసిసిపీ సంగమ ప్రదేశే", english: "Missouri-Mississippi Sangama Pradese", sanskrit: "मिसूरी-मिसिसिपी संगम प्रदेशे" }, cities: [{ id: "st_louis", label: { telugu: "సెంట్ లూయిస్", english: "St. Louis", sanskrit: "सेंट लुइस" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    montana: { label: { telugu: "మొంటానా (Montana)", english: "Montana", sanskrit: "मोन्टाना" }, tz: "-07:00", riverText: { telugu: "మిస్సోరీ నదీ తీర ప్రదేశే", english: "Missouri Nadi Teera Pradese", sanskrit: "मिसूरी नदी तीर प्रदेशे" }, cities: [{ id: "billings", label: { telugu: "బిల్లింగ్స్", english: "Billings", sanskrit: "बिलिंग्स" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    nebraska: { label: { telugu: "నెబ్రాస్కా (Nebraska)", english: "Nebraska", sanskrit: "नेब्रास्का" }, tz: "-06:00", riverText: { telugu: "ప్లాట్ నదీ తీర ప్రదేశే", english: "Platte Nadi Teera Pradese", sanskrit: "प्लेट नदी तीर प्रदेशे" }, cities: [{ id: "omaha", label: { telugu: "ఒమాహా", english: "Omaha", sanskrit: "ओमाहा" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    nevada: { label: { telugu: "నెవాడా (Nevada)", english: "Nevada", sanskrit: "नेवाडा" }, tz: "-08:00", riverText: { telugu: "కొలరాడో నదీ సమీపే", english: "Colorado Nadi Sameepe", sanskrit: "कोलराडो नदी समीपे" }, cities: [{ id: "las_vegas", label: { telugu: "లాస్ వేగాస్", english: "Las Vegas", sanskrit: "लास वेगास" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    new_hampshire: { label: { telugu: "న్యూ హాంప్‌షైర్ (New Hampshire)", english: "New Hampshire", sanskrit: "न्यू हैम्पशायर" }, tz: "-05:00", riverText: { telugu: "మెర్రిమాక్ నదీ తీర ప్రదేశే", english: "Merrimack Nadi Teera Pradese", sanskrit: "मिर्रीमैक नदी तीर प्रदेशे" }, cities: [{ id: "manchester", label: { telugu: "మాంచెస్టర్", english: "Manchester", sanskrit: "मैनचेस्टर" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    new_jersey: { label: { telugu: "న్యూజెర్సీ (New Jersey)", english: "New Jersey", sanskrit: "न्यू जर्सी" }, tz: "-05:00", riverText: { telugu: "హడ్సన్-డెలావేర్ నద్యోర్మధ్యే", english: "Hudson-Delaware Nadyormadhye", sanskrit: "हडसन-डेलावेयर नद्योर्मध्ये" }, cities: [{ id: "edison", label: { telugu: "ఎడిసన్", english: "Edison", sanskrit: "एडिसन" } }, { id: "jersey_city", label: { telugu: "జెర్సీ సిటీ", english: "Jersey City", sanskrit: "जर्सी सिटी" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    new_mexico: { label: { telugu: "న్యూ మెక్సికో (New Mexico)", english: "New Mexico", sanskrit: "न्यू मेक्सिको" }, tz: "-07:00", riverText: { telugu: "రియో గ్రాండే నదీ తీర ప్రదేశే", english: "Rio Grande Nadi Teera Pradese", sanskrit: "रियो ग्रांडे नदी तीर प्रदेशे" }, cities: [{ id: "albuquerque", label: { telugu: "అల్బుకర్కీ", english: "Albuquerque", sanskrit: "अल्बुकर्क" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    new_york: { label: { telugu: "న్యూయార్క్ (New York)", english: "New York", sanskrit: "न्यू यॉर्क" }, tz: "-05:00", riverText: { telugu: "హడ్సన్ నదీ తీర ప్రదేశే, అట్లాంటిక్ మహాసముద్ర సమీపే", english: "Hudson Nadi Teera Pradese", sanskrit: "हडसन नदी तीर प्रदेशे" }, cities: [{ id: "nyc", label: { telugu: "న్యూయార్క్ సిటీ", english: "New York City", sanskrit: "न्यू यॉर्क नगरम्" } }, { id: "albany", label: { telugu: "ఆల్బనీ", english: "Albany", sanskrit: "ऑल्बनी" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    north_carolina: { label: { telugu: "నార్త్ కరోలినా (North Carolina)", english: "North Carolina", sanskrit: "नॉर्थ कैरोलिना" }, tz: "-05:00", riverText: { telugu: "కేప్ ఫియర్ నదీ తీర ప్రదేశే", english: "Cape Fear Nadi Teera Pradese", sanskrit: "केप फियर नदी तीर प्रदेशे" }, cities: [{ id: "charlotte", label: { telugu: "షార్లెట్", english: "Charlotte", sanskrit: "शार्लोट" } }, { id: "raleigh", label: { telugu: "రాలీ", english: "Raleigh", sanskrit: "राले" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    north_dakota: { label: { telugu: "నార్త్ డాకోటా (North Dakota)", english: "North Dakota", sanskrit: "नॉर्थ डकोटा" }, tz: "-06:00", riverText: { telugu: "రెడ్ నదీ తీర ప్రదేశే", english: "Red Nadi Teera Pradese", sanskrit: "रेड नदी तीर प्रदेशे" }, cities: [{ id: "fargo", label: { telugu: "ఫార్గో", english: "Fargo", sanskrit: "फार्गो" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    ohio: { label: { telugu: "ఒహియో (Ohio)", english: "Ohio", sanskrit: "ओहायो" }, tz: "-05:00", riverText: { telugu: "ఒహియో నదీ తీర ప్రదేశే", english: "Ohio Nadi Teera Pradese", sanskrit: "ओहायो नदी तीर प्रदेशे" }, cities: [{ id: "columbus", label: { telugu: "కొలంబస్", english: "Columbus", sanskrit: "कोलंबस" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    oklahoma: { label: { telugu: "ఓక్లహామా (Oklahoma)", english: "Oklahoma", sanskrit: "ओक्लाहोमा" }, tz: "-06:00", riverText: { telugu: "ఆర్కాన్సాస్ నదీ సమీపే", english: "Arkansas Nadi Sameepe", sanskrit: "अर्कंसास नदी समीपे" }, cities: [{ id: "oklahoma_city", label: { telugu: "ఓక్లహామా సిటీ", english: "Oklahoma City", sanskrit: "ओक्लाहोमा नगरम्" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    oregon: { label: { telugu: "ఓరెగాన్ (Oregon)", english: "Oregon", sanskrit: "ऑरेगॉन" }, tz: "-08:00", riverText: { telugu: "విల్లామెట్-కొలరాడో నద్యోర్మధ్యే", english: "Willamette-Columbia Nadyormadhye", sanskrit: "विलामेट-कोलंबिया नद्योर्मध्ये" }, cities: [{ id: "portland_or", label: { telugu: "పోర్ట్‌లాండ్", english: "Portland", sanskrit: "पोर्टलैंड" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    pennsylvania: { label: { telugu: "పెన్సిల్వేనియా (Pennsylvania)", english: "Pennsylvania", sanskrit: "पेन्सिलवेनिया" }, tz: "-05:00", riverText: { telugu: "సుస్క్వేహన్నా-డెలావేర్ నద్యోర్మధ్యే", english: "Susquehanna-Delaware Nadyormadhye", sanskrit: "सुसक्वेहन्ना-डेलावेयर नद्योर्मध्ये" }, cities: [{ id: "philadelphia", label: { telugu: "ఫిలడెల్ఫియా", english: "Philadelphia", sanskrit: "फिलाडेल्फिया" } }, { id: "pittsburgh", label: { telugu: "పిట్స్‌బర్గ్", english: "Pittsburgh", sanskrit: "पिट्सबर्ग" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    rhode_island: { label: { telugu: "రోడ్ ఐలాండ్ (Rhode Island)", english: "Rhode Island", sanskrit: "रोड आइलैंड" }, tz: "-05:00", riverText: { telugu: "నారగన్సెట్ సముద్ర తీరే", english: "Narragansett Samudra Teere", sanskrit: "नारागैनसेट समुद्र तीरे" }, cities: [{ id: "providence", label: { telugu: "ప్రావిడెన్స్", english: "Providence", sanskrit: "प्रोविडेंस" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    south_carolina: { label: { telugu: "సౌత్ కరోలినా (South Carolina)", english: "South Carolina", sanskrit: "साउथ कैरोलिना" }, tz: "-05:00", riverText: { telugu: "శాంటీ నదీ తీర ప్రదేశే", english: "Santee Nadi Teera Pradese", sanskrit: "संटी नदी तीर प्रदेशे" }, cities: [{ id: "charleston", label: { telugu: "చార్లెస్టన్", english: "Charleston", sanskrit: "चार्लस्टन" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    south_dakota: { label: { telugu: "సౌత్ డాకోటా (South Dakota)", english: "South Dakota", sanskrit: "साउथ डकोटा" }, tz: "-06:00", riverText: { telugu: "మిస్సోరీ నదీ తీర ప్రదేశే", english: "Missouri Nadi Teera Pradese", sanskrit: "मिसूरी नदी तीर प्रदेशे" }, cities: [{ id: "sioux_falls", label: { telugu: "స్యూ ఫాల్స్", english: "Sioux Falls", sanskrit: "सू फॉल्स" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    tennessee: { label: { telugu: "టెన్నెస్సీ (Tennessee)", english: "Tennessee", sanskrit: "टेनेसी" }, tz: "-06:00", riverText: { telugu: "టెన్నెస్సీ నదీ తీర ప్రదేశే", english: "Tennessee Nadi Teera Pradese", sanskrit: "टेनेसी नदी तीर प्रदेशे" }, cities: [{ id: "nashville", label: { telugu: "నాష్‌విల్లే", english: "Nashville", sanskrit: "नैशविले" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    texas: { label: { telugu: "టెక్సాస్ (Texas)", english: "Texas", sanskrit: "टेक्सास" }, tz: "-06:00", riverText: { telugu: "ట్రినిటీ-బ్రాజోస్ నద్యోర్మధ్యే", english: "Trinity-Brazos Nadyormadhye", sanskrit: "ट्रिनिटी-ब्राज़ोस नद्योर्मध्ये" }, cities: [{ id: "dallas", label: { telugu: "డల్లాస్", english: "Dallas", sanskrit: "डलास" } }, { id: "houston", label: { telugu: "హ్యూస్టన్", english: "Houston", sanskrit: "ह्यूस्टन" } }, { id: "austin", label: { telugu: "ఆస్టిన్", english: "Austin", sanskrit: "ऑस्टिन" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    utah: { label: { telugu: "యుటా (Utah)", english: "Utah", sanskrit: "यूटा" }, tz: "-07:00", riverText: { telugu: "గ్రేట్ సాల్ట్ సరోవర తీరే", english: "Great Salt Sarovara Teere", sanskrit: "ग्रेट साल्ट सरोवर तीरे" }, cities: [{ id: "salt_lake_city", label: { telugu: "సాల్ట్ లేక్ సిటీ", english: "Salt Lake City", sanskrit: "साल्ट लेक नगरम्" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    vermont: { label: { telugu: "వెర్మాంట్ (Vermont)", english: "Vermont", sanskrit: "वर्मोंट" }, tz: "-05:00", riverText: { telugu: "కనెక్టికట్ నదీ తీర ప్రదేశే", english: "Connecticut Nadi Teera Pradese", sanskrit: "कनेक्टिकट नदी तीर प्रदेशे" }, cities: [{ id: "burlington", label: { telugu: "బర్లింగ్టన్", english: "Burlington", sanskrit: "बर्लिंगटन" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    virginia: { label: { telugu: "వర్జీనియా (Virginia)", english: "Virginia", sanskrit: "वर्जीनिया" }, tz: "-05:00", riverText: { telugu: "జేమ్స్-పోటోమాక్ నద్యోర్మధ్యే", english: "James-Potomac Nadyormadhye", sanskrit: "जेम्स-पोटोमैक नद्योर्मध्ये" }, cities: [{ id: "richmond", label: { telugu: "రిచ్‌మండ్", english: "Richmond", sanskrit: "रिचमंड" } }, { id: "ashburn", label: { telugu: "యాష్‌బర్న్", english: "Ashburn", sanskrit: "ऐशबर्न" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    washington: { label: { telugu: "వాషింగ్టన్ (Washington)", english: "Washington", sanskrit: "वाशिंगटन" }, tz: "-08:00", riverText: { telugu: "కొలంబియా నదీ తీర ప్రదేశే, ప్యూగెట్ సౌండ్ సమీపే", english: "Columbia Nadi Teera Pradese", sanskrit: "कोलंबिया नदी तीर प्रदेशे" }, cities: [{ id: "seattle", label: { telugu: "సీటెల్", english: "Seattle", sanskrit: "सिएटल" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    west_virginia: { label: { telugu: "వెస్ట్ వర్జీనియా (West Virginia)", english: "West Virginia", sanskrit: "वेस्ट वर्जीनिया" }, tz: "-05:00", riverText: { telugu: "ఒహియో నదీ తీర ప్రదేశే", english: "Ohio Nadi Teera Pradese", sanskrit: "ओहायो नदी तीर प्रदेशे" }, cities: [{ id: "charleston_wv", label: { telugu: "చార్లెస్టన్", english: "Charleston", sanskrit: "चार्लस्टन" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    wisconsin: { label: { telugu: "విస్కాన్సిన్ (Wisconsin)", english: "Wisconsin", sanskrit: "विस्कॉन्सिन" }, tz: "-06:00", riverText: { telugu: "మిచిగన్ సరోవర తీరే", english: "Michigan Sarovara Teere", sanskrit: "मिशिगन सरोवर तीरे" }, cities: [{ id: "milwaukee", label: { telugu: "మిల్వాకీ", english: "Milwaukee", sanskrit: "मिलवॉकी" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    wyoming: { label: { telugu: "వైయోమింగ్ (Wyoming)", english: "Wyoming", sanskrit: "वायोमिंग" }, tz: "-07:00", riverText: { telugu: "స్నేక్ నదీ జన్మభూమి ప్రదేశే", english: "Snake Nadi Janmabhumi Pradese", sanskrit: "स्नेक नदी जन्मभूमि प्रदेशे" }, cities: [{ id: "cheyenne", label: { telugu: "షెయెన్", english: "Cheyenne", sanskrit: "शायान" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] }
+                }
+            },
+            india: {
+                label: { telugu: "భారతదేశం (India)", english: "India", sanskrit: "भारतवर्षम् (India)" },
+                sankalpamGeo: {
+                    telugu: "జంబూ ద్వీపే, భరత వర్షే, భరత ఖండే, మేరోః దక్షిణ దిగ్భాగే",
+                    english: "Jamboodveepe, Bharata Varshe, Bharata Khande, Meroho Dakshina Digbhage",
+                    sanskrit: "जम्बूद्वीपे, भारतवर्षे, भारतखण्डे, मेरोः दक्षिण दिग्भागे"
+                },
+                states: {
+                    andhra_pradesh: { label: { telugu: "ఆంధ్రప్రదేశ్", english: "Andhra Pradesh", sanskrit: "आन्ध्रप्रदेशः" }, tz: "+05:30", riverText: { telugu: "గోదావరి-కృష్ణా-తుంగభద్రా నదీ తీర ప్రదేశే", english: "Godavari-Krishna-Tungabhadra Nadi Teera Pradese", sanskrit: "गोदावरी-कृष्णा-तुङ्गभद्रा नदी तीर प्रदेशे" }, cities: [{ id: "visakhapatnam", label: { telugu: "విశాఖపట్నం", english: "Visakhapatnam", sanskrit: "विशाखापटनम्" } }, { id: "vijayawada", label: { telugu: "విజయవాడ", english: "Vijayawada", sanskrit: "विजयवाडा" } }, { id: "tirupati", label: { telugu: "తిరుపతి", english: "Tirupati", sanskrit: "तिरुपतिः" } }, { id: "guntur", label: { telugu: "గుంటూరు", english: "Guntur", sanskrit: "गुंटूर" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    arunachal_pradesh: { label: { telugu: "అరుణాచల్ ప్రదేశ్", english: "Arunachal Pradesh", sanskrit: "अरुणाचलप्रदेशः" }, tz: "+05:30", riverText: { telugu: "బ్రహ్మపుత్రా (సియాంగ్) నదీ తీర ప్రదేశే", english: "Brahmaputra Nadi Teera Pradese", sanskrit: "ब्रह्मपुत्र नदी तीर प्रदेशे" }, cities: [{ id: "itanagar", label: { telugu: "ఇటానగర్", english: "Itanagar", sanskrit: "ईटानगर" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    assam: { label: { telugu: "అస్సాం", english: "Assam", sanskrit: "असमः" }, tz: "+05:30", riverText: { telugu: "బ్రహ్మపుత్రా నదీ తీర ప్రదేశే", english: "Brahmaputra Nadi Teera Pradese", sanskrit: "ब्रह्मपुत्र नदी तीर प्रदेशे" }, cities: [{ id: "guwahati", label: { telugu: "గువహాటి", english: "Guwahati", sanskrit: "गुवाहाटी" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    bihar: { label: { telugu: "బీహార్", english: "Bihar", sanskrit: "बिहारః" }, tz: "+05:30", riverText: { telugu: "గంగా-శోణ నద్యోర్మధ్యే", english: "Ganga-Sone Nadyormadhye", sanskrit: "गंगा-सोण नद्योर्मध्ये" }, cities: [{ id: "patna", label: { telugu: "పాట్నా", english: "Patna", sanskrit: "पटना" } }, { id: "gaya", label: { telugu: "గయ", english: "Gaya", sanskrit: "गया" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    chhattisgarh: { label: { telugu: "ఛత్తీస్‌గఢ్", english: "Chhattisgarh", sanskrit: "छत्तीसगढ़" }, tz: "+05:30", riverText: { telugu: "మహానదీ తీర ప్రదేశే", english: "Mahanadi Teera Pradese", sanskrit: "महानदी तीर प्रदेशे" }, cities: [{ id: "raipur", label: { telugu: "రాయ్‌పూర్", english: "Raipur", sanskrit: "रायपुर" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    goa: { label: { telugu: "గోవా", english: "Goa", sanskrit: "गोवा" }, tz: "+05:30", riverText: { telugu: "మాండవి-జువారి నద్యోర్మధ్యే, అరబ్బీ సముద్ర తీరే", english: "Mandovi-Zuari Nadyormadhye", sanskrit: "माण्डवी-जुवारी नद्योर्मध्ये" }, cities: [{ id: "panaji", label: { telugu: "పణాజి", english: "Panaji", sanskrit: "पणजी" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    gujarat: { label: { telugu: "గుజరాత్", english: "Gujarat", sanskrit: "गुजरातః" }, tz: "+05:30", riverText: { telugu: "సబర్మతీ-నర్మదా-తాపీ నదీ తీర ప్రదేశే", english: "Sabarmati-Narmada Nadi Teera Pradese", sanskrit: "साबरमती-नर्मदा नदी तीर प्रदेशे" }, cities: [{ id: "ahmedabad", label: { telugu: "అహ్మదాబాద్", english: "Ahmedabad", sanskrit: "अहमदाबाद" } }, { id: "surat", label: { telugu: "సూరత్", english: "Surat", sanskrit: "सूरत" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    haryana: { label: { telugu: "హర్యానా", english: "Haryana", sanskrit: "हरियाणा" }, tz: "+05:30", riverText: { telugu: "సరస్వతీ-యమునా నదీ అంతర్వేదీ ప్రదేశే", english: "Saraswati-Yamuna Nadi Antarvedi Pradese", sanskrit: "सरस्वती-यमुना नदी अन्तर्वेदी प्रदेशे" }, cities: [{ id: "gurugram", label: { telugu: "గురుగ్రామ్", english: "Gurugram", sanskrit: "गुरुग्राम" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    himachal_pradesh: { label: { telugu: "హిమాచల్ ప్రదేశ్", english: "Himachal Pradesh", sanskrit: "हिमाचलप्रदेशः" }, tz: "+05:30", riverText: { telugu: "బియాస్-సత్లుజ్ నద్యోర్మధ్యే", english: "Beas-Sutlej Nadyormadhye", sanskrit: "ब्यास-सतलुज नद्योर्मध्ये" }, cities: [{ id: "shimla", label: { telugu: "షిమ్లా", english: "Shimla", sanskrit: "शिमला" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    jharkhand: { label: { telugu: "జార్ఖండ్", english: "Jharkhand", sanskrit: "झारखंड" }, tz: "+05:30", riverText: { telugu: "స్వర్ణరేఖా-దామోదర్ నద్యోర్మధ్యే", english: "Subarnarekha-Damodar Nadyormadhye", sanskrit: "सुवर्णरेखा-दामोदर नद्योर्मध्ये" }, cities: [{ id: "ranchi", label: { telugu: "రాంచీ", english: "Ranchi", sanskrit: "राँची" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    karnataka: { label: { telugu: "కర్ణాటక", english: "Karnataka", sanskrit: "कर्णाटकः" }, tz: "+05:30", riverText: { telugu: "కావేరీ-కృష్ణా-తుంగభద్రా నదీ తీర ప్రదేశే", english: "Kaveri-Krishna-Tungabhadra Nadi Teera Pradese", sanskrit: "कावेरी-कृष्णा-तुङ्गभद्रा नदी तीर प्रदेशे" }, cities: [{ id: "bengaluru", label: { telugu: "బెంగళూరు", english: "Bengaluru", sanskrit: "बेंगलुरु" } }, { id: "mysuru", label: { telugu: "మైసూరు", english: "Mysuru", sanskrit: "मैसूरु" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    kerala: { label: { telugu: "కేరళ", english: "Kerala", sanskrit: "केरलః" }, tz: "+05:30", riverText: { telugu: "పెరియార్-పంబ నదీ తీర ప్రదేశే, పరశురామ క్షేత్రే", english: "Periyar-Pamba Nadi Teera Pradese", sanskrit: "पेरियार-पम्बा नदी तीर प्रदेशे" }, cities: [{ id: "kochi", label: { telugu: "కొచ్చి", english: "Kochi", sanskrit: "कोच्चि" } }, { id: "thiruvananthapuram", label: { telugu: "తిరువనంతపురం", english: "Thiruvananthapuram", sanskrit: "तिरुवनंतपुरम" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    madhya_pradesh: { label: { telugu: "మధ్యప్రదేశ్", english: "Madhya Pradesh", sanskrit: "मध्यप्रदेशः" }, tz: "+05:30", riverText: { telugu: "నర్మదా-షిప్రా-చంబల్ నదీ తీర ప్రదేశే", english: "Narmada-Shipra Nadi Teera Pradese", sanskrit: "नर्मदा-क्षिप्रा नदी तीर प्रदेशे" }, cities: [{ id: "indore", label: { telugu: "ఇండోర్", english: "Indore", sanskrit: "इन्दौर" } }, { id: "bhopal", label: { telugu: "భోపాల్", english: "Bhopal", sanskrit: "भोपाल" } }, { id: "ujjain", label: { telugu: "ఉజ్జయిని", english: "Ujjain", sanskrit: "उज्जैन" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    maharashtra: { label: { telugu: "మహారాష్ట్ర", english: "Maharashtra", sanskrit: "महाराष्ट्रः" }, tz: "+05:30", riverText: { telugu: "గోదావరి-కృష్ణా-భీమా నదీ తీర ప్రదేశే", english: "Godavari-Krishna-Bhima Nadi Teera Pradese", sanskrit: "गोदावरी-कृष्णा-भीमा नदी तीर प्रदेशे" }, cities: [{ id: "mumbai", label: { telugu: "ముంబై", english: "Mumbai", sanskrit: "मुंबई" } }, { id: "pune", label: { telugu: "పుణే", english: "Pune", sanskrit: "पुणे" } }, { id: "nagpur", label: { telugu: "నాగ్‌పూర్", english: "Nagpur", sanskrit: "नागपुर" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    manipur: { label: { telugu: "మణిపూర్", english: "Manipur", sanskrit: "मणिपुरః" }, tz: "+05:30", riverText: { telugu: "ఇంఫాల్ నదీ తీర ప్రదేశే", english: "Imphal Nadi Teera Pradese", sanskrit: "इम्फाल नदी तीर प्रदेशे" }, cities: [{ id: "imphal", label: { telugu: "ఇంఫాల్", english: "Imphal", sanskrit: "इम्फाल" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    meghalaya: { label: { telugu: "మేఘాలయ", english: "Meghalaya", sanskrit: "मेघालयః" }, tz: "+05:30", riverText: { telugu: "ఉమ్‌గోట్ నదీ తీర ప్రదేశే", english: "Umngot Nadi Teera Pradese", sanskrit: "उमंगोट नदी तीर प्रदेशे" }, cities: [{ id: "shillong", label: { telugu: "షిల్లాంగ్", english: "Shillong", sanskrit: "शिलांग" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    mizoram: { label: { telugu: "మిజోరం", english: "Mizoram", sanskrit: "मिजोरमః" }, tz: "+05:30", riverText: { telugu: "త్లాంగ్ నదీ తీర ప్రదేశే", english: "Tlawng Nadi Teera Pradese", sanskrit: "त्लॉन्ग नदी तीर प्रदेशे" }, cities: [{ id: "aizawl", label: { telugu: "ఐజ్వాల్", english: "Aizawl", sanskrit: "आइज़ोल" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    nagaland: { label: { telugu: "నాగాలాండ్", english: "Nagaland", sanskrit: "नागालैंड" }, tz: "+05:30", riverText: { telugu: "ధ్యాన్ నదీ తీర ప్రదేశే", english: "Doyang Nadi Teera Pradese", sanskrit: "दोयांग नदी तीर प्रदेशे" }, cities: [{ id: "kohima", label: { telugu: "కోహిమా", english: "Kohima", sanskrit: "कोहिमा" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    odisha: { label: { telugu: "ఒడిషా", english: "Odisha", sanskrit: "ओडिशा (उत्कलः)" }, tz: "+05:30", riverText: { telugu: "మహానదీ-బ్రాహ్మణి నదీ తీర ప్రదేశే, ఉత్కల దేశే", english: "Mahanadi-Brahmani Nadi Teera Pradese", sanskrit: "महानदी-ब्राह्मणी नदी तीर प्रदेशे" }, cities: [{ id: "bhubaneswar", label: { telugu: "భువనేశ్వర్", english: "Bhubaneswar", sanskrit: "भुवनेश्वर" } }, { id: "puri", label: { telugu: "పూరీ", english: "Puri", sanskrit: "पुरी" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    punjab: { label: { telugu: "పంజాబ్", english: "Punjab", sanskrit: "पंजाबః" }, tz: "+05:30", riverText: { telugu: "సత్లుజ్-బియాస్-రవి పంచనదీ తీర ప్రదేశే", english: "Sutlej-Beas Panchanadi Teera Pradese", sanskrit: "सतलुज-ब्यास पंचनदी तीर प्रदेशे" }, cities: [{ id: "amritsar", label: { telugu: "అమృతసర్", english: "Amritsar", sanskrit: "अमृतसर" } }, { id: "ludhiana", label: { telugu: "లూధియానా", english: "Ludhiana", sanskrit: "लुधियाना" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    rajasthan: { label: { telugu: "రాజస్థాన్", english: "Rajasthan", sanskrit: "राजस्थानః" }, tz: "+05:30", riverText: { telugu: "చంబల్-బనాస్ నదీ తీర ప్రదేశే, మరుభూమి ప్రాంతే", english: "Chambal-Banas Nadi Teera Pradese", sanskrit: "चम्बल-बनास नदी तीर प्रदेशे" }, cities: [{ id: "jaipur", label: { telugu: "జైపూర్", english: "Jaipur", sanskrit: "जयपुर" } }, { id: "udaipur", label: { telugu: "ఉదయపూర్", english: "Udaipur", sanskrit: "उदयपुर" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    sikkim: { label: { telugu: "సిక్కిం", english: "Sikkim", sanskrit: "सिक्किम" }, tz: "+05:30", riverText: { telugu: "తీస్తా నదీ తీర ప్రదేశే", english: "Teesta Nadi Teera Pradese", sanskrit: "तीस्ता नदी तीर प्रदेशे" }, cities: [{ id: "gangtok", label: { telugu: "గాంగ్‌టక్", english: "Gangtok", sanskrit: "गंगटोक" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    tamil_nadu: { label: { telugu: "తమిళనాడు", english: "Tamil Nadu", sanskrit: "तमिलनाडु" }, tz: "+05:30", riverText: { telugu: "కావేరీ-తామ్రపర్ణి నదీ తీర ప్రదేశే, ద్రావిడ దేశే", english: "Kaveri-Tamraparni Nadi Teera Pradese", sanskrit: "कावेरी-ताम्रपर्णी नदी तीर प्रदेशे" }, cities: [{ id: "chennai", label: { telugu: "చెన్నై", english: "Chennai", sanskrit: "चेन्नई" } }, { id: "madurai", label: { telugu: "మధురై", english: "Madurai", sanskrit: "मधुरै" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    telangana: { label: { telugu: "తెలంగాణ", english: "Telangana", sanskrit: "तेलङ्गाणा" }, tz: "+05:30", riverText: { telugu: "మూసీ-గోదావరి-కృష్ణా నదీ తీర ప్రదేశే", english: "Musi-Godavari Nadi Teera Pradese", sanskrit: "मुसी-गोदावरी नदी तीर प्रदेशे" }, cities: [{ id: "hyderabad", label: { telugu: "హైదరాబాద్", english: "Hyderabad", sanskrit: "हैदराबाद" } }, { id: "warangal", label: { telugu: "వరంగల్", english: "Warangal", sanskrit: "वरंगल" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    tripura: { label: { telugu: "త్రిపుర", english: "Tripura", sanskrit: "त्रिपुरा" }, tz: "+05:30", riverText: { telugu: "గోమతి నదీ తీర ప్రదేశే", english: "Gomati Nadi Teera Pradese", sanskrit: "गोमती नदी तीर प्रदेशे" }, cities: [{ id: "agartala", label: { telugu: "అగర్తలా", english: "Agartala", sanskrit: "अगरतला" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    uttar_pradesh: { label: { telugu: "ఉత్తరప్రదేశ్", english: "Uttar Pradesh", sanskrit: "उत्तरप्रदेशః" }, tz: "+05:30", riverText: { telugu: "గంగా-యమునా-సరస్వతీ త్రివేణీ సంగమ ప్రదేశే / ఆర్యవర్తే", english: "Ganga-Yamuna Triveni Sangama Pradese", sanskrit: "गंगा-यमुना त्रिवेणी संगम प्रदेशे" }, cities: [{ id: "varanasi", label: { telugu: "వారణాసి / కాశీ", english: "Varanasi / Kashi", sanskrit: "वाराणसी" } }, { id: "prayagraj", label: { telugu: "ప్రయాగ్‌రాజ్", english: "Prayagraj", sanskrit: "प्रयागराज" } }, { id: "ayodhya", label: { telugu: "అయోధ్య", english: "Ayodhya", sanskrit: "अयोध्या" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    uttarakhand: { label: { telugu: "ఉత్తరాఖండ్", english: "Uttarakhand", sanskrit: "उत्तराखण्डః" }, tz: "+05:30", riverText: { telugu: "భాగీరథీ-అలకనందా దేవగంగా తీర ప్రదేశే, దేవభూమౌ", english: "Bhagirathi-Alaknanda Ganga Teera Pradese", sanskrit: "भागीरथी-अलकनन्दा गंगा तीर प्रदेशे" }, cities: [{ id: "haridwar", label: { telugu: "హరిద్వార్", english: "Haridwar", sanskrit: "हरिद्वारम्" } }, { id: "dehradun", label: { telugu: "డెహ్రాడూన్", english: "Dehradun", sanskrit: "देहरादून" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    west_bengal: { label: { telugu: "పశ్చిమ బెంగాల్", english: "West Bengal", sanskrit: "पश्चिमबंगालః (गौड़ः)" }, tz: "+05:30", riverText: { telugu: "భాగీరథీ-హుగ్లీ గంగా తీర ప్రదేశే, గౌడ దేశే", english: "Bhagirathi-Hooghly Ganga Teera Pradese", sanskrit: "भागीरथी-हुगली गंगा तीर प्रदेशे" }, cities: [{ id: "kolkata", label: { telugu: "కోల్‌కతా", english: "Kolkata", sanskrit: "कोलकाता" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    andaman_nicobar: { label: { telugu: "అండమాన్ నికోబార్", english: "Andaman and Nicobar Islands", sanskrit: "अण्डमान निकोबार" }, tz: "+05:30", riverText: { telugu: "బెంగాల్ అగాధ మధ్యే, సముద్ర తీరే", english: "Bengal Agadha Madhye", sanskrit: "बंगाल समुद्र मध्ये" }, cities: [{ id: "port_blair", label: { telugu: "పోర్ట్ బ్లేయర్", english: "Port Blair", sanskrit: "पोर्ट ब्लेयर" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    chandigarh: { label: { telugu: "చండీగఢ్", english: "Chandigarh", sanskrit: "चण्डीगढ़" }, tz: "+05:30", riverText: { telugu: "సుఖ్నా సరోవర సమీపే", english: "Sukhna Sarovara Sameepe", sanskrit: "सुखना सरोवर समीपे" }, cities: [{ id: "chandigarh_city", label: { telugu: "చండీగఢ్", english: "Chandigarh", sanskrit: "चण्डीगढ़" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    dadra_nagar_haveli_daman_diu: { label: { telugu: "దాద్రా నగర్ హవేలీ & డామన్ డయ్యూ", english: "Dadra and Nagar Haveli and Daman and Diu", sanskrit: "दादरा नगर हवेली दमन दीव" }, tz: "+05:30", riverText: { telugu: "దమన్‌గంగా నదీ తీర ప్రదేశే, అరబ్బీ సముద్ర సమీపే", english: "Damanganga Nadi Teera Pradese", sanskrit: "दमनगंगा नदी तीर प्रदेशे" }, cities: [{ id: "daman", label: { telugu: "డామన్", english: "Daman", sanskrit: "दमन" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    delhi: { label: { telugu: "ఢిల్లీ (NCT)", english: "Delhi (NCT)", sanskrit: "दिल्ली (इन्द्रप्रस्थम्)" }, tz: "+05:30", riverText: { telugu: "యమునా నదీ తీర ప్రదేశే, ఇంద్రప్రస్థ క్షేత్రే", english: "Yamuna Nadi Teera Pradese, Indraprastha Kshetre", sanskrit: "यमुना नदी तीर प्रदेशे, इन्द्रप्रस्थ क्षेत्रे" }, cities: [{ id: "new_delhi", label: { telugu: "న్యూఢిల్లీ", english: "New Delhi", sanskrit: "नई दिल्ली" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    jammu_kashmir: { label: { telugu: "జమ్మూ & కాశ్మీర్", english: "Jammu and Kashmir", sanskrit: "जम्मू काश्मीरः" }, tz: "+05:30", riverText: { telugu: "జీలమ్-తవి నదీ తీర ప్రదేశే, శారదా పీఠ క్షేత్రే", english: "Jhelum-Tawi Nadi Teera Pradese", sanskrit: "झेलम-तवी नदी तीर प्रदेशे" }, cities: [{ id: "srinagar", label: { telugu: "శ్రీనగర్", english: "Srinagar", sanskrit: "श्रीनगर" } }, { id: "jammu", label: { telugu: "జమ్మూ", english: "Jammu", sanskrit: "जम्मू" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    ladakh: { label: { telugu: "లడఖ్", english: "Ladakh", sanskrit: "लद्दाख" }, tz: "+05:30", riverText: { telugu: "సింధు నదీ తీర ప్రదేశే", english: "Sindhu Nadi Teera Pradese", sanskrit: "सिन्धु नदी तीर प्रदेशे" }, cities: [{ id: "leh", label: { telugu: "లేహ్", english: "Leh", sanskrit: "लेह" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    lakshadweep: { label: { telugu: "లక్షద్వీప్", english: "Lakshadweep", sanskrit: "लक्षद्वीप" }, tz: "+05:30", riverText: { telugu: "అరబ్బీ సముద్ర మధ్యే, ద్వీప సమూహే", english: "Arabian Samudra Madhye", sanskrit: "अरब समुद्र मध्ये" }, cities: [{ id: "kavaratti", label: { telugu: "కవరత్తి", english: "Kavaratti", sanskrit: "कवरत्ती" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] },
+                    puducherry: { label: { telugu: "పుదుచ్చేరి", english: "Puducherry", sanskrit: "पुदुच्चेरी" }, tz: "+05:30", riverText: { telugu: "బంగాళాఖాత సముద్ర తీరే", english: "Bangalakhata Samudra Teere", sanskrit: "बंगाल खाड़ी समुद्र तीरे" }, cities: [{ id: "puducherry_city", label: { telugu: "పుదుచ్చేరి", english: "Puducherry", sanskrit: "पुदुच्चेरी" } }, { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }] }
+                }
+            },
+            uae: {
+                label: { telugu: "యు.ఎ.ఇ (UAE)", english: "UAE (United Arab Emirates)", sanskrit: "संयुक्त अरब अमीरात (UAE)" },
+                sankalpamGeo: {
+                    telugu: "జంబూద్వీపే, పశ్చిమ ఆసియా ఖండే, యు.ఎ.ఇ దేశే",
+                    english: "Jamboodveepe, Paschima Asia Khande, UAE Dese",
+                    sanskrit: "जम्बूद्वीपे, पश्चिम एशिया खण्डे, संयुक्त अरब अमीरात देशे"
+                },
+                states: {
+                    dubai_emirate: {
+                        label: { telugu: "దుబాయ్ (Dubai)", english: "Dubai Emirate", sanskrit: "दुबई राज्यम्" },
+                        tz: "+04:00",
+                        riverText: {
+                            telugu: "అరేబియా సముద్ర తీరే, పర్షియన్ గల్ఫ్ సమీపే",
+                            english: "Arabia Samudra Teere, Persian Gulf Sameepe",
+                            sanskrit: "अरब समुद्र तीरे, फ़ारसी खाड़ी समीपे"
+                        },
+                        cities: [
+                            { id: "dubai", label: { telugu: "దుబాయ్", english: "Dubai", sanskrit: "दुबई" } },
+                            { id: "deira", label: { telugu: "డేరా", english: "Deira", sanskrit: "डेरा" } },
+                            { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }
+                        ]
+                    },
+                    abu_dhabi_emirate: {
+                        label: { telugu: "అబుదాబి (Abu Dhabi)", english: "Abu Dhabi Emirate", sanskrit: "अबू धाबी राज्यम्" },
+                        tz: "+04:00",
+                        riverText: {
+                            telugu: "అరేబియా సముద్ర తీరే",
+                            english: "Arabia Samudra Teere",
+                            sanskrit: "अरब समुद्र तीरे"
+                        },
+                        cities: [
+                            { id: "abu_dhabi", label: { telugu: "అబుదాబి", english: "Abu Dhabi", sanskrit: "अबू धाबी" } },
+                            { id: "al_ain", label: { telugu: "అల్ ఐన్", english: "Al Ain", sanskrit: "अल ऐन" } },
+                            { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }
+                        ]
+                    },
+                    sharjah_emirate: {
+                        label: { telugu: "షార్జా (Sharjah)", english: "Sharjah Emirate", sanskrit: "शारजाह राज्यम्" },
+                        tz: "+04:00",
+                        riverText: {
+                            telugu: "అరేబియా సముద్ర తీరే",
+                            english: "Arabia Samudra Teere",
+                            sanskrit: "अरब समुद्र तीरे"
+                        },
+                        cities: [
+                            { id: "sharjah", label: { telugu: "షార్జా", english: "Sharjah", sanskrit: "शारजाह" } },
+                            { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }
+                        ]
+                    }
+                }
+            },
+            australia: {
+                label: { telugu: "ఆస్ట్రేలియా (Australia)", english: "Australia", sanskrit: "ऑस्ट्रेलिया (Australia)" },
+                sankalpamGeo: {
+                    telugu: "శాల్మలీ ద్వీపే, ఆస్ట్రేలియా ఖండే",
+                    english: "Salmali Dveepe, Australia Khande",
+                    sanskrit: "शाल्मली द्वीपे, ऑस्ट्रेलिया खण्डे"
+                },
+                states: {
+                    nsw: {
+                        label: { telugu: "న్యూ సౌత్ వేల్స్ (NSW)", english: "New South Wales", sanskrit: "न्यू साउथ वेल्स" },
+                        tz: "+10:00",
+                        riverText: {
+                            telugu: "పరామట్టా-డార్లింగ్ నద్యోర్మధ్యే, దక్షిణ మహాసముద్ర తీరే",
+                            english: "Paramatta-Darling Nadyormadhye, Dakshina Mahasamudra Teere",
+                            sanskrit: "परामट्टा-डार्लिंग नद्योर्मध्ये"
+                        },
+                        cities: [
+                            { id: "sydney", label: { telugu: "సిడ్నీ", english: "Sydney", sanskrit: "सिडनी" } },
+                            { id: "parramatta", label: { telugu: "పరామట్టా", english: "Parramatta", sanskrit: "परामाट्टा" } },
+                            { id: "newcastle", label: { telugu: "న్యూక్యాసిల్", english: "Newcastle", sanskrit: "न्यूकैसल" } },
+                            { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }
+                        ]
+                    },
+                    victoria: {
+                        label: { telugu: "విక్టోరియా (Victoria)", english: "Victoria", sanskrit: "विक्टोरिया" },
+                        tz: "+10:00",
+                        riverText: {
+                            telugu: "యార్రా-ముర్రే నద్యోర్మధ్యే",
+                            english: "Yarra-Murray Nadyormadhye",
+                            sanskrit: "यार्रा-मुर्रे नद्योर्मध्ये"
+                        },
+                        cities: [
+                            { id: "melbourne", label: { telugu: "మెల్‌బోర్న్", english: "Melbourne", sanskrit: "मेलबर्न" } },
+                            { id: "geelong", label: { telugu: "జీలాంగ్", english: "Geelong", sanskrit: "जिलोंग" } },
+                            { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }
+                        ]
+                    },
+                    queensland: {
+                        label: { telugu: "క్వీన్స్‌లాండ్ (Queensland)", english: "Queensland", sanskrit: "क्वींसलैंड" },
+                        tz: "+10:00",
+                        riverText: {
+                            telugu: "బ్రిస్బేన్ నదీ తీర ప్రదేశే",
+                            english: "Brisbane Nadi Teera Pradese",
+                            sanskrit: "ब्रिस्बेन नदी तीर प्रदेशे"
+                        },
+                        cities: [
+                            { id: "brisbane", label: { telugu: "బ్రిస్బేన్", english: "Brisbane", sanskrit: "ब्रिस्बेन" } },
+                            { id: "gold_coast", label: { telugu: "గోల్డ్ కోస్ట్", english: "Gold Coast", sanskrit: "गोल्ड कोस्ट" } },
+                            { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }
+                        ]
+                    },
+                    wa: {
+                        label: { telugu: "వెస్టర్న్ ఆస్ట్రేలియా (WA)", english: "Western Australia", sanskrit: "पश्चिमी ऑस्ट्रेलिया" },
+                        tz: "+08:00",
+                        riverText: {
+                            telugu: "స్వాన్ నదీ తీర ప్రదేశే, హిందూ మహాసముద్ర సమీపే",
+                            english: "Swan Nadi Teera Pradese",
+                            sanskrit: "स्वान नदी तीर प्रदेशे"
+                        },
+                        cities: [
+                            { id: "perth", label: { telugu: "పెర్త్", english: "Perth", sanskrit: "पर्थ" } },
+                            { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }
+                        ]
+                    }
+                }
+            },
+            new_zealand: {
+                label: { telugu: "న్యూజిలాండ్ (New Zealand)", english: "New Zealand", sanskrit: "न्यू जीलैण्ड (New Zealand)" },
+                sankalpamGeo: {
+                    telugu: "శాల్మలీ ద్వీపే, ఓషియానియా ఖండే, న్యూజిలాండ్ దేశే",
+                    english: "Salmali Dveepe, Oceania Khande, New Zealand Dese",
+                    sanskrit: "शाल्मली द्वीपे, ओशियानिया खण्डे, न्यू जीलैण्ड देशे"
+                },
+                states: {
+                    north_island: {
+                        label: { telugu: "ఉత్తర దేవి / నార్త్ ఐలాండ్", english: "North Island", sanskrit: "उत्तर द्वीपम्" },
+                        tz: "+12:00",
+                        riverText: {
+                            telugu: "వైకాటో నదీ తీర ప్రదేశే, పసిఫిక్ మహాసముద్ర సమీపే",
+                            english: "Waikato Nadi Teera Pradese",
+                            sanskrit: "वाइकाटो नदी तीर प्रदेशे"
+                        },
+                        cities: [
+                            { id: "auckland", label: { telugu: "ఆక్లాండ్", english: "Auckland", sanskrit: "ऑकलैंड" } },
+                            { id: "wellington", label: { telugu: "వెల్లింగ్టన్", english: "Wellington", sanskrit: "वेलिंगटन" } },
+                            { id: "hamilton", label: { telugu: "హామిల్టన్", english: "Hamilton", sanskrit: "हैमिल्टन" } },
+                            { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }
+                        ]
+                    },
+                    south_island: {
+                        label: { telugu: "దక్షిణ దేవి / సౌత్ ఐలాండ్", english: "South Island", sanskrit: "दक्षिण द्वीपम्" },
+                        tz: "+12:00",
+                        riverText: {
+                            telugu: "క్లూతా నదీ తీర ప్రదేశే",
+                            english: "Clutha Nadi Teera Pradese",
+                            sanskrit: "क्लुथा नदी तीर प्रदेशे"
+                        },
+                        cities: [
+                            { id: "christchurch", label: { telugu: "క్రైస్ట్‌చర్చ్", english: "Christchurch", sanskrit: "क्राइस्टचर्च" } },
+                            { id: "dunedin", label: { telugu: "డునెడిన్", english: "Dunedin", sanskrit: "ड्यूनेडिन" } },
+                            { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }
+                        ]
+                    }
+                }
+            },
+            canada: {
+                label: { telugu: "కెనడా (Canada)", english: "Canada", sanskrit: "कनाडा (Canada)" },
+                sankalpamGeo: {
+                    telugu: "క్రౌంచ ద్వీపే, ఉత్తర అమెరికా ఖండే, కెనడా దేశే",
+                    english: "Krauncha Dveepe, Uttara America Khande, Canada Dese",
+                    sanskrit: "क्रौञ्च द्वीपे, उत्तर अमेरिका खण्डे, कनाडा देशे"
+                },
+                states: {
+                    ontario: {
+                        label: { telugu: "ఒంటారియో (Ontario)", english: "Ontario", sanskrit: "ओंटारियो" },
+                        tz: "-05:00",
+                        riverText: {
+                            telugu: "ఒంటారియో సరోవర తీరే, ఒట్టావా నద్యోర్మధ్యే",
+                            english: "Ontario Sarovara Teere, Ottawa Nadyormadhye",
+                            sanskrit: "ओंटारियो सरोवर तीरे"
+                        },
+                        cities: [
+                            { id: "toronto", label: { telugu: "టొరంటో", english: "Toronto", sanskrit: "टोरंटो" } },
+                            { id: "ottawa", label: { telugu: "ఒట్టావా", english: "Ottawa", sanskrit: "ओटावा" } },
+                            { id: "mississauga", label: { telugu: "మిస్సిసాగా", english: "Mississauga", sanskrit: "मििससागा" } },
+                            { id: "brampton", label: { telugu: "బ్రాంప్టన్", english: "Brampton", sanskrit: "ब्रैम्पटन" } },
+                            { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }
+                        ]
+                    },
+                    bc: {
+                        label: { telugu: "బ్రిటిష్ కొలంబియా (BC)", english: "British Columbia", sanskrit: "ब्रिटिश कोलंबिया" },
+                        tz: "-08:00",
+                        riverText: {
+                            telugu: "ఫ్రేజర్ నదీ తీర ప్రదేశే, పసిఫిక్ మహాసముద్ర సమీపే",
+                            english: "Fraser Nadi Teera Pradese",
+                            sanskrit: "फ़्रेज़र नदी तीर प्रदेशे"
+                        },
+                        cities: [
+                            { id: "vancouver", label: { telugu: "వాంకోవర్", english: "Vancouver", sanskrit: "वैंकूवर" } },
+                            { id: "surrey", label: { telugu: "సర్రీ", english: "Surrey", sanskrit: "सर्रे" } },
+                            { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }
+                        ]
+                    },
+                    alberta: {
+                        label: { telugu: "అల్బెర్టా (Alberta)", english: "Alberta", sanskrit: "अल्बर्टा" },
+                        tz: "-07:00",
+                        riverText: {
+                            telugu: "బో-శాస్కట్చేవాన్ నద్యోర్మధ్యే",
+                            english: "Bow-Saskatchewan Nadyormadhye",
+                            sanskrit: "बो-सास्काचेवान नद्योर्मध्ये"
+                        },
+                        cities: [
+                            { id: "calgary", label: { telugu: "కాల్గరీ", english: "Calgary", sanskrit: "कैलगरी" } },
+                            { id: "edmonton", label: { telugu: "ఎడ్మంటన్", english: "Edmonton", sanskrit: "एडमोंटन" } },
+                            { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }
+                        ]
+                    }
+                }
+            },
+            singapore: {
+                label: { telugu: "సింగపూర్ (Singapore)", english: "Singapore", sanskrit: "सिंगापुर (Singapore)" },
+                sankalpamGeo: {
+                    telugu: "ప్లక్ష ద్వీపే, ఆసియా ఖండే, సింగపూర్ దేశే",
+                    english: "Plaksha Dveepe, Asia Khande, Singapore Dese",
+                    sanskrit: "प्लक्ष द्वीपे, एशिया खण्डे, सिंगापुर देशे"
+                },
+                states: {
+                    singapore_region: {
+                        label: { telugu: "సింగపూర్ (Singapore)", english: "Singapore", sanskrit: "सिंगापुर" },
+                        tz: "+08:00",
+                        riverText: {
+                            telugu: "సింగపూర్ నదీ తీర ప్రదేశే, మలక్కా జలసంధి సమీపే",
+                            english: "Singapore Nadi Teera Pradese",
+                            sanskrit: "सिंगापुर नदी तीर प्रदेशे"
+                        },
+                        cities: [
+                            { id: "singapore_city", label: { telugu: "సింగపూర్ సిటీ", english: "Singapore City", sanskrit: "सिंगापुर नगरम्" } },
+                            { id: "jurong", label: { telugu: "జురోంగ్", english: "Jurong", sanskrit: "जुरोंग" } },
+                            { id: "tampines", label: { telugu: "టాంపినెస్", english: "Tampines", sanskrit: "टैम्पाइन्स" } },
+                            { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }
+                        ]
+                    }
+                }
+            },
+            malaysia: {
+                label: { telugu: "మలేషియా (Malaysia)", english: "Malaysia", sanskrit: "मलेशिया (Malaysia)" },
+                sankalpamGeo: {
+                    telugu: "ప్లక్ష ద్వీపే, ఆసియా ఖండే, మలేషియా దేశే",
+                    english: "Plaksha Dveepe, Asia Khande, Malaysia Dese",
+                    sanskrit: "प्लक्ष द्वीपे, एशिया खण्डे, मलेशिया देशे"
+                },
+                states: {
+                    selangor: {
+                        label: { telugu: "సెలాంగోర్ / కౌలాలంపూర్", english: "Selangor / Kuala Lumpur", sanskrit: "सेलांगोर / कुआलालंपुर" },
+                        tz: "+08:00",
+                        riverText: {
+                            telugu: "క్లాంగ్ నదీ తీర ప్రదేశే",
+                            english: "Klang Nadi Teera Pradese",
+                            sanskrit: "क्लैंग नदी तीर प्रदेशे"
+                        },
+                        cities: [
+                            { id: "kuala_lumpur", label: { telugu: "కౌలాలంపూర్", english: "Kuala Lumpur", sanskrit: "कुआलालंपुर" } },
+                            { id: "petaling_jaya", label: { telugu: "పెటాలింగ్ జయా", english: "Petaling Jaya", sanskrit: "पिटैलिंग जया" } },
+                            { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }
+                        ]
+                    },
+                    penang: {
+                        label: { telugu: "పెనాంగ్ (Penang)", english: "Penang", sanskrit: "पेनांग" },
+                        tz: "+08:00",
+                        riverText: {
+                            telugu: "మలక్కా సముద్ర తీరే",
+                            english: "Malacca Samudra Teere",
+                            sanskrit: "मलक्का समुद्र तीरे"
+                        },
+                        cities: [
+                            { id: "george_town", label: { telugu: "జార్జ్ టౌన్", english: "George Town", sanskrit: "जॉर्ज टाउन" } },
+                            { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }
+                        ]
+                    },
+                    johor: {
+                        label: { telugu: "జోహోర్ (Johor)", english: "Johor", sanskrit: "जोहोर" },
+                        tz: "+08:00",
+                        riverText: {
+                            telugu: "జోహోర్ జలసంధి సమీపే",
+                            english: "Johor Jalasandhi Sameepe",
+                            sanskrit: "जोहोर जलसंधि समीपे"
+                        },
+                        cities: [
+                            { id: "johor_bahru", label: { telugu: "జోహోర్ బహ్రూ", english: "Johor Bahru", sanskrit: "जोहोर बाहरू" } },
+                            { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }
+                        ]
+                    }
+                }
+            },
+            saudi_arabia: {
+                label: { telugu: "సౌదీ అరేబియా (Saudi Arabia)", english: "Saudi Arabia", sanskrit: "साउदी अरेबिया (Saudi Arabia)" },
+                sankalpamGeo: {
+                    telugu: "జంబూ ద్వీపే, పశ్చిమ ఆసియా ఖండే, సౌదీ అరేబియా దేశే",
+                    english: "Jambudvipe, Paschima Asia Khande, Saudi Arabia Dese",
+                    sanskrit: "जम्बूद्वीपे, पश्चिम एशिया खण्डे, साउदी अरेबिया देशे"
+                },
+                states: {
+                    riyadh_province: {
+                        label: { telugu: "రియాద్ ప్రాంతం (Riyadh)", english: "Riyadh Province", sanskrit: "रियाद प्रदेशः" },
+                        tz: "+03:00",
+                        riverText: {
+                            telugu: "హనిఫా లోయ ప్రదేశే, ఎడారి ప్రాంతే",
+                            english: "Hanifa Loya Pradese",
+                            sanskrit: "हनीफ़ा उपत्यका प्रदेशे"
+                        },
+                        cities: [
+                            { id: "riyadh", label: { telugu: "రియాద్", english: "Riyadh", sanskrit: "रियाद" } },
+                            { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }
+                        ]
+                    },
+                    eastern_province: {
+                        label: { telugu: "తూర్పు ప్రాంతం (Eastern Province)", english: "Eastern Province (Dammam/Khobar)", sanskrit: "पूर्वी प्रदेशः" },
+                        tz: "+03:00",
+                        riverText: {
+                            telugu: "అరేబియా / పర్షియన్ గల్ఫ్ సముద్ర తీరే",
+                            english: "Arabian / Persian Gulf Samudra Teere",
+                            sanskrit: "फ़ारसी खाड़ी समुद्र तीरे"
+                        },
+                        cities: [
+                            { id: "dammam", label: { telugu: "దమ్మామ్", english: "Dammam", sanskrit: "दम्माम" } },
+                            { id: "khobar", label: { telugu: "అల్ ఖోబార్", english: "Al Khobar", sanskrit: "अल खोबार" } },
+                            { id: "jubail", label: { telugu: "జుబైల్", english: "Jubail", sanskrit: "जुबैल" } },
+                            { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }
+                        ]
+                    },
+                    makkah_province: {
+                        label: { telugu: "మక్కా / జిద్దా ప్రాంతం", english: "Makkah / Jeddah Province", sanskrit: "मक्का / जेद्दा प्रदेशः" },
+                        tz: "+03:00",
+                        riverText: {
+                            telugu: "ఎర్ర సముద్ర తీరే (Red Sea)",
+                            english: "Erra Samudra Teere (Red Sea)",
+                            sanskrit: "रक्त समुद्र तीरे"
+                        },
+                        cities: [
+                            { id: "jeddah", label: { telugu: "జిద్దా", english: "Jeddah", sanskrit: "जेद्दा" } },
+                            { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }
+                        ]
+                    }
+                }
+            },
+            oman: {
+                label: { telugu: "ఒమాన్ (Oman)", english: "Oman", sanskrit: "ओमान (Oman)" },
+                sankalpamGeo: {
+                    telugu: "జంబూద్వీపే, పశ్చిమ ఆసియా ఖండే, ఒమాన్ దేశే",
+                    english: "Jamboodveepe, Paschima Asia Khande, Oman Dese",
+                    sanskrit: "जम्बूद्वीपे, पश्चिम एशिया खण्डे, ओमान देशे"
+                },
+                states: {
+                    muscat_gov: {
+                        label: { telugu: "మస్కట్ (Muscat)", english: "Muscat Governorate", sanskrit: "मस्कट प्रदेशः" },
+                        tz: "+04:00",
+                        riverText: {
+                            telugu: "ఒమాన్ అరేబియా సముద్ర తీరే",
+                            english: "Oman Arabia Samudra Teere",
+                            sanskrit: "ओमान अरब समुद्र तीरे"
+                        },
+                        cities: [
+                            { id: "muscat", label: { telugu: "మస్కట్", english: "Muscat", sanskrit: "मस्कट" } },
+                            { id: "ruwi", label: { telugu: "రువి", english: "Ruwi", sanskrit: "रुवी" } },
+                            { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }
+                        ]
+                    },
+                    dhofar_gov: {
+                        label: { telugu: "ధోఫార్ / సలాలా", english: "Dhofar (Salalah)", sanskrit: "धोफ़ार (सलालाह)" },
+                        tz: "+04:00",
+                        riverText: {
+                            telugu: "అరేబియా సముద్ర తీరే",
+                            english: "Arabia Samudra Teere",
+                            sanskrit: "अरब समुद्र तीरे"
+                        },
+                        cities: [
+                            { id: "salalah", label: { telugu: "సలాలా", english: "Salalah", sanskrit: "सलालाह" } },
+                            { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }
+                        ]
+                    }
+                }
+            },
+            bahrain: {
+                label: { telugu: "బహ్రెయిన్ (Bahrain)", english: "Bahrain", sanskrit: "बहरीन (Bahrain)" },
+                sankalpamGeo: {
+                    telugu: "జంబూద్వీపే, పశ్చిమ ఆసియా ఖండే, బహ్రెయిన్ దేశే",
+                    english: "Jamboodveepe, Paschima Asia Khande, Bahrain Dese",
+                    sanskrit: "जम्बूद्वीपे, पश्चिम एशिया खण्डे, बहरीन देशे"
+                },
+                states: {
+                    capital_gov: {
+                        label: { telugu: "మనామా / రాజధాని ప్రాంతం", english: "Capital Governorate (Manama)", sanskrit: "मनामा राजधानी" },
+                        tz: "+03:00",
+                        riverText: {
+                            telugu: "అరేబియన్ గల్ఫ్ సముద్ర తీరే",
+                            english: "Arabian Gulf Samudra Teere",
+                            sanskrit: "अरब खाड़ी समुद्र तीरे"
+                        },
+                        cities: [
+                            { id: "manama", label: { telugu: "మనామా", english: "Manama", sanskrit: "मनामा" } },
+                            { id: "riffa", label: { telugu: "రిఫ్ఫా", english: "Riffa", sanskrit: "रिफ़ा" } },
+                            { id: "muharraq", label: { telugu: "ముహర్రక్", english: "Muharraq", sanskrit: "मुहर्रक़" } },
+                            { id: "other", label: { telugu: "ఇతర (Other)", english: "Other", sanskrit: "अन्य (Other)" } }
+                        ]
+                    }
+                }
+            }
+        };
+
+        const panchangDataByLang = {
+            telugu: {
+                samvatsaras: ["ప్రభవ", "విభవ", "శుక్ల", "ప్రమోదూత", "ప్రజోత్పత్తి", "అంగీరస", "శ్రీముఖ", "భావ", "యువ", "ధాత", "ఈశ్వర", "బహుధాన్య", "ప్రమాధి", "విక్రమ", "వృష", "చిత్రభాను", "స్వభాను", "తారణ", "పార్థివ", "వ్యయ", "సర్వజిత్తు", "సర్వధారి", "విరోధి", "వికృతి", "ఖర", "నందన", "విజయ", "జయ", "మన్మథ", "దుర్ముఖి", "హేవిలంబి", "విలంబి", "వికారి", "శార్వరి", "ప్లవ", "శుభకృతు", "శోభకృతు", "క్రోధి", "విశ్వావసు", "పరాభవ", "ప్లవంగ", "కీలక", "సౌమ్య", "సాధారణ", "విరోధికృతు", "పరిధావి", "ప్రమాదీచ", "ఆనంద", "రాక్షస", "నల", "పింగళ", "కాళయుక్తి", "సిద్ధార్థి", "రౌద్రి", "దుర్మతి", "దుందుభి", "రుధిరోద్గారి", "రక్తాక్షి", "క్రోధన", "అక్షయ"],
+                nakshatras: ["అశ్విని-నక్షత్రే", "భరణి-నక్షత్రే", "కృత్తికా-నక్షత్రే", "రోహిణి-నక్షత్రే", "మృగశిరా-నక్షత్రే", "ఆర్ద్రా-నక్షత్రే", "పునర్వసు-నక్షత్రే", "పుష్యమి-నక్షత్రే", "ఆశ్లేషా-నక్షత్రే", "మఖా-నక్షత్రే", "పూర్వఫల్గుణి-నక్షత్రే", "ఉత్తరఫల్గుణి-నక్షత్రే", "హస్తా-నక్షత్రే", "చిత్తా-నక్షత్రే", "స్వాతి-నక్షత్రే", "విశాఖా-నక్షత్రే", "అనూరాధా-నక్షత్రే", "జ్యేష్ఠా-నక్షత్రే", "మూలా-నక్షత్రే", "పూర్వాషాఢా-నక్షత్రే", "ఉత్తరాషాఢా-నక్షత్రే", "శ్రవణా-నక్షత్రే", "ధనిష్ఠా-నక్షత్రే", "శతభిషా-నక్షత్రే", "పూర్వాభాద్రా-నక్షత్రే", "ఉత్తరాభాద్రా-నక్షత్రే", "రేవతీ-నక్షత్రే"],
+                tithis: ["ప్రథమ్యామ్ తిథౌ", "ద్వితీయాయామ్ తిథౌ", "తృతీయాయామ్ తిథౌ", "చతుర్థ్యామ్ తిథౌ", "పంచమ్యామ్ తిథౌ", "షష్ఠ్యామ్ తిథౌ", "సప్తమ్యామ్ తిథౌ", "అష్టమ్యామ్ తిథౌ", "నవమ్యామ్ తిథౌ", "దశమ్యామ్ తిథౌ", "ఏకాదశ్యామ్ తిథౌ", "ద్వాదశ్యామ్ తిథౌ", "త్రయోదశ్యామ్ తిథౌ", "చతుర్దశ్యామ్ తిథౌ", "పౌర్ణమస్యామ్ / అమవాస్యాయామ్ తిథౌ"],
+                masams: ["చైత్ర-మాసే", "వైశాఖ-మాసే", "జ్యేష్ఠ-మాసే", "ఆషాఢ-మాసే", "శ్రావణ-మాసే", "భాద్రపద-మాసే", "ఆశ్వయుజ-మాసే", "కార్తీక-మాసే", "మార్గశిర-మాసే", "పుష్య-మాసే", "మాఘ-మాసే", "ఫాల్గుణ-మాసే"],
+                days: ["భానువాసర యుక్తాయామ్", "ఇందువాసర యుక్తాయామ్", "భౌమవాసర యుక్తాయామ్", "సౌమ్యవాసర యుక్తాయామ్", "గురువాసర యుక్తాయామ్", "భృగువాసర యుక్తాయామ్", "స్థిరవాసర యుక్తాయామ్"],
+                sukla: "శుక్ల పక్షే", bahula: "బహుళ పక్షే"
+            },
+            english: {
+                samvatsaras: ["Prabhava", "Vibhava", "Sukla", "Pramodoota", "Prajotpatti", "Aangirasa", "Srimukha", "Bhava", "Yuva", "Dhata", "Eeswara", "Bahudhanya", "Pramadhi", "Vikrama", "Vrusha", "Chitrabhanu", "Svabhanu", "Tarana", "Parthiva", "Vyaya", "Sarvajittu", "Sarvadhari", "Virodhi", "Vikruthi", "Khara", "Nandana", "Vijaya", "Jaya", "Manmatha", "Durmukhi", "Hevilambi", "Vilambi", "Vikari", "Sarvari", "Plava", "Subhakrutu", "Sobhakrutu", "Krodhi", "Visvavasu", "Parabhava", "Plavanga", "Keelaka", "Soumya", "Sadharana", "Virodhikrutu", "Paridhavi", "Pramadeecha", "Aananda", "Rakshasa", "Nala", "Pingala", "Kalayukti", "Siddhardhi", "Roudri", "Durmathi", "Dundubhi", "Rudhirodgari", "Raktakshi", "Krodhana", "Akshaya"],
+                nakshatras: ["Aswini-Nakshatre", "Bharani-Nakshatre", "Krittika-Nakshatre", "Rohini-Nakshatre", "Mrigasira-Nakshatre", "Ardra-Nakshatre", "Punarvasu-Nakshatre", "Pushyami-Nakshatre", "Aslesha-Nakshatre", "Makha-Nakshatre", "Purvaphalguni-Nakshatre", "Uttaraphalguni-Nakshatre", "Hasta-Nakshatre", "Chitta-Nakshatre", "Swathi-Nakshatre", "Visakha-Nakshatre", "Anuradha-Nakshatre", "Jyeshta-Nakshatre", "Moola-Nakshatre", "Purvashada-Nakshatre", "Uttarashada-Nakshatre", "Sravana-Nakshatre", "Dhanishta-Nakshatre", "Satabhisha-Nakshatre", "Purvabhadra-Nakshatre", "Uttarabhadra-Nakshatre", "Revati-Nakshatre"],
+                tithis: ["Prathamyam Tithau", "Dvitiyayam Tithau", "Tritiyayam Tithau", "Chaturthyam Tithau", "Panchamyam Tithau", "Shashthyam Tithau", "Saptamyam Tithau", "Ashtamyam Tithau", "Navamyam Tithau", "Dashamyam Tithau", "Ekadashyam Tithau", "Dvadashyam Tithau", "Trayodashyam Tithau", "Chaturdashyam Tithau", "Paurnamasyam / Amavasyayam Tithau"],
+                masams: ["Chaitra-Mase", "Vaisakha-Mase", "Jyeshtha-Mase", "Ashadha-Mase", "Sravana-Mase", "Bhadrapada-Mase", "Ashvayuja-Mase", "Kartika-Mase", "Margashirsha-Mase", "Pushya-Mase", "Magha-Mase", "Phalguna-Mase"],
+                days: ["Bhanuvasara Yuktayam", "Induvasara Yuktayam", "Bhaumavasara Yuktayam", "Saumyavasara Yuktayam", "Guruvasara Yuktayam", "Bhriguvasara Yuktayam", "Sthiravasara Yuktayam"],
+                sukla: "Sukla Pakshe", bahula: "Krishna Pakshe"
+            },
+            sanskrit: {
+                samvatsaras: ["प्रभव", "विभव", "शुक्ल", "प्रमोदूत", "प्रजोत्पत्ति", "अङ्गीरस", "श्रीमुख", "भाव", "युव", "धाता", "ईश्वर", "बहुधान्य", "प्रमाथी", "विक्रम", "वृष", "चित्रभानु", "स्वभानु", "तारण", "पार्थिव", "व्यय", "सर्वजित्", "सर्वधारी", "विरोधी", "विकृति", "खर", "नन्दन", "विजय", "जय", "मन्मथ", "दुर्मुखी", "हेविलम्बी", "विलम्बी", "विकारी", "शार्वरी", "प्लव", "शुभकृत्", "शोभकृत्", "क्रोधी", "विश्वावसु", "पराभव", "प्लवङ्ग", "कीलक", "सौम्य", "साधारण", "विरोधिकृत्", "परिधावी", "प्रमादीचा", "आनन्द", "राक्षस", "नल", "पिङ्गल", "कालयुक्ति", "सिद्धार्थी", "रौद्री", "दुर्मती", "दुन्दुभी", "रुधिरोद्गारी", "रक्ताक्षी", "क्रोधन", "अक्षय"],
+                nakshatras: ["अश्विनी-नक्षत्रे", "भरणी-नक्षत्रे", "कृत्तिका-नक्षत्रे", "रोहिणी-नक्षत्रे", "मृगशिरा-नक्षत्रे", "आर्द्रा-नक्षत्रे", "पुनर्वसु-नक्षत्रे", "पुष्यमी-नक्षत्रे", "आश्लेषा-नक्षत्रे", "मघा-नक्षत्रे", "पूर्वफाल्गुनी-नक्षत्रे", "उत्तराफाल्गुनी-नक्षत्रे", "हस्ता-नक्षत्रे", "चित्रा-नक्षत्रे", "स्वाती-नक्षत्रे", "विशाखा-नक्षत्रे", "अनुराधा-नक्षत्रे", "ज्येष्ठा-नक्षत्रे", "मूल-नक्षत्रे", "पूर्वाषाढा-नक्षत्रे", "उत्तराषाढा-नक्षत्रे", "श्रवण-नक्षत्रे", "धनिष्ठा-नक्षत्रे", "शतभिषा-नक्षत्रे", "पूर्वाभाद्रपदा-नक्षत्रे", "उत्तराभाद्रपदा-नक्षत्रे", "रेवती-नक्षत्रे"],
+                tithis: ["प्रथम्यां तिथौ", "द्वितीयायां तिथौ", "तृतीयायां तिथौ", "चतुर्थ्यां तिथौ", "पञ्चम्यां तिथौ", "षष्ठ्यां तिथौ", "सप्तम्यां तिथौ", "अष्टम्यां तिथौ", "नवम्यां तिथौ", "दशम्यां तिथौ", "एकादश्यां तिथौ", "द्वादश्यां तिथौ", "त्रयोदश्यां तिथौ", "चतुर्दश्यां तिथौ", "पौर्णमास्यां / अमावास्यायां तिथौ"],
+                masams: ["चैत्र-मासे", "वैशाख-मासे", "ज्येष्ठ-मासे", "आषाढ-मासे", "श्रावण-मासे", "भाद्रपद-मासे", "आश्वयुज-मासे", "कार्तिक-मासे", "मार्गशीर्ष-मासे", "पुष्य-मासे", "माघ-मासे", "फाल्गुन-मासे"],
+                days: ["भानुवासर युक्तायां", "इन्दुवासर युक्तायां", "भौमवासर युक्तायां", "सौम्यवासर युक्तायां", "गुरुवासर युक्तायां", "भृगुवासर युक्तायां", "स्थिरवासर युक्तायां"],
+                sukla: "शुक्ल पक्षे", bahula: "कृष्ण पक्षे"
+            }
+        };
+
+        let currentActivePresetKey = 'varalakshmi';
+
+        function populateCountries() {
+            const countrySelect = document.getElementById('country');
+            const currentSelected = countrySelect.value || "usa";
+            const outputLang = document.querySelector('input[name="outputLanguage"]:checked')?.value || 'english';
+            
+            countrySelect.innerHTML = '';
+            Object.keys(locationConfig).forEach(cKey => {
+                const opt = document.createElement('option');
+                opt.value = cKey;
+                opt.textContent = locationConfig[cKey].label[outputLang] || locationConfig[cKey].label.english;
+                if (cKey === currentSelected) opt.selected = true;
+                countrySelect.appendChild(opt);
+            });
+
+            populateStates();
+        }
+
+        function populateStates() {
+            const countryKey = document.getElementById('country').value;
+            const stateSelect = document.getElementById('state');
+            const currentSelected = stateSelect.value;
+            const outputLang = document.querySelector('input[name="outputLanguage"]:checked')?.value || 'english';
+            
+            stateSelect.innerHTML = '';
+
+            const statesObj = locationConfig[countryKey] ? locationConfig[countryKey].states : {};
+            Object.keys(statesObj).forEach(sKey => {
+                const opt = document.createElement('option');
+                opt.value = sKey;
+                opt.textContent = statesObj[sKey].label[outputLang] || statesObj[sKey].label.english;
+                if (sKey === currentSelected) opt.selected = true;
+                stateSelect.appendChild(opt);
+            });
+
+            onStateChange();
+        }
+
+        function onStateChange() {
+            const countryKey = document.getElementById('country').value;
+            const stateKey = document.getElementById('state').value;
+            const outputLang = document.querySelector('input[name="outputLanguage"]:checked')?.value || 'english';
+            
+            const stateConfig = (locationConfig[countryKey] && locationConfig[countryKey].states[stateKey]);
+
+            if (stateConfig) {
+                document.getElementById('timezoneOffset').value = stateConfig.tz;
+                const citySelect = document.getElementById('city');
+                const currentCitySelected = citySelect.value;
+                
+                citySelect.innerHTML = '';
+                stateConfig.cities.forEach(cityObj => {
+                    const opt = document.createElement('option');
+                    opt.value = cityObj.id;
+                    opt.textContent = cityObj.label[outputLang] || cityObj.label.english;
+                    if (cityObj.id === currentCitySelected) opt.selected = true;
+                    citySelect.appendChild(opt);
+                });
+            }
+
+            onCityChange();
+        }
+
+        function onCityChange() {
+            const citySelect = document.getElementById('city');
+            const customContainer = document.getElementById('customCityContainer');
+            
+            if (citySelect.value === 'other') {
+                customContainer.classList.remove('hidden');
+            } else {
+                customContainer.classList.add('hidden');
+            }
+
+            fetchGlobalPanchang();
+        }
+
+        function applyPreset(key) {
+            currentActivePresetKey = key;
+            const outputLang = document.querySelector('input[name="outputLanguage"]:checked')?.value || 'english';
+            const year = document.getElementById('pujaYear').value;
+            const dataDate = presetsBaseDate[key];
+            const dataNames = presetsMap[outputLang][key];
+
+            if (!dataDate || !dataNames) return;
+
+            document.getElementById('pujaName').value = dataNames.pujaName;
+            document.getElementById('deityName').value = dataNames.deityName;
+            document.getElementById('pujaDateTime').value = `${year}-${dataDate.monthDayTime}`;
+            
+            fetchGlobalPanchang();
+        }
+
+        function updateDateByYear() {
+            const year = document.getElementById('pujaYear').value;
+            const currentDtVal = document.getElementById('pujaDateTime').value;
+            if (currentDtVal) {
+                const monthTimePart = currentDtVal.slice(4);
+                document.getElementById('pujaDateTime').value = `${year}${monthTimePart}`;
+            }
+            fetchGlobalPanchang();
+        }
+
+        function syncYearFromDateTime() {
+            const currentDtVal = document.getElementById('pujaDateTime').value;
+            if (currentDtVal) {
+                const year = currentDtVal.split('-')[0];
+                const yearSelect = document.getElementById('pujaYear');
+                if (yearSelect && yearSelect.querySelector(`option[value="${year}"]`)) {
+                    yearSelect.value = year;
+                }
+            }
+            fetchGlobalPanchang();
+        }
+
+        function fetchGlobalPanchang() {
+    const outputLang = document.querySelector('input[name="outputLanguage"]:checked')?.value || 'english';
+    const langPanchang = panchangDataByLang[outputLang] || panchangDataByLang.english;
+    const selectedVal = document.getElementById('pujaDateTime').value;
+    const tzOffset = document.getElementById('timezoneOffset').value;
+    if (!selectedVal) return;
+
+    const dateObj = new Date(selectedVal + tzOffset);
+    
+    // --- 1. Ayanam Calculation ---
+    // Uttarayana: Jan 15 (Makara Sankranti) to Jul 15 | Dakshinayana: Jul 16 to Jan 14
+    const m = dateObj.getMonth() + 1; // 1 - 12
+    const d = dateObj.getDate();
+    
+    let isUttarayana = false;
+    if (m > 1 && m < 7) {
+        isUttarayana = true;
+    } else if (m === 1 && d >= 15) {
+        isUttarayana = true;
+    } else if (m === 7 && d <= 15) {
+        isUttarayana = true;
+    } else {
+        isUttarayana = false;
+    }
+
+    // Set Ayanam output based on output language
+    const ayanamMap = {
+        telugu: { uttarayana: "ఉత్తరాయణే", dakshinayana: "దక్షిణాయనే" },
+        sanskrit: { uttarayana: "उत्तरायणे", dakshinayana: "दक्षिणायने" },
+        english: { uttarayana: "Uttarayane", dakshinayana: "Dakshinayane" }
+    };
+    const currentAyanamText = isUttarayana 
+        ? (ayanamMap[outputLang]?.uttarayana || ayanamMap.english.uttarayana)
+        : (ayanamMap[outputLang]?.dakshinayana || ayanamMap.english.dakshinayana);
+
+    const ayanamElem = document.getElementById('ayanam');
+    if (ayanamElem) {
+        ayanamElem.value = currentAyanamText;
+    }
+
+    // --- 2. Samvatsaram & Vaaram ---
+    let gYear = dateObj.getFullYear();
+    if (dateObj.getMonth() < 2 || (dateObj.getMonth() === 2 && dateObj.getDate() < 15)) {
+        gYear -= 1;
+    }
+    let samvatsaraIdx = (gYear - 1987) % 60;
+    if (samvatsaraIdx < 0) samvatsaraIdx += 60;
+
+    document.getElementById('samvatsaram').value = langPanchang.samvatsaras[samvatsaraIdx];
+    document.getElementById('vaaram').value = langPanchang.days[dateObj.getDay()];
+
+    // --- 3. Paksham & Tithi ---
+    const epoch = new Date('2026-01-01T00:00:00' + tzOffset).getTime();
+    const daysDiff = (dateObj.getTime() - epoch) / (1000 * 60 * 60 * 24);
+
+    const lunarAge = (daysDiff + 12.5) % 29.53059; 
+    const isSukla = lunarAge < 14.765;
+    document.getElementById('paksham').value = isSukla ? langPanchang.sukla : langPanchang.bahula;
+
+    let tithiIdx = Math.floor((lunarAge % 14.765) / (14.765 / 15));
+    if (tithiIdx > 14) tithiIdx = 14;
+    document.getElementById('tithi').value = langPanchang.tithis[tithiIdx];
+
+    // --- 4. Masam ---
+    let masamIdx = (dateObj.getMonth() + 9) % 12;
+    document.getElementById('masam').value = langPanchang.masams[masamIdx];
+
+    // --- 5. Nakshatram ---
+    const refTime = new Date('2026-08-21T08:00:00' + tzOffset).getTime();
+    const diffDays = (dateObj.getTime() - refTime) / (1000 * 3600 * 24);
+    const siderealMonth = 27.321661;
+    let nakshatraIdx = Math.floor((17 + (diffDays * 27 / siderealMonth)) % 27);
+    if (nakshatraIdx < 0) nakshatraIdx += 27;
+    
+    document.getElementById('nakshatram').value = langPanchang.nakshatras[nakshatraIdx];
+}
+        function populateSingleNakshatraSelect(selectElem) {
+            const currentVal = selectElem.value;
+            const outputLang = document.querySelector('input[name="outputLanguage"]:checked')?.value || 'english';
+            selectElem.innerHTML = '';
+            
+            nakshatrasList.forEach(n => {
+                const opt = document.createElement('option');
+                opt.value = n.telugu;
+                if (outputLang === 'english') {
+                    opt.textContent = n.eng;
+                } else if (outputLang === 'sanskrit') {
+                    opt.textContent = n.sans;
+                } else {
+                    opt.textContent = `${n.telugu} (${n.eng})`;
+                }
+                selectElem.appendChild(opt);
+            });
+            
+            if (currentVal) {
+                selectElem.value = currentVal;
+            }
+        }
+
+        function populateNakshatraDropdowns() {
+            const dropdowns = document.querySelectorAll('.nakshatra-dropdown');
+            dropdowns.forEach(dropdown => {
+                populateSingleNakshatraSelect(dropdown);
+            });
+        }
+
+        function updateSectionUILabels() {
+            const outputLang = document.querySelector('input[name="outputLanguage"]:checked')?.value || 'english';
+            const labels = sectionUILabels[outputLang] || sectionUILabels.english;
+            const placeholders = placeHoldersByLang[outputLang] || placeHoldersByLang.english;
+
+            for (const [id, text] of Object.entries(labels)) {
+                const elem = document.getElementById(id);
+                if (elem) {
+                    if (id === 'btn_add_child') {
+                        elem.innerHTML = text;
+                    } else {
+                        elem.textContent = text;
+                    }
+                }
+            }
+
+            const gotramElem = document.getElementById('gotram');
+            if (gotramElem) gotramElem.placeholder = placeholders.gotram;
+            
+            const selfNameElem = document.getElementById('selfName');
+            if (selfNameElem) selfNameElem.placeholder = placeholders.selfName;
+            
+            const wifeNameElem = document.getElementById('wifeName');
+            if (wifeNameElem) wifeNameElem.placeholder = placeholders.wifeName;
+
+            const presetMap = presetsMap[outputLang] || presetsMap.english;
+            for (const [k, v] of Object.entries(presetMap)) {
+                if (k === 'label') continue;
+                const btn = document.getElementById(`btn_preset_${k}`);
+                if (btn) btn.textContent = v.btn;
+            }
+
+            if (presetMap[currentActivePresetKey]) {
+                document.getElementById('pujaName').value = presetMap[currentActivePresetKey].pujaName;
+                document.getElementById('deityName').value = presetMap[currentActivePresetKey].deityName;
+            }
+        }
+
+        function updatePreferredLanguage() {
+            updateSectionUILabels();
+            populateCountries();
+            populateNakshatraDropdowns();
+            fetchGlobalPanchang();
+
+            const outputDiv = document.getElementById('sankalpamOutput');
+            if (outputDiv && !outputDiv.querySelector('.italic')) {
+                generateSankalpam();
+            }
+        }
+
+        function addChildRow(name = '', type = 'పుత్రుడి', nakshatra = 'అశ్విని') {
+            const container = document.getElementById('childrenContainer');
+            const outputLang = document.querySelector('input[name="outputLanguage"]:checked')?.value || 'english';
+            const placeholders = placeHoldersByLang[outputLang] || placeHoldersByLang.english;
+            
+            let optSon = "Son";
+            let optDaughter = "Daughter";
+            if (outputLang === 'telugu') {
+                optSon = "కుమారుడు (Son)";
+                optDaughter = "కుమార్తె (Daughter)";
+            } else if (outputLang === 'sanskrit') {
+                optSon = "पुत्रः (Son)";
+                optDaughter = "पुत्री (Daughter)";
+            }
+
+            const row = document.createElement('div');
+            row.className = 'grid grid-cols-12 gap-1.5 bg-amber-50 p-2 rounded border border-amber-100 child-row items-center';
+            row.innerHTML = `
+                <div class="col-span-4">
+                    <select class="child-type w-full p-1 text-xs border border-gray-300 rounded bg-white font-medium">
+                        <option value="పుత్రుడి" ${type === 'పుత్రుడి' ? 'selected' : ''}>${optSon}</option>
+                        <option value="పుత్రిక" ${type === 'పుత్రిక' ? 'selected' : ''}>${optDaughter}</option>
+                    </select>
+                </div>
+                <div class="col-span-3">
+                    <input type="text" placeholder="${placeholders.childName}" value="${name}" class="child-name w-full p-1 text-xs border border-gray-300 rounded bg-white">
+                </div>
+                <div class="col-span-4">
+                    <select class="child-nakshatra nakshatra-dropdown w-full p-1 text-xs border border-gray-300 rounded bg-white">
+                    </select>
+                </div>
+                <div class="col-span-1 text-center">
+                    <button type="button" onclick="removeChildRow(this)" title="Remove" class="text-red-500 hover:text-red-700 font-bold text-sm bg-red-50 hover:bg-red-100 border border-red-200 rounded w-6 h-6 inline-flex items-center justify-center">
+                        ✕
+                    </button>
+                </div>
+            `;
+            container.appendChild(row);
+            const selectElem = row.querySelector('.child-nakshatra');
+            populateSingleNakshatraSelect(selectElem);
+            if (nakshatra) {
+                selectElem.value = nakshatra;
+            }
+        }
+
+        function removeChildRow(btn) {
+            const row = btn.closest('.child-row');
+            if (row) row.remove();
+        }
+
+        function generateSankalpam() {
+            const lang = document.querySelector('input[name="outputLanguage"]:checked')?.value || 'english';
+            const countryKey = document.getElementById('country').value;
+            const stateKey = document.getElementById('state').value;
+            const citySelect = document.getElementById('city');
+            const customCityVal = document.getElementById('customCityInput').value;
+
+            const gotram = getMultiLangFamilyValue(document.getElementById('gotram').value, lang) || "[Gotram]";
+            const selfName = getMultiLangFamilyValue(document.getElementById('selfName').value, lang) || "[Yajamana Name]";
+            const selfNakshatra = getNakshatraText(document.getElementById('selfNakshatra').value, lang);
+            
+            const wifeName = getMultiLangFamilyValue(document.getElementById('wifeName').value, lang);
+            const wifeNakshatra = getNakshatraText(document.getElementById('wifeNakshatra').value, lang);
+
+            const pujaName = document.getElementById('pujaName').value || "Puja";
+            const deityName = document.getElementById('deityName').value || "Deity";
+
+            const samvatsaram = document.getElementById('samvatsaram').value;
+            const masam = document.getElementById('masam').value;
+            const paksham = document.getElementById('paksham').value;
+            const tithi = document.getElementById('tithi').value;
+            const vaaram = document.getElementById('vaaram').value;
+            const nakshatram = document.getElementById('nakshatram').value;
+
+            // Resolve Geographic Region and River Text
+            let geoText = locationConfig[countryKey]?.sankalpamGeo?.[lang] || "";
+            let riverText = locationConfig[countryKey]?.states?.[stateKey]?.riverText?.[lang] || "";
+
+            // Resolve City Text
+            let cityText = "";
+            if (citySelect.value === 'other') {
+                cityText = customCityVal.trim();
+            } else if (citySelect.selectedIndex >= 0) {
+                const stateObj = locationConfig[countryKey]?.states?.[stateKey];
+                const foundCity = stateObj?.cities?.find(c => c.id === citySelect.value);
+                if (foundCity) {
+                    cityText = foundCity.label[lang] || foundCity.label.english;
+                } else {
+                    cityText = citySelect.options[citySelect.selectedIndex].text;
+                }
+            }
+
+            let cityClause = "";
+            if (cityText) {
+                if (lang === 'telugu') {
+                    cityClause = `${cityText} నగరే, `;
+                } else if (lang === 'sanskrit') {
+                    cityClause = `${cityText} नगरे, `;
+                } else {
+                    cityClause = `${cityText} Nagare, `;
+                }
+            }
+
+            // Collect Children Details
+       // Collect Children Details
+const childRows = document.querySelectorAll('#childrenContainer .child-row');
+let childrenDetails = [];
+
+childRows.forEach(row => {
+    const cType = row.querySelector('.child-type').value;
+    const rawCName = row.querySelector('.child-name').value;
+    const cName = getMultiLangFamilyValue(rawCName, lang);
+    const rawCNakshatra = row.querySelector('.child-nakshatra').value;
+    const cNakshatra = getNakshatraText(rawCNakshatra, lang);
+
+    if (cName) {
+        const isDaughter = (cType === 'పుత్రిక' || cType === 'daughter' || cType === 'పుత్రి');
+
+        let prefix = '';
+        let nakshatraSuffix = '';
+        let nameSuffix = '';
+
+        if (lang === 'telugu') {
+            prefix = isDaughter ? 'సపుత్రికాయాః' : 'సపుత్రకస్య';
+            nakshatraSuffix = isDaughter ? 'నక్షత్రే జాతాయాః' : 'నక్షత్రే జాతస్య';
+            nameSuffix = isDaughter ? 'నామధేయవత్యాః' : 'నామధేయస్య';
+        } else if (lang === 'sanskrit') {
+            prefix = isDaughter ? 'सपुत्रिकायाः' : 'सपुत्रकस्य';
+            nakshatraSuffix = isDaughter ? 'नक्षत्रे जातायाः' : 'नक्षत्रे जातस्य';
+            nameSuffix = isDaughter ? 'नामधेयवत्याः' : 'नामधेयस्य';
+        } else {
+            // English default fallback
+            prefix = isDaughter ? 'Saputrikayah' : 'Saputrakasya';
+            nakshatraSuffix = isDaughter ? 'Nakshatre Jatayah' : 'Nakshatre Jatasya';
+            nameSuffix = isDaughter ? 'Namadheyavatyah' : 'Namadheyasya';
+        }
+
+        // Format: [Prefix] [Nakshatra] [Nakshatra Suffix] [Name] [Name Suffix]
+        const formattedDetail = `${prefix} ${cNakshatra} ${nakshatraSuffix} ${cName} ${nameSuffix}`.trim();
+        childrenDetails.push(formattedDetail);
+    }
+});
+
+            // Construct Sankalpam Output
+            let text = "";
+
+            if (lang === 'telugu') {
+                text = `ఓం మమోపాత్త సమస్త దురితక్షయ ద్వారా శ్రీ పరమేశ్వర ప్రీత్యర్థం,
+శుభే శోభనే ముహూర్తే,
+శ్రీమద్విష్ణోరాజ్ఞయా,
+ప్రవర్తమానస్య,
+అద్య బ్రహ్మణః,
+ ద్వితీయ పరార్థే,
+శ్వేత వరాహ కల్పే,
+వైవస్వత మన్వంతరే,
+కలియుగే, ప్రథమ పాదే,
+ ${geoText},
+ ${riverText}, 
+${cityClause} స్వగృహే/ లక్ష్మీ నివాస గృహే,
+అస్మిన్ వర్తమానే,
+వ్యవహారిక చాంద్రమానేన,
+ ${samvatsaram} నామ సంవత్సరే,
+${masam}, ${paksham}, ${tithi}, ${vaaram}, ${nakshatram} 
+శుభ యోగే, శుభ కరణే, 
+శుభకరణ ఏవం గుణ విశేషణ విశిష్టాయామ్ శుభతిథౌ,
+ ${pujaName}  పూజా పుణ్యకాలే,
+${deityName} ప్రీత్యర్థం,
+
+శ్రీమాన్ ${gotram} గోత్రోద్భవస్య, ${selfNakshatra} నక్షత్రస్య, ${selfName} నామధేయస్య,
+${wifeName ? ` మమ ధర్మపత్నీ సమేతస్య  ${wifeNakshatra} నక్షత్రే జాతాయాః, శ్రీమత్యాః  ${wifeName} నామ్నీ),\n` : ''}${childrenDetails.length > 0 ? `  ${childrenDetails.join(', ')},\n` : ''} సహ కుటుంబస్య, 
+సబాంధవస్య
+అస్మాకం
+ క్షేమ-స్థైర్య-ధైర్య-విజయ-ఆయుః-ఆరోగ్య- ఐశ్వర్య-అభివృద్ధ్యర్థం,
+ధర్మ అర్థ కామ మోక్ష చతుర్విధ పురుషార్థ ఫల సిద్ధ్యర్థమ్,
+సమస్త మంగళవాప్త్యర్థమ్
+ధన కనక వస్తు వాహన సమృద్ధియర్థమ్
+జ్ఞాన వైరాగ్య మోక్ష ప్రాప్త్యర్థమ్
+సర్వాభీష్ట సిద్ధ్యర్థమ్
+ ${pujaName} విధానేన, ${deityName} ప్రీత్యర్థం,
+సమ్భవద్భిః ద్రవ్యైః
+సమ్భవద్భిః ఉపచారైః
+చ సమ్భవతా నియమేన సమ్భావితా ప్రకారేణ
+యావచ్ఛక్తి ధ్యాన ఆవాహనాది
+${deityName} షోడశోపచార పూజాం కరిష్యే,
+నిర్విఘ్న పూజా పరిసమాప్త్యర్థమ్
+ఆదౌ శ్రీమహాగాణపతి పూజాం కరిష్యే
+తదంగ కలశ ఆరాధనమ్ కరిష్యే ।`;
+            } else if (lang === 'sanskrit') {
+                text = `ॐ ममोपात्त समस्त दुरितक्षय द्वारा श्री परमेश्वर प्रीत्यर्थम्,
+
+शुभे शोभने मुहूर्ते,
+अद्य ब्रह्मणः द्वितीय परार्धे,
+श्रीमद्विष्णोराज्ङया 
+प्रवर्त्तमानस्य 
+अद्य ब्रह्मणः 
+द्वितीय परार्धे   
+श्वेतवराहकल्पे  
+वैवस्वतमन्वन्तरे  
+कलियुगे 
+प्रथमपादे  
+क्रौञ्च द्वीपे
+ ${geoText},
+ ${riverText},
+ ${cityClause} , स्वगृहे/शोभन गृहे:
+अस्मिन् वर्तमाने 
+व्यवहारिक चान्द्रमानेन 
+ ${samvatsaram} नाम संवत्सरे,
+${masam}, ${paksham}, ${tithi}, ${vaaram}, ${nakshatram}
+शुभ योगे 
+शुभ करणे 
+एवम् गुण विशेषण विशिष्टायाम्  
+शुभ तिथौ
+${pujaName} पूजा पुण्यकाले,  
+${deityName} प्रीत्यर्थम्,
+श्रीमान् ${gotram} गोत्रोद्भवस्य, ${selfNakshatra} नक्षत्रस्य, ${selfName} नामधेयस्य,
+${wifeName ? ` मम धर्मपत्नी समेतस्य (${wifeNakshatra} नक्षत्रे जातायाः, श्रीमत्या: ${wifeName} नाम्नी),\n` : ''}${childrenDetails.length > 0 ? `सन्तानम्: ${childrenDetails.join(', ')},\n` : ''}
+सह कुतुम्बस्य 
+सभान्दवस्य  
+अस्माकं  
+क्षेम-स्थैर्य-धैर्य-विजय-आयुः-आरोग्य
+ऐश्वर्य-अभिवृद्ध्यर्थं
+धर्म अर्थ काम मोक्ष 
+चतुर्विध पुरुषार्थ 
+फल सिद्ध्यर्थम् 
+समस्त मन्गलवाप्यर्थम् 
+धन कनक वस्तु वाहन  समृद्धयर्थम् 
+ज्ञान वैरग्य मोक्श प्राप्यर्थम्  
+सर्वाभीष्ट सिद्ध्यर्थम् 
+${pujaName}  विधानेन,
+${deityName}  प्रीत्यर्थम्
+सम्भवद्भिः द्रव्यैः 
+सम्भवद्भिः उपचारैः 
+च सम्भवता नियमेन 
+सम्भाविता प्रकारेण 
+यावच्छक्ति ध्यान आवाहन आदि 
+${deityName} षोडशोपचार पूजां करिष्ये |
+निर्विघ्न पूजा परिसमाप्त्यर्थम्
+आदौ श्रीमहागणपति पूजां करिष्ये।
+तदङ्ग कलश आराधनं करिष्ये।`;
+            } else {
+                text = `Om Mamopatta Samasta Duritakshaya Dvara
+Sri Parameswara Preetyartham,
+
+Subhe Sobhane Muhurte,
+Adya Brahmanaha, 
+Dvitiya Parardhe, Sveta Varaha Kalpe,
+Vaivasvata Manvantare,
+Kaliyuge, Prathama Pade,
+${geoText},
+${riverText}, 
+${cityClause}Svagruhe/Sobhana Gruhe
+Śrīmadviṣṇorājñayā,
+pravartamānasya, asmin vartamāne,
+${samvatsaram} Nama Samvatsare,
+${masam}, ${paksham}, ${tithi}, ${vaaram}, ${nakshatram} 
+Subhayoga, Subhakarana 
+Evam Guna Viseshana Visishtayam Subhatithau,
+${pujaName} pūjā puṇyakāle,,
+${deityName} prītyartham,
+śrīmān ${gotram} gotrodbhavasya, ${selfNakshatra} nakṣatrasya, ${selfName} nāmadheyasya,
+${wifeName ? ` mama dharmapatnī sametasya ${wifeNakshatra} nakṣatre jātāyāḥ, śrīmatyāḥ ${wifeName} nāmnī,\n` : ''}${childrenDetails.length > 0 ? ` ${childrenDetails.join(', ')},\n` : ''} saha kuṭumbasya,
+sabāndhavasya,
+asmākam,
+kṣema-sthairya-dhairya-vijaya-āyuḥ-ārogya-aiśvarya-abhi-vṛddhyartham,
+dharma-artha-kāma-mokṣa caturvidha-puruṣārtha-phala-siddhyartham,
+samasta-maṅgalāvāptyartham,
+dhana-kanaka-vastu-vāhana-samṛddhyartham,
+jñāna-vairāgya-mokṣa-prāptyartham,
+sarvābhīṣṭa-siddhyartham,
+${pujaName} vidhānena, ${deityName} prītyartham,
+Śrīmad-Viṣṇor-ājñayā,
+Pravartamānasya, asmin vartamāne,
+Vyāvahārika-cāndramānena, kṣema-sthairya-dhairya-vijaya-āyuḥ-ārogya-aiśvarya-abhi-vṛddhyartham,
+Dharma-artha-kāma-mokṣa caturvidha-puruṣārtha-phala-siddhyartham,
+Samasta-maṅgalāvāptyartham,
+Dhana-kanaka-vastu-vāhana-samṛddhyartham,
+Jñāna-vairāgya-mokṣa-prāptyartham,
+Sarvābhīṣṭa-siddhyartham sambhavadbhiḥ dravyaiḥ,
+ ${pujaName} Vidhānena,  ${deityName} Prītyartham,
+Sambhavadbhiḥ upacāraiḥ,
+cha sambhavatā niyamena sambhāvitā prakāreṇa,
+Yāvacchakti dhyāna-āvāhanādi
+${deityName} Ṣoḍaśopacāra Pūjāṁ Kariṣye,
+Nirvighna Pūjā Parisamāptyartham,
+Ādau Śrīmahāgaṇapati Pūjāṁ Kariṣye,
+Tadaṅga Kalaśa Ārādhanam Kariṣye.`;
+            }
+
+            document.getElementById('sankalpamOutput').textContent = text;
+        }
+
+
+        function startOver() {
+            document.getElementById('gotram').value = '';
+            document.getElementById('selfName').value = '';
+            document.getElementById('wifeName').value = '';
+            document.getElementById('childrenContainer').innerHTML = '';
+            document.getElementById('sankalpamOutput').innerHTML = `
+                <div class="text-center text-gray-400 py-20 italic" id="emptyOutputPlaceholder">
+                    Fill in the details and click the <br>
+                    <span class="font-bold text-amber-800">"Generate Sankalpam"</span> <br>
+                    button below.
+                </div>`;
+        }
+
+        function copyToClipboard() {
+            const text = document.getElementById('sankalpamOutput').textContent;
+            if (text && !text.includes('Generate Sankalpam')) {
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('Sankalpam text copied to clipboard!');
+                });
+            }
+        }
+
+        function addComment() {
+            const name = document.getElementById('commentName').value.trim();
+            const msg = document.getElementById('commentMsg').value.trim();
+            if (!name || !msg) return alert('Please enter both name and comment.');
+
+            const container = document.getElementById('commentsContainer');
+            const badge = document.getElementById('commentCountBadge');
+
+            const item = document.createElement('div');
+            item.className = 'p-2.5 bg-amber-50 rounded border border-amber-200 text-xs space-y-1';
+            item.innerHTML = `<div class="font-bold text-amber-900">${name}</div><div class="text-gray-700">${msg}</div>`;
+
+            container.prepend(item);
+            badge.textContent = container.children.length;
+
+            document.getElementById('commentName').value = '';
+            document.getElementById('commentMsg').value = '';
+        }
+
+        function openQuickContactModal() {
+            document.getElementById('contactModal').classList.remove('hidden');
+            document.getElementById('contactModal').classList.add('flex');
+        }
+
+        function closeQuickContactModal() {
+            document.getElementById('contactModal').classList.add('hidden');
+            document.getElementById('contactModal').classList.remove('flex');
+        }
+
+        function sendDirectMessage() {
+            const name = document.getElementById('modalSenderName').value.trim();
+            const msg = document.getElementById('modalMessage').value.trim();
+            if (!name || !msg) return alert('Please fill in both fields.');
+
+            window.location.href = `mailto:gchappa4@gmail.com?subject=Direct%20Message%20from%20${encodeURIComponent(name)}&body=${encodeURIComponent(msg)}`;
+            closeQuickContactModal();
+        }
+
+        // Initialize on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            updateVisitorCounter();
+            updateSectionUILabels();
+            populateCountries();
+            populateNakshatraDropdowns();
+            fetchGlobalPanchang();
+        });
+    </script>
+</body>
+</html>
